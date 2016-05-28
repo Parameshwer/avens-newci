@@ -1,0 +1,107 @@
+.page-width {
+	width: 1000px;
+	margin:0 auto;
+}
+
+/*** dashboard page css ***/
+
+/*
+ * Base structure
+ */
+
+/* Move down content because we have a fixed navbar that is 50px tall */
+body {
+  padding: 0;
+  margin: 0;
+  font-family: "open sans";
+}
+
+.navbar {
+	border-radius: 0;
+}
+#main-wrapper {
+	position: absolute;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+}
+.nav-wrap {
+	position: absolute;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+}
+.main-wrap {
+	position: absolute;
+	top: 52px;
+	left: 0;
+	right: 0;
+	bottom: 0;
+}
+.sidebar-bar {
+	width: 300px;
+	position: absolute;
+	top: 0;
+	left: 0;
+	bottom: 0;
+	border-right: 1px solid #cccccc;
+}
+.main-content {
+	position: absolute;
+	top: 0;
+	left: 300px;
+	bottom: 0;
+	right: 0;
+	overflow: auto;
+	padding: 15px;
+}
+.main-content h1 {
+	margin: 0 0 10px;
+	padding: 0 0 10px 0;
+	border-bottom: 1px solid #ccc;
+	font-weight: normal;
+}
+.form-box {
+	width: 540px;
+}
+.sub-header {
+  padding-bottom: 10px;
+  border-bottom: 1px solid #eee;
+}
+.count-div p {
+	font-size: 20px;
+}
+/*
+ * Top navigation
+ * Hide default border to remove 1px line.
+ */
+.navbar-fixed-top {
+  border: 0;
+}
+
+/* Sidebar navigation */
+.nav-sidebar > li > a {
+  padding-right: 20px;
+  padding-left: 20px;
+}
+.nav-sidebar > .active > a,
+.nav-sidebar > .active > a:hover,
+.nav-sidebar > .active > a:focus {
+  color: #fff;
+  background-color: #428bca;
+}
+
+.main {
+  padding: 20px;
+}
+@media (min-width: 768px) {
+  .main {
+    padding-right: 40px;
+    padding-left: 40px;
+  }
+}
+.main .page-header {
+  margin-top: 0;
+}

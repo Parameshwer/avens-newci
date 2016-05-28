@@ -6,18 +6,18 @@
 			<div class="col-sm-4 col-md-3">
 				<h4>Company</h4>
 				<ul>
-					<li><a href="http://www.avensonline.org/about-us">About Us</a></li>
-					<li><a href="http://www.avensonline.org/policies">Policies</a></li>
-					<li><a href="http://www.avensonline.org/membership">Membership</a></li>
+					<li><a href="<?php echo base_url(); ?>about-us">About Us</a></li>
+					<li><a href="<?php echo base_url(); ?>policies">Policies</a></li>
+					<li><a href="<?php echo base_url(); ?>membership">Membership</a></li>
 				</ul>
 			</div>
 			<div class="col-sm-4 col-md-3">
 				<h4>Journals</h4>
 				<ul>
-					<li><a href="http://www.avensonline.org/journals/?sort_type=medical">Medical</a></li>
-					<li><a href="http://www.avensonline.org/journals/?sort_type=biology">Biology</a></li>
-					<li><a href="http://www.avensonline.org/journals/?sort_type=pharmaceutical">Pharmacy</a></li>				
-					<li><a href="http://www.avensonline.org/journals/?sort_type=biotechnology">Biotechnology</a></li>				
+					<li><a href="<?php echo base_url(); ?>journals/?sort_type=medical">Medical</a></li>
+					<li><a href="<?php echo base_url(); ?>journals/?sort_type=biology">Biology</a></li>
+					<li><a href="<?php echo base_url(); ?>journals/?sort_type=pharmaceutical">Pharmacy</a></li>				
+					<li><a href="<?php echo base_url(); ?>journals/?sort_type=biotechnology">Biotechnology</a></li>				
 				</ul>
 			</div>
 			<div class="col-sm-4 col-md-3 address-section">
@@ -42,27 +42,27 @@
 					<ul class="list-inline footer-social">
 						<li>
 							<a target="_blank" href="https://www.facebook.com/www.avensonline.org?fref=ts">
-								<img src="http://www.avensonline.org/wp-content/themes/twentythirteen/images/fb-icon.png" alt="Facebook">
+								<img src="<?php echo base_url(); ?>public/images/fb-icon.png" alt="Facebook">
 							</a>
 						</li>
 						<li>
 							<a target="_blank" href="https://twitter.com/avensonline">
-								<img src="http://www.avensonline.org/wp-content/themes/twentythirteen/images/tweet.png" alt="Twitter">
+								<img src="<?php echo base_url(); ?>public/images/tweet.png" alt="Twitter">
 							</a>
 						</li>
 						<li>
 							<a target="_blank" href="https://www.linkedin.com/pub/avens-publishers/58/a2b/479">
-								<img src="http://www.avensonline.org/wp-content/themes/twentythirteen/images/linked.png" alt="Linked In">
+								<img src="<?php echo base_url(); ?>public/images/linked.png" alt="Linked In">
 							</a>
 						</li>
 						<li>
 							<a target="_blank" href="http://feeds.feedburner.com/Avens">
-								<img src="http://www.avensonline.org/wp-content/themes/twentythirteen/images/rssfeed.png" alt="Rss Feed">
+								<img src="<?php echo base_url(); ?>public/images/rssfeed.png" alt="Rss Feed">
 							</a>
 						</li>
 						<li>
 							<a target="_blank" href="http://avensonline.org/blog">
-								<img src="http://www.avensonline.org/wp-content/themes/twentythirteen/images/blog-icon.png" alt="Avens Blog">
+								<img src="<?php echo base_url(); ?>public/images/blog-icon.png" alt="Avens Blog">
 							</a>
 						</li>
 
@@ -109,7 +109,7 @@
 			jQuery(this).next(".post-archive-box-inner").slideToggle();
 		});
 
-jQuery("#latest-article-results").load("http://www.avensonline.org/latest-article-ajax/");  //initial page number to load
+jQuery("#latest-article-results").load("<?php echo base_url(); ?>latest-article-ajax/");  //initial page number to load
 jQuery(".pagination").bootpag({
 	total: 16,
 	page: 1,
@@ -119,7 +119,7 @@ jQuery(".pagination").bootpag({
 }).on("page", function(e, num){
 	e.preventDefault();
 	jQuery("#latest-article-results").prepend('<div class="loading-indication">Loading...</div>');		
-	jQuery("#latest-article-results").load("http://www.avensonline.org/latest-article-ajax/", {'page':num});
+	jQuery("#latest-article-results").load("<?php echo base_url(); ?>latest-article-ajax/", {'page':num});
 });
 
 jQuery('.nav-controls .custom-prev').on('click',function(e){
@@ -167,5 +167,77 @@ jQuery('body').on('click',function(e){
 
 });
 </script>
+<script type="text/javascript" src="<?php echo base_url(); ?>public/js/jquery.validator.js"></script>
+	<script type="text/javascript">
+		jQuery(document).ready(function(){
+			jQuery("#form_collab").validate({
+				rules: {
+					institute_name: "required",
+					email: {
+						required: true,
+						email: true
+					},
+					mailing_address: "required",
+					country:"required",
+					website_rrl:"required"
+				},
+				messages: {
+					institute_name: "Please enter your Institute Name",
+					email: "Please enter a valid email address",
+					mailing_address: "Please enter your mailing address",
+					country: "Please enter your country",
+					website_rrl: "Please enter your website url"
+
+				},
+				success: function(){
+					jQuery(this).click(false);
+					jQuery(this).attr("readonly", true);
+				}
+			});
+		jQuery(".contact-form").validate({
+		rules: {
+			first_name: "required",
+			email_id: {
+				required: true,
+				email: true
+			}
+		},
+		messages: {
+			first_name: "Please enter your firstname",
+			email_id: "Please enter a valid email address"
+
+		},
+		success: function(){
+			jQuery(this).click(false);
+		    jQuery(this).attr("readonly", true);
+		}
+	});
+
+		jQuery("#manuscript_form").validate({
+		rules: {
+			firstname: "required",
+			email: {
+				required: true,
+				email: true
+			},
+                         phoneno:{
+                                number: true,
+                                required: true,
+                        },
+		},
+		messages: {
+			first_name: "Please enter your Firstname",
+			email_id: "Please enter a valid Email Address",
+                        phoneno: "Please enter a valid Phone Number"
+
+		},
+		success: function(){
+			jQuery(this).click(false);
+		    jQuery(this).attr("readonly", true);
+		}
+	});
+	});
+</script>
+
 </body>
 </html>

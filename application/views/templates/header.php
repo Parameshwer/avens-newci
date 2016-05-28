@@ -39,28 +39,12 @@
 <link rel='stylesheet' id='twentythirteen-ie-css'  href='http://www.avensonline.org/wp-content/themes/twentythirteen/css/ie.css?ver=2013-07-18' type='text/css' media='all' />
 <![endif]-->
 <link rel='stylesheet' id='avhec-widget-css'  href='<?php echo base_url(); ?>public/css/avh-ec.widget.css' type='text/css' media='all' />
-<style type="text/css" id="twentythirteen-header-css">
-	.site-header {
-		background: url(http://www.avensonline.org/wp-content/uploads/2015/05/banner-1.jpg) no-repeat scroll top;
-		background-size: 1600px auto;
-	}
-	@media (max-width: 767px) {
-		.site-header {
-			background-size: 768px auto;
-		}
-	}
-	@media (max-width: 359px) {
-		.site-header {
-			background-size: 360px auto;
-		}
-	}
-</style>
 
 <link href="<?php echo base_url(); ?>public/css/bootstrap.min.css" rel="stylesheet">
 <link rel="stylesheet" type="text/css" href="<?php echo base_url(); ?>public/css/theme.css">
 <link rel="stylesheet" type="text/css" href="<?php echo base_url(); ?>public/css/responsive.css">
 </head>
-<body class="home blog single-author sidebar">
+<body class="blog single-author sidebar">
 <div id="page" class="hfeed site">
 	<div class="container">
 		<div class="row">
@@ -68,8 +52,7 @@
 				<a href=""><img src="<?php echo base_url() ?>public//images/logo.png" alt="Avens Publishing Group" class="img-responsive"></a>
 			</div>
 			<div class="col-sm-8 text-right hidden-xs">
-				<object type="application/x-shockwave-flash" data="http://avensonline.org/wp-content/themes/twentythirteen/images/11.swf" width="100%" height="100" id="afe-swf-1" title="Adobe Flash Player" style="visibility: visible;"></object>
-			</div>
+				</div>
 		</div>
 	</div>
 </div>
@@ -78,16 +61,17 @@
 		<nav id="site-navigation" class="navigation main-navigation" role="navigation">
 			<button class="menu-toggle">Menu</button>
 			<a class="screen-reader-text skip-link" href="#content" title="Skip to content">Skip to content</a>
-			<div class="menu-main-menu-container"><ul id="menu-main-menu" class="nav-menu"><li id="menu-item-91" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-item current_page_item menu-item-home menu-item-91">
-			<a href="<?php echo base_url(); ?>">Home</a></li>
-				<li id="menu-item-4496" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-4496"><a href="<?php echo base_url(); ?>about-us/">About Us</a></li>
-				<li id="menu-item-360" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-360"><a href="<?php echo base_url(); ?>journals/">Journals</a></li>
-				<li id="menu-item-85" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-85"><a href="<?php echo base_url(); ?>submit-manuscript/">Submit Manuscript</a></li>
-				<li id="menu-item-16932" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-16932"><a href="<?php echo base_url(); ?>processing-fee/">Processing Fee</a></li>
-				<li id="menu-item-16937" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-16937"><a href="<?php echo base_url(); ?>collaborations/">Collaborations</a></li>
-				<li id="menu-item-150" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-150"><a href="<?php echo base_url(); ?>membership/">Membership</a></li>
-				<li id="menu-item-16933" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-16933"><a href="<?php echo base_url(); ?>policies/">Policies</a></li>
-				<li id="menu-item-84" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-84"><a href="<?php echo base_url(); ?>contact/">Contact</a></li>
+			<div class="menu-main-menu-container">
+			<ul id="menu-main-menu" class="nav-menu">			
+				<li class="menu-item <?php echo (($this->uri->segment(1) == '')?'current_page_item':''); ?>"><a href="<?php echo base_url(); ?>">Home</a></li>
+				<li class="menu-item <?php echo (($this->uri->segment(1) == 'about-us')?'current_page_item':''); ?>"><a href="<?php echo base_url(); ?>about-us/">About Us</a></li>
+				<li class="menu-item <?php echo (($this->uri->segment(1) == 'Journals')?'current_page_item':''); ?>"><a href="<?php echo base_url(); ?>journals/">Journals</a></li>
+				<li class="menu-item <?php echo (($this->uri->segment(1) == 'submit-manuscript')?'current_page_item':''); ?>"><a href="<?php echo base_url(); ?>submit-manuscript/">Submit Manuscript</a></li>
+				<li class="menu-item <?php echo (($this->uri->segment(1) == 'processing-fee')?'current_page_item':''); ?>"><a href="<?php echo base_url(); ?>processing-fee/">Processing Fee</a></li>
+				<li class="menu-item <?php echo (($this->uri->segment(1) == 'collaborations')?'current_page_item':''); ?>"><a href="<?php echo base_url(); ?>collaborations/">Collaborations</a></li>
+				<li class="menu-item <?php echo (($this->uri->segment(1) == 'membership')?'current_page_item':''); ?>"><a href="<?php echo base_url(); ?>membership/">Membership</a></li>
+				<li class="menu-item <?php echo (($this->uri->segment(1) == 'policies')?'current_page_item':''); ?>"><a href="<?php echo base_url(); ?>policies/">Policies</a></li>
+				<li class="menu-item <?php echo (($this->uri->segment(1) == 'contact')?'current_page_item':''); ?>"><a href="<?php echo base_url(); ?>contact/">Contact</a></li>
 			</ul></div>				<form role="search" method="get" class="search-form" action="<?php echo base_url(); ?>">
 			<label>
 				<span class="screen-reader-text">Search for:</span>

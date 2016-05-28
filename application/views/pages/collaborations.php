@@ -1,39 +1,10 @@
-<header id="masthead" class="site-header" role="banner">
+<header id="masthead" class="site-header collaborations" role="banner">
 	<div class="home-link">
 <h2>Collaborations</h2><!-- <h1 class="site-title"></h1>
 <h2 class="site-description"></h2> -->
 </div>
 </header>
-<div id="main" class="site-main"><style>.error{color:#ff0000 !important;font-weight:normal;}label{font-weight:normal;}</style>
-	<script type="text/javascript" src="http://www.avensonline.org/wp-content/themes/twentythirteen/jquery.validator.js"></script>
-	<script type="text/javascript">
-		jQuery(document).ready(function(){
-			jQuery("#form_collab").validate({
-				rules: {
-					institute_name: "required",
-					email: {
-						required: true,
-						email: true
-					},
-					mailing_address: "required",
-					country:"required",
-					website_rrl:"required"
-				},
-				messages: {
-					institute_name: "Please enter your Institute Name",
-					email: "Please enter a valid email address",
-					mailing_address: "Please enter your mailing address",
-					country: "Please enter your country",
-					website_rrl: "Please enter your website url"
-
-				},
-				success: function(){
-					jQuery(this).click(false);
-					jQuery(this).attr("readonly", true);
-				}
-			});
-		});
-	</script>
+<div id="main" class="site-main"><style>.error{color:#ff0000 !important;font-weight:normal;}label{font-weight:normal;}</style>	
 	<style type="text/css">
 		#errorfiled
 		{

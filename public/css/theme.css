@@ -1,4 +1,46 @@
 body{font-family: Roboto;color: #000000}
+.home .site-header {
+  background: url('../images/banner-1.jpg') no-repeat scroll top;
+  background-size: 1600px auto;
+}
+.site-header.about-us {
+  background: url('../images/about-banner.jpg') no-repeat scroll top;
+  background-size: 1600px auto;
+}
+.site-header.submit-manuscript {
+  background: url('../images/submit-man-banner-1.jpg') no-repeat scroll top;
+  background-size: 1600px auto;
+}
+.site-header.membership {
+  background: url('../images/submit-man-banner-1.jpg') no-repeat scroll top;
+  background-size: 1600px auto;
+}
+.site-header.processing-fee {
+  background: url('../images/policies-banner.jpg') no-repeat scroll top;
+  background-size: 1600px auto;
+}
+.site-header.collaborations {
+  background: url('../images/submit-man-banner-1.jpg') no-repeat scroll top;
+  background-size: 1600px auto;
+}
+.site-header.policies,.site-header.collaborations {
+  background: url('../images/policies-banner.jpg') no-repeat scroll top;
+  background-size: 1600px auto;
+}
+.error {
+    color: #ff0000 !important;
+    font-weight: normal;
+}
+@media (max-width: 767px) {
+  .site-header {
+    background-size: 768px auto;
+  }
+}
+@media (max-width: 359px) {
+  .site-header {
+    background-size: 360px auto;
+  }
+}
 a:visited{color: #428bca;}
 .navbar{margin: 0;}
 #logo-box{}

@@ -1,4 +1,4 @@
-<header id="masthead" class="site-header" role="banner">
+<header id="masthead" class="site-header membership" role="banner">
 	<div class="home-link">
 <h2>Membership</h2><!-- <h1 class="site-title"></h1>
 <h2 class="site-description"></h2> -->
