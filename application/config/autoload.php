@@ -80,6 +80,7 @@ $autoload['libraries'] = array();
 |
 */
 $autoload['drivers'] = array();
+$autoload['libraries'] = array('database', 'pagination', 'session', 'user_agent', 'form_validation');
 
 /*
 | -------------------------------------------------------------------
@@ -89,7 +90,7 @@ $autoload['drivers'] = array();
 |
 |	$autoload['helper'] = array('url', 'file');
 */
-$autoload['helper'] = array('url');
+$autoload['helper'] = array('url', 'form', 'cookie');
 
 /*
 | -------------------------------------------------------------------
@@ -104,6 +105,8 @@ $autoload['helper'] = array('url');
 |
 */
 $autoload['config'] = array();
+//$autoload['helper'] = array('form');
+
 
 /*
 | -------------------------------------------------------------------

@@ -1,5 +1,6 @@
 var app = angular.module('myApp',['ngRoute']);
 app.config(['$routeProvider', function($routeProvider){
+	console.log($routeProvider);
 	$routeProvider.when('/',{
 		title: 'Avens Publishing Group Login',
 		templateUrl: 'partials/login.html'
@@ -19,6 +20,6 @@ app.config(['$routeProvider', function($routeProvider){
 		title: 'All Posts',
 		templateUrl: 'partials/all-posts.html'
 	}).otherwise({
-		redirectTo: '/'
+		redirectTo: '/dsdsds'
 	});
 }]);
