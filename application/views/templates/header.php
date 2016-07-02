@@ -63,15 +63,15 @@
 			<a class="screen-reader-text skip-link" href="#content" title="Skip to content">Skip to content</a>
 			<div class="menu-main-menu-container">
 			<ul id="menu-main-menu" class="nav-menu">			
-				<li class="menu-item <?php echo (($this->uri->segment(1) == '')?'current_page_item':''); ?>"><a href="<?php echo base_url(); ?>">Home</a></li>
-				<li class="menu-item <?php echo (($this->uri->segment(1) == 'about-us')?'current_page_item':''); ?>"><a href="<?php echo base_url(); ?>about-us/">About Us</a></li>
-				<li class="menu-item <?php echo (($this->uri->segment(1) == 'Journals')?'current_page_item':''); ?>"><a href="<?php echo base_url(); ?>journals/">Journals</a></li>
-				<li class="menu-item <?php echo (($this->uri->segment(1) == 'submit-manuscript')?'current_page_item':''); ?>"><a href="<?php echo base_url(); ?>submit-manuscript/">Submit Manuscript</a></li>
-				<li class="menu-item <?php echo (($this->uri->segment(1) == 'processing-fee')?'current_page_item':''); ?>"><a href="<?php echo base_url(); ?>processing-fee/">Processing Fee</a></li>
-				<li class="menu-item <?php echo (($this->uri->segment(1) == 'collaborations')?'current_page_item':''); ?>"><a href="<?php echo base_url(); ?>collaborations/">Collaborations</a></li>
-				<li class="menu-item <?php echo (($this->uri->segment(1) == 'membership')?'current_page_item':''); ?>"><a href="<?php echo base_url(); ?>membership/">Membership</a></li>
-				<li class="menu-item <?php echo (($this->uri->segment(1) == 'policies')?'current_page_item':''); ?>"><a href="<?php echo base_url(); ?>policies/">Policies</a></li>
-				<li class="menu-item <?php echo (($this->uri->segment(1) == 'contact')?'current_page_item':''); ?>"><a href="<?php echo base_url(); ?>contact/">Contact</a></li>
+				<li class="menu-item <?php echo (($this->uri->segment(2) == '')?'current_page_item':''); ?>"><a href="<?php echo base_url(); ?>">Home</a></li>
+				<li class="menu-item <?php echo (($this->uri->segment(2) == 'about_us')?'current_page_item':''); ?>"><a href="<?php echo base_url(); ?>page/about_us/">About Us</a></li>
+				<li class="menu-item <?php echo (($this->uri->segment(2) == 'Journals')?'current_page_item':''); ?>"><a href="<?php echo base_url(); ?>page/journals/">Journals</a></li>
+				<li class="menu-item <?php echo (($this->uri->segment(2) == 'submit_manuscript')?'current_page_item':''); ?>"><a href="<?php echo base_url(); ?>page/submit_manuscript/">Submit Manuscript</a></li>
+				<li class="menu-item <?php echo (($this->uri->segment(2) == 'processing_fee')?'current_page_item':''); ?>"><a href="<?php echo base_url(); ?>page/processing_fee/">Processing Fee</a></li>
+				<li class="menu-item <?php echo (($this->uri->segment(2) == 'collaborations')?'current_page_item':''); ?>"><a href="<?php echo base_url(); ?>page/collaborations/">Collaborations</a></li>
+				<li class="menu-item <?php echo (($this->uri->segment(2) == 'membership')?'current_page_item':''); ?>"><a href="<?php echo base_url(); ?>page/membership/">Membership</a></li>
+				<li class="menu-item <?php echo (($this->uri->segment(2) == 'policies')?'current_page_item':''); ?>"><a href="<?php echo base_url(); ?>page/policies/">Policies</a></li>
+				<li class="menu-item <?php echo (($this->uri->segment(2) == 'contact')?'current_page_item':''); ?>"><a href="<?php echo base_url(); ?>page/contact/">Contact</a></li>
 			</ul></div>				<form role="search" method="get" class="search-form" action="<?php echo base_url(); ?>">
 			<label>
 				<span class="screen-reader-text">Search for:</span>

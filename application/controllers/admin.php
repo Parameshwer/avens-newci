@@ -18,43 +18,52 @@ class Admin extends CI_Controller {
 	 * map to /index.php/welcome/<method_name>
 	 * @see https://codeigniter.com/user_guide/general/urls.html
 	 */
+	function index() {					
+		$this->load->view('templates/admin/header');
+	    //$this->load->view('pages/'.$page, $data);
+	    $this->load->view('templates/admin/content');
+	    $this->load->view('templates/admin/footer');
+	}
 	function login()
-	{
-	    $this->load->view('admin-template/header');
-        $this->load->view('admin/login');
-        $this->load->view('admin-template/footer');
+	{		
+		$this->load->view('templates/admin/header');
+	    //$this->load->view('pages/'.$page, $data);
+	    $this->load->view('templates/admin/content');
+	    $this->load->view('templates/admin/footer');
 	}
 	function validate_credentials()
-	{	
-
+	{			
 		$this->load->model('Users_model');
 
 		$user_name = $this->input->post('user_name');
 		$password = $this->__encrip_password($this->input->post('password'));
-		
+
 		$is_valid = $this->Users_model->validate($user_name, $password);
 		
 		if($is_valid)
 		{
+			echo 'if';
 			$data = array(
 				'user_name' => $user_name,
 				'is_logged_in' => true
 			);
 			$this->session->set_userdata($data);
-			redirect('admin/products');
+			redirect('admin/dashboard');
 		}
 		else // incorrect username or password
 		{
+			echo 'else';
 			$data['message_error'] = TRUE;
 			$this->login();	
 		}
-	}	
+	}
 	function __encrip_password($password) {
         return md5($password);
-    }
-    function signup() {
-    	$this->load->view('admin-template/header');
-		$this->load->view('admin/signup_form');
-		$this->load->view('admin-template/footer');	
+    }	
+	function dashboard() {		
+		$this->load->view('templates/admin/header');
+	    //$this->load->view('pages/'.$page, $data);
+	    $this->load->view('templates/admin/content');
+	    $this->load->view('templates/admin/footer');
 	}
 }
