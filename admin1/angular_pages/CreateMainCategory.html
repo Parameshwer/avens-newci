@@ -1,0 +1,22 @@
+<div id="main-wrapper">
+	<div ng-include="'admin1/angular_pages/navbar.html'"></div>
+	<div class="main-wrap">
+		<div ng-include="'admin1/angular_pages/sidebar1.html'"></div>
+		<div class="main-content">
+			<h1 class="page-header">Main Categories</h1>
+			<div ng-controller="CreateMainCategoryController">
+				<table class="table table-striped">
+				<tbody>
+				<tr><th>Category Id</th><th>Category Name</th><th>Created Date</th><th>Edit</th><th>Delete</th></tr>
+				<tr ng-repeat="categories in main_categories">
+				{{main_categories}}
+				<td>{{main_categories.category_name}}</td><td>Medical</td><td>2016-04-17</td>
+				<td><a href="http://localhost/avens-php/wp-admin/admin.php?page=create_category&amp;id=10">Edit</a></td>
+				<td><a href="http://localhost/avens-php/wp-admin/admin.php?page=all_categories&amp;id=10">Delete</a></td>
+				</tr>
+				</tbody>
+				</table>
+			</div>
+		</div>
+	</div>
+</div>

@@ -60,10 +60,27 @@ class Admin extends CI_Controller {
 	function __encrip_password($password) {
         return md5($password);
     }	
-	function dashboard() {		
-		$this->load->view('templates/admin/header');
-	    //$this->load->view('pages/'.$page, $data);
-	    $this->load->view('templates/admin/content');
-	    $this->load->view('templates/admin/footer');
+	function dashboard() {
+		$this->load->model('Users_model');	
+		$data = $this->Users_model->get_count();
+		if(is_array($data)){
+			echo json_encode($data);
+		}
+		//echo $data;
+
+	}
+	function get_categories() {
+		$this->load->model('Users_model');	
+		$data = $this->Users_model->get_categories();
+		if(is_array($data)){
+			echo json_encode($data);
+		}
+		echo $data;
+
+	}
+	function logout()
+	{
+		$this->session->sess_destroy();
+		redirect('admin');
 	}
 }

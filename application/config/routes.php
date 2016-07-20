@@ -56,5 +56,6 @@ $route['(:any)'] = 'static_pages/$1';*/
 //s$route['admin'] = 'admin/login';
 /*$route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;*/
-$route['default_controller'] = 'admin';
+$route['admin'] = 'admin/login';
 //$route['admin'] = 'admin';
+$route['default_controller'] = 'page';

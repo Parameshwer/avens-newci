@@ -68,5 +68,13 @@ class Users_model extends CI_Model {
 		}
 	      
 	}//create_member
+	function get_count() {
+		$query = $this->db->query('SELECT count(DISTINCT wp_journals.journal_name) as journal_count, count(DISTINCT wp_journal_main_categories.category_name) as category_count FROM wp_journals INNER JOIN wp_journal_main_categories on wp_journals.main_category_id = wp_journal_main_categories.category_id ORDER BY wp_journals.journal_name');				
+		return $query->result_array();
+	}
+	function get_categories() {
+		$query = $this->db->query('SELECT * FROM `wp_journal_main_categories` WHERE deleted = "1"');				
+		return $query->result_array();
+	}
 }
 
