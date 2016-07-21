@@ -41,7 +41,7 @@ body {
 	bottom: 0;
 }
 .sidebar-bar {
-	width: 300px;
+	width: 200px;
 	position: absolute;
 	top: 0;
 	left: 0;
@@ -51,7 +51,7 @@ body {
 .main-content {
 	position: absolute;
 	top: 0;
-	left: 300px;
+	left: 200px;
 	bottom: 0;
 	right: 0;
 	overflow: auto;

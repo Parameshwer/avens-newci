@@ -8,11 +8,10 @@
 				<table class="table table-striped">
 				<tbody>
 				<tr><th>Category Id</th><th>Category Name</th><th>Created Date</th><th>Edit</th><th>Delete</th></tr>
-				<tr ng-repeat="categories in main_categories">
-				{{main_categories}}
-				<td>{{main_categories.category_name}}</td><td>Medical</td><td>2016-04-17</td>
-				<td><a href="http://localhost/avens-php/wp-admin/admin.php?page=create_category&amp;id=10">Edit</a></td>
-				<td><a href="http://localhost/avens-php/wp-admin/admin.php?page=all_categories&amp;id=10">Delete</a></td>
+				<tr ng-repeat="(key,val) in main_categories">				
+				<td>{{val.category_id}}</td><td>{{val.category_name}}</td><td>{{val.created_date}}</td>
+				<td><a href="">Edit</a></td>
+				<td><a href="">Delete</a></td>
 				</tr>
 				</tbody>
 				</table>

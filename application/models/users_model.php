@@ -76,5 +76,13 @@ class Users_model extends CI_Model {
 		$query = $this->db->query('SELECT * FROM `wp_journal_main_categories` WHERE deleted = "1"');				
 		return $query->result_array();
 	}
+	function get_journals() {
+		$query = $this->db->query('SELECT * FROM wp_journals INNER JOIN wp_journal_main_categories ON wp_journals.main_category_id = wp_journal_main_categories.category_id');				
+		return $query->result_array();
+	}
+	function get_journals_posts() {
+		$query = $this->db->query('SELECT * FROM wp_journal_posts WHERE deleted="1"');				
+		return $query->result_array();
+	}
 }
 

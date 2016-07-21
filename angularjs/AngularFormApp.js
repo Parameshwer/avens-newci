@@ -52,22 +52,34 @@ app.controller('dashboardController', function($scope,$rootScope,$http){
     });    
 });
 app.controller('CreateJournalController', function($scope,$rootScope,$http){        
-     
+     $http({
+        url: 'http://localhost/avens-angular/admin/get_journals',
+        method: "POST"        
+    })
+    .then(function(response) {
+        $scope.main_journals = response.data;
+        return $scope;
+    }); 
 });
 app.controller('CreateMainCategoryController', function($scope,$rootScope,$http){        
-     $http({
+    $http({
         url: 'http://localhost/avens-angular/admin/get_categories',
         method: "POST"        
     })
     .then(function(response) {
-        console.log(response.data);
-        $scope.main_categories = [];
         $scope.main_categories = response.data;
         return $scope;
     }); 
 });
 app.controller('CreateJournalPostController', function($scope,$rootScope,$http){        
-     
+    $http({
+        url: 'http://localhost/avens-angular/admin/get_journals_posts',
+        method: "POST"        
+    })
+    .then(function(response) {
+        $scope.journal_posts = response.data;
+        return $scope;
+    });
 });
 app.controller('AllPostsController', function($scope,$rootScope,$http){        
      

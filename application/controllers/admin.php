@@ -75,9 +75,28 @@ class Admin extends CI_Controller {
 		if(is_array($data)){
 			echo json_encode($data);
 		}
-		echo $data;
+		//echo $data;
 
 	}
+	function get_journals() {
+		$this->load->model('Users_model');	
+		$data = $this->Users_model->get_journals();
+		if(is_array($data)){
+			echo json_encode($data);
+		}
+		//echo $data;
+
+	}
+	function get_journals_posts() {
+		$this->load->model('Users_model');	
+		$data = $this->Users_model->get_journals_posts();
+		if(is_array($data)){
+			echo json_encode($data);
+		}
+		//echo $data;
+
+	}
+	
 	function logout()
 	{
 		$this->session->sess_destroy();
