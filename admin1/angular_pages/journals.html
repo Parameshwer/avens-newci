@@ -4,7 +4,8 @@
 		<div ng-include="'admin1/angular_pages/sidebar1.html'"></div>
 		<div class="main-content">
 			<h1 class="page-header">Create Journal</h1>
-			<div ng-controller="CreateJournalController">
+			<div class="create-btn"><a class="btn btn-primary">Create Journal</a></div>
+			<div ng-controller="JournalsController">
 				<table class="table table-striped">
 				<tbody>
 				<tr><th>Journal Name</th><th>Journal Meta Keywords</th><th>Journal Category</th><th>Journal url slug</th><th>Journal Description</th><th>Created Date</th><th>Edit</th><th>Delete</th></tr></tbody>

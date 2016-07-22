@@ -81,8 +81,24 @@ class Users_model extends CI_Model {
 		return $query->result_array();
 	}
 	function get_journals_posts() {
-		$query = $this->db->query('SELECT * FROM wp_journal_posts WHERE deleted="1"');				
+		$query = $this->db->query('SELECT * FROM wp_journal_posts WHERE deleted="1"');	
+		//print_r($query);				
 		return $query->result_array();
 	}
+	function get_main_category($cat_id) {		
+		//echo "SELECT * FROM wp_journal_main_categories WHERE category_id=".$cat_id."";exit;
+		$query = $this->db->query("SELECT * FROM wp_journal_main_categories WHERE category_id=$cat_id");
+		return $query->result_array();
+	}
+	function insert_main_category($id,$name) {		
+		if($id) {
+		$query = $this->db->query("UPDATE wp_journal_main_categories SET category_name='.$name.' WHERE category_id='.$id.'");
+		} else {
+		   $query = $this->db->query("SELECT * FROM wp_journal_main_categories WHERE category_id=$cat_id");
+		}
+		return $query;
+		//return $query->result_array();
+	}
+	
 }
 

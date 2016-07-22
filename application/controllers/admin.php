@@ -96,7 +96,26 @@ class Admin extends CI_Controller {
 		//echo $data;
 
 	}
-	
+	function get_main_category() {
+		$this->load->model('Users_model');
+		$cat_id = $this->input->get('id');
+		$data = $this->Users_model->get_main_category($cat_id);
+		if(is_array($data)){
+			echo json_encode($data);
+		}
+		//echo $data;
+
+	}
+	function insert_main_category() {
+		$this->load->model('Users_model');
+		$cat_id = $this->input->get('id')?$this->input->get('id'):'0';
+		$cat_name = $this->input->get('category_name');
+		$data = $this->Users_model->insert_main_category($cat_id,$cat_name);
+		if(is_array($data)){
+			echo json_encode($data);
+		}		
+
+	}
 	function logout()
 	{
 		$this->session->sess_destroy();
