@@ -48,6 +48,8 @@ body {
 	bottom: 0;
 	border-right: 1px solid #cccccc;
 }
+.sidebar-bar .sub-nav li {list-style: none;}
+.sidebar-bar .sub-nav li a {padding: 5px 0;display: inline-block;}
 .main-content {
 	position: absolute;
 	top: 0;
@@ -112,3 +114,4 @@ body {
 	right: 15px;
 	top: 7px;
 }
+.create-btn.text {top: 16px;}

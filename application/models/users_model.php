@@ -92,9 +92,23 @@ class Users_model extends CI_Model {
 	}
 	function insert_main_category($id,$name) {		
 		if($id) {
-		$query = $this->db->query("UPDATE wp_journal_main_categories SET category_name='.$name.' WHERE category_id='.$id.'");
+		$query = $this->db->query("UPDATE wp_journal_main_categories SET category_name='".$name."', updated_date ='".date('Y-m-d')."' WHERE category_id=$id");
 		} else {
-		   $query = $this->db->query("SELECT * FROM wp_journal_main_categories WHERE category_id=$cat_id");
+		   $query = $this->db->query("INSERT INTO wp_journal_main_categories (category_name, created_date, updated_date, deleted) VALUES ('".$name."','".date('Y-m-d')."','".date('Y-m-d')."','1')");
+		}
+		return $query;
+		//return $query->result_array();
+	}
+	function get_jounal($journal_id) {		
+		$query = $this->db->query("SELECT * FROM wp_journals WHERE id=$journal_id");
+		return $query->result_array();
+	}
+	function insert_journal($data) {
+		print_r($data);exit;
+		if($data->id) {
+		$query = $this->db->query("UPDATE wp_journals SET category_name='".$name."', updated_date ='".date('Y-m-d')."' WHERE category_id=$id");
+		} else {
+		   $query = $this->db->query("INSERT INTO wp_journal_main_categories (category_name, created_date, updated_date, deleted) VALUES ('".$name."','".date('Y-m-d')."','".date('Y-m-d')."','1')");
 		}
 		return $query;
 		//return $query->result_array();

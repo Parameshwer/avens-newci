@@ -100,21 +100,60 @@ class Admin extends CI_Controller {
 		$this->load->model('Users_model');
 		$cat_id = $this->input->get('id');
 		$data = $this->Users_model->get_main_category($cat_id);
-		if(is_array($data)){
+		if(is_array($data)) {
 			echo json_encode($data);
 		}
 		//echo $data;
 
 	}
 	function insert_main_category() {
+		$obj=json_decode(file_get_contents('php://input'));
+		//print_r($obj->category_name);exit;
+		//print_r($obj);exit;
 		$this->load->model('Users_model');
-		$cat_id = $this->input->get('id')?$this->input->get('id'):'0';
-		$cat_name = $this->input->get('category_name');
-		$data = $this->Users_model->insert_main_category($cat_id,$cat_name);
-		if(is_array($data)){
+		$cat_id = $obj->category_id;
+		$cat_name = $obj->category_name;
+		if($cat_id) {
+			$data = $this->Users_model->insert_main_category($cat_id,$cat_name);			
+			if($data){
+				$status = array('status' => true,"message" => 'Category Edited Successfully');
+			}
+		} else {
+			$data = $this->Users_model->insert_main_category($cat_id,$cat_name);			
+			if($data) {
+				$status = array('status' => true,"message" => 'Category Added Successfully');			
+			}
+			
+		}
+		
+		echo json_encode($status);		
+	}
+	function insert_journal() {
+		$obj=json_decode(file_get_contents('php://input'));		
+		$this->load->model('Users_model');	
+		$journal_id = $obj->id;	
+		if($journal_id) {
+			$data = $this->Users_model->insert_journal($obj);			
+			if($data){
+				$status = array('status' => true,"message" => 'Journal Edited Successfully');
+			}
+		} else {
+			$data = $this->Users_model->insert_journal($obj);			
+			if($data) {
+				$status = array('status' => true,"message" => 'Journal Added Successfully');			
+			}
+			
+		}
+		
+		echo json_encode($status);		
+	}
+	function get_journal() {
+		$this->load->model('Users_model');
+		$journal_id = $this->input->get('id');
+		$data = $this->Users_model->get_jounal($journal_id);
+		if(is_array($data)) {
 			echo json_encode($data);
-		}		
-
+		}
 	}
 	function logout()
 	{
