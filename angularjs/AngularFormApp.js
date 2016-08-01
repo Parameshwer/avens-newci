@@ -46,7 +46,7 @@ app.factory("services", ['$http', function($http) {
         .then(function(response) {
             console.log(response);
             if(response.status) {
-                window.location = base_url+'admin#/journals/medical'                
+                window.location = base_url+'admin#/Journals/medical'                
             }
         });
     };
@@ -162,7 +162,7 @@ app.controller('loginController', function($scope,$rootScope,$http){
             data: user
         })
         .then(function(response) {
-            //window.location = base_url+'admin#/Dashboard'
+            window.location = base_url+'admin#/Dashboard'
         });
     }
 });

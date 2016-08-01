@@ -61,7 +61,7 @@
 					<label for="main_category" class="col-sm-3 control-label">Main Category</label>
 					<div class="col-sm-9">
 
-						<select class="form-control" data-ng-options="o.name for o in options" data-ng-model="selectedOption"></select>
+						<select class="form-control" name="main_category_id" ng-model="main_journal.main_category_id" data-ng-options="o.name for o in options"></select>
 						</div>
 					</div>
 					<div class="form-group">
@@ -73,7 +73,7 @@
 					<div class="form-group">
 						<div class="col-sm-offset-3 col-sm-10">
 							<!-- <input type="submit" name="insert" value="Save" class="btn btn-primary"> -->
-							<button ng-click="saveJournal(main_category)" class="btn btn-primary">{{buttonText}}</button>
+							<button ng-click="saveJournal(main_journal)" class="btn btn-primary">{{buttonText}}</button>
 						</div>
 					</div>
 				</form>						

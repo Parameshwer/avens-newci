@@ -104,11 +104,11 @@ class Users_model extends CI_Model {
 		return $query->result_array();
 	}
 	function insert_journal($data) {
-		print_r($data);exit;
+				
 		if($data->id) {
-		$query = $this->db->query("UPDATE wp_journals SET category_name='".$name."', updated_date ='".date('Y-m-d')."' WHERE category_id=$id");
+		$query = $this->db->query("UPDATE wp_journals SET journal_name='".$data->journal_name."', updated_date ='".date('Y-m-d')."',issn_number ='".$data->issn_number."',journal_meta_keywords ='".$data->journal_meta_keywords."',journal_ic_value ='".$data->journal_ic_value."',main_category_id ='".$data->main_category_id."',journal_description ='".$data->journal_description."' WHERE id=$data->id");
 		} else {
-		   $query = $this->db->query("INSERT INTO wp_journal_main_categories (category_name, created_date, updated_date, deleted) VALUES ('".$name."','".date('Y-m-d')."','".date('Y-m-d')."','1')");
+		   $query = $this->db->query("INSERT INTO wp_journals (journal_name, created_date, updated_date, issn_number,journal_meta_keywords,journal_ic_value,main_category_id,journal_description,deleted) VALUES ('".$data->journal_name."','".date('Y-m-d')."','".date('Y-m-d')."','".$data->issn_number."','".$data->journal_meta_keywords."','".$data->journal_ic_value."','".$data->main_category_id."','".$data->journal_description."','1')");
 		}
 		return $query;
 		//return $query->result_array();

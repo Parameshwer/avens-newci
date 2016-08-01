@@ -129,8 +129,9 @@ class Admin extends CI_Controller {
 		echo json_encode($status);		
 	}
 	function insert_journal() {
-		$obj=json_decode(file_get_contents('php://input'));		
-		$this->load->model('Users_model');	
+		$obj=json_decode(file_get_contents('php://input'));
+		//print_r($obj);exit;		
+		$this->load->model('Users_model');			
 		$journal_id = $obj->id;	
 		if($journal_id) {
 			$data = $this->Users_model->insert_journal($obj);			
