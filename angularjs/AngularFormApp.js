@@ -1,6 +1,6 @@
 var app = angular.module('myApp', ['ngRoute']);
 var base_url = "http://localhost/avens-angular/";
-console.log(app);
+//console.log(app);
 app.factory("services", ['$http', function($http) {
   var serviceBase = 'services/'
     var obj = {};
@@ -9,6 +9,9 @@ app.factory("services", ['$http', function($http) {
     }
     obj.get_journal = function(main_cat_id){
         return $http.get(base_url+"admin/get_journal?id="+main_cat_id+"");
+    }
+    obj.get_journalPage = function(PageId){
+        return $http.get(base_url+"admin/get_journalPage?id="+PageId+"");
     }
     obj.insertCategory = function (main_category) {
         return $http.get(base_url+"admin/insert_main_category?name="+main_category.cateogry_name+"");       
@@ -37,6 +40,10 @@ app.factory("services", ['$http', function($http) {
     };
     obj.updateJournal = function (id,main_journal) {        
         //return $http.get(base_url+"admin/insert_main_category?name="+main_category.category_name+"&id="+main_category.category_id+"");
+        console.log(main_journal);
+        /*if(!id) {
+            main_journal.main_category_id = 0;
+        }*/
         $http({
             url: base_url+"admin/insert_journal",
             method: "POST",
@@ -54,7 +61,6 @@ app.factory("services", ['$http', function($http) {
 }]);
 app.controller('EditMaincategoryController', function($scope,$rootScope,$routeParams,$location,services,main_category){        
     var main_cat_id = ($routeParams.MaincatID) ? parseInt($routeParams.MaincatID) : 0;
-    console.log(main_cat_id);
     $rootScope.title = (main_cat_id > 0) ? 'Edit Category' : 'Add Category';
     $scope.buttonText = (main_cat_id > 0) ? 'Update Category' : 'Add New Category';    
     var original = main_category.data[0];    
@@ -77,17 +83,37 @@ app.controller('EditJournalController', function($scope,$rootScope,$routeParams,
     $scope.buttonText = (journal_id > 0) ? 'Update Journal' : 'Add New Journal';    
     var original = main_journal.data[0];    
     $scope.main_journal = original;
-    $scope.options = [{ name: "Medical", id: 10 }, { name: "Biotechnolgy", id: 20 },{ name: "Pharmaseutical", id: 30 },{ name: "Biology", id: 40 }];
-    $scope.selectedOption = $scope.options[1];
+    //$scope.options = [{ name: "Medical", id: 10 }, { name: "Biotechnolgy", id: 20 },{ name: "Pharmaseutical", id: 30 },{ name: "Biology", id: 40 }];
+    //$scope.selectedOption = $scope.options[1];
     $scope.isClean = function() {
        return angular.equals(original, $scope.main_journal);
     }
     $scope.saveJournal = function(main_journal) {
         if (journal_id <= 0) {
-            services.updateJournal("0",main_journal);
+            services.updateJournal(0,main_journal);
         }
         else {
             services.updateJournal(journal_id, main_journal);
+        }
+    }
+});
+app.controller('EditJournalPageController', function($scope,$rootScope,$routeParams,$location,services,main_page) { 
+    var page_id = ($routeParams.Page_id) ? parseInt($routeParams.Page_id) : 0;
+    $rootScope.title = (page_id > 0) ? 'Edit Journal Page' : 'Add Journal Page';
+    $scope.buttonText = (page_id > 0) ? 'Update Journal Page' : 'Add New Journal Page';    
+    var original = main_page.data[0];    
+    $scope.main_page = original;
+    //$scope.options = [{ name: "Medical", id: 10 }, { name: "Biotechnolgy", id: 20 },{ name: "Pharmaseutical", id: 30 },{ name: "Biology", id: 40 }];
+    //$scope.selectedOption = $scope.options[1];
+    $scope.isClean = function() {
+       return angular.equals(original, $scope.main_page);
+    }
+    $scope.saveJournalPage = function(main_page) {
+        if (page_id <= 0) {
+            services.updateJournal(0,main_page);
+        }
+        else {
+            services.updateJournal(page_id, main_page);
         }
     }
 });
@@ -146,6 +172,16 @@ app.config(['$routeProvider',function ($routeProvider) {
           main_journal: function(services, $route){            
             var journal_id = $route.current.params.JournalID;
             return services.get_journal(journal_id);
+          }
+        }    
+    }).when("/EditJournalPage/:pageID", {        
+        title: 'Edit Journal Page',
+        templateUrl:base_url+'admin1/angular_pages/edit-journal-page.html',
+        controller: "EditJournalPageController",
+        resolve: {
+          main_page: function(services, $route){            
+            var Page_id = $route.current.params.pageID;
+            return services.get_journalPage(Page_id);
           }
         }    
     })

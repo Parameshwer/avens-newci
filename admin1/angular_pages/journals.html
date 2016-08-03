@@ -8,10 +8,10 @@
 			<div ng-controller="JournalsController">
 				<table class="table table-striped">
 				<tbody>
-				<tr><th>Journal Name</th><th>Journal Meta Keywords</th><th>Journal Category</th><th>Journal url slug</th><th>Journal Description</th><th>Created Date</th><th>Edit</th><th>Delete</th></tr></tbody>
+				<tr><th>Journal Name</th><th>Journal ISSN Number</th><th>Journal Category</th><th>Created Date</th><th>Edit</th><th>Delete</th></tr></tbody>
 				<tr ng-repeat="(key,val) in main_journals">				
 				{{val}}
-				<td>{{val.journal_name}}</td><td>{{val.journal_meta_keywords}}</td><td>{{val.category_name}}</td><td>{{val.journal_url_slug}}</td><td>{{val.journal_description}}</td><td>{{val.category_name}}</td>
+				<td>{{val.journal_name}}</td><td>{{val.issn_number}}</td><td>{{val.category_name}}</td><td>{{val.created_date}}</td>
 				<td><a href="#/EditJournals/{{val.id}}">Edit</a></td>
 				<td><a href="">Delete</a></td>
 				</tr>

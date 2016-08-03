@@ -103,6 +103,10 @@ class Users_model extends CI_Model {
 		$query = $this->db->query("SELECT * FROM wp_journals WHERE id=$journal_id");
 		return $query->result_array();
 	}
+	function get_journalPage($page_id) {		
+		$query = $this->db->query("SELECT * FROM wp_journal_posts WHERE id=$page_id");
+		return $query->result_array();
+	}
 	function insert_journal($data) {
 				
 		if($data->id) {

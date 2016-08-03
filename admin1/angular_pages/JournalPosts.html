@@ -3,13 +3,16 @@
 	<div class="main-wrap">
 		<div ng-include="'admin1/angular_pages/sidebar1.html'"></div>
 		<div class="main-content">
-			<h1 class="page-header">Create Journal Post</h1>
-			<div class="create-btn"><a class="btn btn-primary">Create Journal Post</a></div>
+			<h1 class="page-header">Journal pages</h1>
+			<div class="create-btn text">
+				<a href="#/Journals/medical">Back to Journal Posts</a>				
+			</div>
+			<div class="create-btn"><a href="#/EditJournalPage/0"class="btn btn-primary">Create Journal page</a></div>
 			<div ng-controller="JournalPostsController">
 				<table class="table table-striped"><tbody><tr><th>Post Name</th><th>Journal</th><th>Category</th><th>Created date</th><th>Updated date</th><th>Edit</th><th>Delete</th></tr>
 				<tr ng-repeat="(key,val) in journal_posts">				
 				<td>{{val.post_name}}</td><td>{{val.journal_id}}</td><td>{{val.category_id}}</td><td>{{val.created_date}}</td><td>{{val.updated_date}}</td>
-				<td><a href="">Edit</a></td>
+				<td><a href="#/EditJournalPage/{{val.id}}">Edit</a></td>
 				<td><a href="">Delete</a></td>
 				</tr>
 				</tbody></table>

@@ -156,6 +156,14 @@ class Admin extends CI_Controller {
 			echo json_encode($data);
 		}
 	}
+	function get_journalPage() {
+		$this->load->model('Users_model');
+		$page_id = $this->input->get('id');
+		$data = $this->Users_model->get_journalPage($page_id);
+		if(is_array($data)) {
+			echo json_encode($data);
+		}	
+	}
 	function logout()
 	{
 		$this->session->sess_destroy();

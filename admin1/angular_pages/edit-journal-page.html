@@ -1,0 +1,92 @@
+<script>
+$(document).ready(function(){
+tinymce.init({
+  selector: '.journal-post-editor',
+  height: 500,
+  width: 700,
+  plugins: [
+    'advlist autolink lists link image charmap print preview anchor',
+    'searchreplace visualblocks code fullscreen',
+    'insertdatetime media table contextmenu paste code'
+  ],
+  toolbar: 'insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image',
+  content_css: [
+    '//fast.fonts.net/cssapi/e6dc9b99-64fe-4292-ad98-6974f93cd2a2.css',
+    '//www.tinymce.com/css/codepen.min.css'
+  ]
+});
+});
+</script>
+<div id="main-wrapper">
+	<div ng-include="'admin1/angular_pages/navbar.html'"></div>
+	<div class="main-wrap">
+		<div ng-include="'admin1/angular_pages/sidebar1.html'"></div>
+		<div class="main-content">
+			<h1 class="page-header">Create Journal page</h1>
+			<div class="create-btn text">
+				<a href="#/JournalPosts">Back to Journals Pages</a>				
+			</div>
+			<div>
+				<div class="form-box">					
+					<form class="form-horizontal" enctype="multipart/form-data" method="post" novalidate="novalidate">
+						<div class="form-group">
+							<label for="issn_number" class="col-sm-3 control-label">Post Name</label>
+							<div class="col-sm-9">
+								<input type="text" class="form-control valid" id="journal_post_name" name="journal_post_name" required>
+
+							</div>
+						</div>
+						<div class="form-group">
+							<label for="issn_number" class="col-sm-3 control-label">Post Slug</label>
+							<div class="col-sm-9">
+								<input type="text" class="form-control" id="journal_post_slug" name="journal_post_slug" value="home" required="">					
+							</div>
+						</div>
+						<div class="form-group">
+							<label for="journal_name" class="col-sm-3 control-label">Main Category Name</label>
+							<div class="col-sm-9">
+								<select class="form-control" name="category_id">
+									<option val="">Select Category</option>
+									<option value="10">Medical</option>
+									<option value="20">Biotechnology</option>
+									<option value="30">Biology</option>
+									<option value="40">Pharmaceutical</option>
+								</select>
+							</div>
+						</div>
+						<div class="form-group">
+							<label for="journal_name" class="col-sm-3 control-label">Journal Name</label>
+							<div class="col-sm-9">
+								<select class="form-control" name="category_id">
+									<option val="">Select Category</option>
+									<option value="10">Medical</option>
+									<option value="20">Biotechnology</option>
+									<option value="30">Biology</option>
+									<option value="40">Pharmaceutical</option>
+								</select>
+							</div>
+						</div>
+						<div class="form-group">
+							<label for="issn_number" class="col-sm-3 control-label">Jounral Slug</label>
+							<div class="col-sm-9">
+								<input type="text" class="form-control" id="journal_slug" name="journal_slug" required>					
+							</div>
+						</div>
+						<div class="form-group" required="">
+							<label for="banner_image" class="col-sm-3 control-label">Post Content</label>
+							<div class="col-sm-9">
+								<textarea class="journal-post-editor">Easy! You should check out MoxieManager!</textarea>
+							</div>
+						</div>
+						<div class="form-group">
+							<div class="col-sm-offset-3 col-sm-10">
+								<input type="submit" name="insert" value="Save" class="btn btn-primary">
+							</div>
+						</div>
+					</form>						
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+</div>
