@@ -32,20 +32,20 @@ tinymce.init({
 						<div class="form-group">
 							<label for="issn_number" class="col-sm-3 control-label">Post Name</label>
 							<div class="col-sm-9">
-								<input type="text" class="form-control valid" id="journal_post_name" name="journal_post_name" required>
+								<input type="text" class="form-control valid" ng-model="main_page.post_name" id="journal_post_name" name="journal_post_name" required>
 
 							</div>
 						</div>
 						<div class="form-group">
 							<label for="issn_number" class="col-sm-3 control-label">Post Slug</label>
 							<div class="col-sm-9">
-								<input type="text" class="form-control" id="journal_post_slug" name="journal_post_slug" value="home" required="">					
+								<input type="text" class="form-control" id="journal_post_slug" ng-model="main_page.post_slug" name="journal_post_slug" required>					
 							</div>
 						</div>
 						<div class="form-group">
 							<label for="journal_name" class="col-sm-3 control-label">Main Category Name</label>
 							<div class="col-sm-9">
-								<select class="form-control" name="category_id">
+								<select class="form-control" name="category_id" ng-model="main_page.category_id">
 									<option val="">Select Category</option>
 									<option value="10">Medical</option>
 									<option value="20">Biotechnology</option>
@@ -57,13 +57,14 @@ tinymce.init({
 						<div class="form-group">
 							<label for="journal_name" class="col-sm-3 control-label">Journal Name</label>
 							<div class="col-sm-9">
-								<select class="form-control" name="category_id">
+							<select class="form-control" ng-model="myColor" ng-options="journal_info.journal_name group by journal_info.category_name for journal_info in journal_info"></select>							
+								<!-- <select class="form-control" name="category_id">
 									<option val="">Select Category</option>
 									<option value="10">Medical</option>
 									<option value="20">Biotechnology</option>
 									<option value="30">Biology</option>
 									<option value="40">Pharmaceutical</option>
-								</select>
+								</select> -->
 							</div>
 						</div>
 						<div class="form-group">
@@ -74,8 +75,9 @@ tinymce.init({
 						</div>
 						<div class="form-group" required="">
 							<label for="banner_image" class="col-sm-3 control-label">Post Content</label>
-							<div class="col-sm-9">
-								<textarea class="journal-post-editor">Easy! You should check out MoxieManager!</textarea>
+							<div class="col-sm-9">								
+								<!-- {{textarea_text}} -->
+								 <textarea ui-tinymce="tinymceOptions" ng-model="textarea_text"></textarea>						
 							</div>
 						</div>
 						<div class="form-group">

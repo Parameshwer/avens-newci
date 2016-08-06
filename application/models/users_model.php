@@ -117,6 +117,10 @@ class Users_model extends CI_Model {
 		return $query;
 		//return $query->result_array();
 	}
+	function get_journals_and_categories() {
+		$query = $this->db->query("SELECT wp_journals.journal_name,wp_journals.id, wp_journal_main_categories.category_id, wp_journal_main_categories.category_name FROM wp_journals INNER JOIN wp_journal_main_categories ON wp_journals.main_category_id=wp_journal_main_categories.category_id GROUP BY wp_journals.journal_name");
+		return $query->result_array();
+	}
 	
 }
 

@@ -90,6 +90,8 @@ class Admin extends CI_Controller {
 	function get_journals_posts() {
 		$this->load->model('Users_model');	
 		$data = $this->Users_model->get_journals_posts();
+		$journal_data = $this->Users_model->get_journals_and_categories();
+
 		if(is_array($data)){
 			echo json_encode($data);
 		}
@@ -159,7 +161,8 @@ class Admin extends CI_Controller {
 	function get_journalPage() {
 		$this->load->model('Users_model');
 		$page_id = $this->input->get('id');
-		$data = $this->Users_model->get_journalPage($page_id);
+		$data['post_info'] = $this->Users_model->get_journalPage($page_id);
+		$data['journal_info'] = $this->Users_model->get_journals_and_categories();
 		if(is_array($data)) {
 			echo json_encode($data);
 		}	

@@ -1,4 +1,4 @@
-var app = angular.module('myApp', ['ngRoute']);
+var app = angular.module('myApp', ['ngRoute','ui.tinymce']);
 var base_url = "http://localhost/avens-angular/";
 //console.log(app);
 app.factory("services", ['$http', function($http) {
@@ -101,8 +101,12 @@ app.controller('EditJournalPageController', function($scope,$rootScope,$routePar
     var page_id = ($routeParams.Page_id) ? parseInt($routeParams.Page_id) : 0;
     $rootScope.title = (page_id > 0) ? 'Edit Journal Page' : 'Add Journal Page';
     $scope.buttonText = (page_id > 0) ? 'Update Journal Page' : 'Add New Journal Page';    
-    var original = main_page.data[0];    
+        
+    var original = main_page.data.post_info;        
     $scope.main_page = original;
+    $scope.journal_info = main_page.data.journal_info;
+    $scope.myColor = $scope.journal_info[2];
+    $scope.textarea_text = original.post_content;
     //$scope.options = [{ name: "Medical", id: 10 }, { name: "Biotechnolgy", id: 20 },{ name: "Pharmaseutical", id: 30 },{ name: "Biology", id: 40 }];
     //$scope.selectedOption = $scope.options[1];
     $scope.isClean = function() {
@@ -116,6 +120,17 @@ app.controller('EditJournalPageController', function($scope,$rootScope,$routePar
             services.updateJournal(page_id, main_page);
         }
     }
+    $scope.tinymceOptions = {
+        onChange: function(e) {
+          // put logic here for keypress and cut/paste changes
+        },
+        inline: false,
+        plugins : 'advlist autolink link image lists charmap print preview link media',
+        skin: 'lightgray',
+        theme : 'modern',
+        width : 600,
+        height : 300
+      };
 });
 app.controller('JournalsController', function($scope,services) {    
     services.get_journals().then(function(data){      
@@ -238,6 +253,7 @@ app.controller('JournalPostsController', function($scope,$rootScope,$http){
         method: "POST"        
     })
     .then(function(response) {
+        console.log(response);
         $scope.journal_posts = response.data;
         return $scope;
     });
