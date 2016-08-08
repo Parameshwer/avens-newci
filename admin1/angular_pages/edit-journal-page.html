@@ -57,7 +57,7 @@ tinymce.init({
 						<div class="form-group">
 							<label for="journal_name" class="col-sm-3 control-label">Journal Name</label>
 							<div class="col-sm-9">
-							<select class="form-control" ng-model="myColor" ng-options="journal_info.journal_name group by journal_info.category_name for journal_info in journal_info"></select>							
+							<!-- <select class="form-control" ng-model="myColor" ng-options="journal_info.journal_name group by journal_info.category_name for journal_info in journal_info"></select>	 -->						
 								<!-- <select class="form-control" name="category_id">
 									<option val="">Select Category</option>
 									<option value="10">Medical</option>
@@ -65,6 +65,21 @@ tinymce.init({
 									<option value="30">Biology</option>
 									<option value="40">Pharmaceutical</option>
 								</select> -->
+
+								<select class="form-control">
+								  <optgroup label="Medical">
+								    <option ng-repeat="j in journal_info" ng-selected="seleced_id==j.id?'selected':''" ng-if="j.category_name == 'Medical'" value="{{j.id}}">{{j.journal_name}}</option>    
+								  </optgroup>
+								  <optgroup label="Biotechnolgy">
+								    <option ng-repeat="j in journal_info" ng-selected="seleced_id==j.id?'selected':''" ng-if="j.category_name == 'Biotechnolgy'" value="{{j.id}}">{{j.journal_name}}</option>    
+								  </optgroup>
+								  <optgroup label="Biology">
+								    <option ng-repeat="j in journal_info" ng-selected="seleced_id==j.id?'selected':''" ng-if="j.category_name == 'Biology'" value="{{j.id}}">{{j.journal_name}}</option>    
+								  </optgroup>
+								  <optgroup label="Pharmaseutical">
+								    <option ng-repeat="j in journal_info" ng-selected="seleced_id==j.id?'selected':''" ng-if="j.category_name == 'Pharmaseutical'" value="{{j.id}}">{{j.journal_name}}</option>    
+								  </optgroup>								  
+								</select>
 							</div>
 						</div>
 						<div class="form-group">

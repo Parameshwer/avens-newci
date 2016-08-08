@@ -102,10 +102,11 @@ app.controller('EditJournalPageController', function($scope,$rootScope,$routePar
     $rootScope.title = (page_id > 0) ? 'Edit Journal Page' : 'Add Journal Page';
     $scope.buttonText = (page_id > 0) ? 'Update Journal Page' : 'Add New Journal Page';    
         
-    var original = main_page.data.post_info;        
+    var original = main_page.data.post_info;
+    
     $scope.main_page = original;
     $scope.journal_info = main_page.data.journal_info;
-    $scope.myColor = $scope.journal_info[2];
+    $scope.seleced_id = original[0].journal_id;
     $scope.textarea_text = original.post_content;
     //$scope.options = [{ name: "Medical", id: 10 }, { name: "Biotechnolgy", id: 20 },{ name: "Pharmaseutical", id: 30 },{ name: "Biology", id: 40 }];
     //$scope.selectedOption = $scope.options[1];
