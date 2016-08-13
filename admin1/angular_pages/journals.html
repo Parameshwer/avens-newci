@@ -11,7 +11,7 @@
 				<tr><th>Journal Name</th><th>Journal ISSN Number</th><th>Journal Category</th><th>Created Date</th><th>Edit</th><th>Delete</th></tr></tbody>
 				<tr ng-repeat="(key,val) in main_journals">				
 				{{val}}
-				<td>{{val.journal_name}}</td><td>{{val.issn_number}}</td><td>{{val.category_name}}</td><td>{{val.created_date}}</td>
+				<td>{{val.journal_name}}</td><td>{{val.issn_number}}</td><td>{{val.category_name}}</td><td>{{val.updated_date}}</td>
 				<td><a href="#/EditJournals/{{val.id}}">Edit</a></td>
 				<td><a href="">Delete</a></td>
 				</tr>

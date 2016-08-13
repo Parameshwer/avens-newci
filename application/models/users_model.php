@@ -121,6 +121,15 @@ class Users_model extends CI_Model {
 		$query = $this->db->query("SELECT wp_journals.journal_name,wp_journals.id, wp_journal_main_categories.category_id, wp_journal_main_categories.category_name FROM wp_journals INNER JOIN wp_journal_main_categories ON wp_journals.main_category_id=wp_journal_main_categories.category_id GROUP BY wp_journals.journal_name");
 		return $query->result_array();
 	}
-	
+	function update_journal_page($data) {
+		
+		if(isset($data->id) && !empty($data->id)) {
+		$query = $this->db->query("UPDATE wp_journal_posts SET post_name='".$data->post_name."', updated_date ='".date('Y-m-d')."',category_id ='".$data->category_id."',post_slug ='".$data->post_slug."',journal_slug ='".$data->journal_slug."',post_content ='".$data->post_content."',journal_id ='".$data->journal_id."' WHERE id=$data->id");
+		} else {
+		   $query = $this->db->query("INSERT INTO wp_journal_posts (post_name, created_date, updated_date, category_id,post_slug,journal_slug,post_content,journal_id,deleted) VALUES ('".$data->post_name."','".date('Y-m-d')."','".date('Y-m-d')."','".$data->category_id."','".$data->post_slug."','".$data->journal_slug."','".$data->post_content."','$data->journal_id','1')");
+		}
+		return $query;
+		//return $query->result_array();
+	}
 }
 

@@ -167,6 +167,24 @@ class Admin extends CI_Controller {
 			echo json_encode($data);
 		}	
 	}
+	function update_journal_page() {
+		$this->load->model('Users_model');
+		$obj=json_decode(file_get_contents('php://input'));
+		
+		if(isset($obj->id) && !empty($obj->id)) {
+			$data = $this->Users_model->update_journal_page($obj);			
+			if($data){
+				$status = array('status' => true,"message" => 'Journal Post Edited Successfully');
+			}
+		} else {
+			$data = $this->Users_model->update_journal_page($obj);			
+			if($data) {
+				$status = array('status' => true,"message" => 'Journal post Added Successfully');			
+			}
+			
+		}		
+		echo json_encode($data);
+	}
 	function logout()
 	{
 		$this->session->sess_destroy();

@@ -57,6 +57,25 @@ app.factory("services", ['$http', function($http) {
             }
         });
     };
+    obj.updateJournalPage = function (id,journal_page) {        
+        //return $http.get(base_url+"admin/insert_main_category?name="+main_category.category_name+"&id="+main_category.category_id+"");
+        /*if(!id) {
+            journal_page.main_category_id = 0;
+        }*/
+        console.log(journal_page);
+        $http({
+            url: base_url+"admin/update_journal_page",
+            method: "POST",
+            headers: {'Content-Type': 'application/json'},
+            data : JSON.stringify(journal_page)          
+        })
+        .then(function(response) {
+            console.log(response);
+            if(response.status) {
+                window.location = base_url+'admin#/JournalPosts'                
+            }
+        });
+    };
     return obj;   
 }]);
 app.controller('EditMaincategoryController', function($scope,$rootScope,$routeParams,$location,services,main_category){        
@@ -98,27 +117,28 @@ app.controller('EditJournalController', function($scope,$rootScope,$routeParams,
     }
 });
 app.controller('EditJournalPageController', function($scope,$rootScope,$routeParams,$location,services,main_page) { 
-    var page_id = ($routeParams.Page_id) ? parseInt($routeParams.Page_id) : 0;
+
+    var page_id = ($routeParams.pageID) ? parseInt($routeParams.pageID) : 0;
     $rootScope.title = (page_id > 0) ? 'Edit Journal Page' : 'Add Journal Page';
     $scope.buttonText = (page_id > 0) ? 'Update Journal Page' : 'Add New Journal Page';    
-        
+    console.log(page_id);
     var original = main_page.data.post_info;
-    
-    $scope.main_page = original;
-    $scope.journal_info = main_page.data.journal_info;
-    $scope.seleced_id = original[0].journal_id;
-    $scope.textarea_text = original.post_content;
+   console.log(original[0]); 
+    $scope.main_page = original[0];
+    $scope.journal_info = main_page.data.journal_info;    
     //$scope.options = [{ name: "Medical", id: 10 }, { name: "Biotechnolgy", id: 20 },{ name: "Pharmaseutical", id: 30 },{ name: "Biology", id: 40 }];
     //$scope.selectedOption = $scope.options[1];
     $scope.isClean = function() {
        return angular.equals(original, $scope.main_page);
     }
-    $scope.saveJournalPage = function(main_page) {
+    $scope.saveJournalPage = function(main_page) {        
+        console.log(main_page);        
         if (page_id <= 0) {
-            services.updateJournal(0,main_page);
+            alert('aa');
+            services.updateJournalPage(0,main_page);
         }
         else {
-            services.updateJournal(page_id, main_page);
+            services.updateJournalPage(page_id, main_page);
         }
     }
     $scope.tinymceOptions = {
@@ -132,9 +152,24 @@ app.controller('EditJournalPageController', function($scope,$rootScope,$routePar
         width : 600,
         height : 300
       };
+    $scope.convertToPostSlug = function(elem) {
+        $('#journal_post_slug').val('');
+         $('#journal_post_slug').val(elem.main_page.post_name.toLowerCase().replace(/[^\w ]+/g,'').replace(/ +/g,'-'));
+    };
+    $scope.convertToJournalSlug = function(elem) {        
+        $.each($scope.journal_info,function(i,v){
+            if(v.id == elem){
+                $('#journal_slug').val('');
+                $('#journal_slug').val(v.journal_name.toLowerCase().replace(/[^\w ]+/g,'').replace(/ +/g,'-'));
+                //return false;
+            }
+        });        
+
+    };
 });
 app.controller('JournalsController', function($scope,services) {    
-    services.get_journals().then(function(data){      
+    services.get_journals().then(function(data){
+    console.log(data);      
         $scope.main_journals = data.data;
     });
 });
