@@ -57,12 +57,19 @@ app.factory("services", ['$http', function($http) {
             }
         });
     };
-    obj.updateJournalPage = function (id,journal_page) {        
+    obj.updateJournalPage = function (id,journal_page,scope) {        
         //return $http.get(base_url+"admin/insert_main_category?name="+main_category.category_name+"&id="+main_category.category_id+"");
         /*if(!id) {
             journal_page.main_category_id = 0;
         }*/
         console.log(journal_page);
+        journal_page.journal_post_slug = journal_page.post_name.toLowerCase().replace(/[^\w ]+/g,'').replace(/ +/g,'-');        
+        $.each(scope.journal_info,function(i,v){
+            if(v.id == journal_page.journal_id) {                
+                console.log(v);
+                journal_page.journal_slug = v.journal_name.toLowerCase().replace(/[^\w ]+/g,'').replace(/ +/g,'-');                            
+            }
+        });
         $http({
             url: base_url+"admin/update_journal_page",
             method: "POST",
@@ -135,10 +142,10 @@ app.controller('EditJournalPageController', function($scope,$rootScope,$routePar
         console.log(main_page);        
         if (page_id <= 0) {
             alert('aa');
-            services.updateJournalPage(0,main_page);
+            services.updateJournalPage(0,main_page,$scope);
         }
         else {
-            services.updateJournalPage(page_id, main_page);
+            services.updateJournalPage(page_id, main_page,$scope);
         }
     }
     $scope.tinymceOptions = {
@@ -152,21 +159,27 @@ app.controller('EditJournalPageController', function($scope,$rootScope,$routePar
         width : 600,
         height : 300
       };
-    $scope.convertToPostSlug = function(elem) {
-        $('#journal_post_slug').val('');
-         $('#journal_post_slug').val(elem.main_page.post_name.toLowerCase().replace(/[^\w ]+/g,'').replace(/ +/g,'-'));
+    $scope.convertToPostSlug = function(elem) {        
+        $('#journal_post_slug').val(elem.main_page.post_name.toLowerCase().replace(/[^\w ]+/g,'').replace(/ +/g,'-'));         
     };
     $scope.convertToJournalSlug = function(elem) {        
         $.each($scope.journal_info,function(i,v){
-            if(v.id == elem){
-                $('#journal_slug').val('');
-                $('#journal_slug').val(v.journal_name.toLowerCase().replace(/[^\w ]+/g,'').replace(/ +/g,'-'));
-                //return false;
+            if(v.id == elem){                
+                    $('#journal_slug').val(v.journal_name.toLowerCase().replace(/[^\w ]+/g,'').replace(/ +/g,'-'));                            
             }
         });        
 
     };
 });
+
+app.controller('EditJournalArchiveController', function($scope,$rootScope,$routeParams,$location,services) { 
+
+    /*var page_id = ($routeParams.pageID) ? parseInt($routeParams.pageID) : 0;
+    $rootScope.title = (page_id > 0) ? 'Edit Journal Archive' : 'Add Journal Archive';
+    $scope.buttonText = (archive_id > 0) ? 'Update Journal Archive' : 'Add New Journal Archive';    */
+
+});
+
 app.controller('JournalsController', function($scope,services) {    
     services.get_journals().then(function(data){
     console.log(data);      
@@ -201,6 +214,10 @@ app.config(['$routeProvider',function ($routeProvider) {
         title: 'JournalPosts',
         templateUrl:base_url+'admin1/angular_pages/JournalPosts.html',
         controller: "JournalPostsController",
+    }).when("/archives", {        
+        title: 'Journal Archives',
+        templateUrl:base_url+'admin1/angular_pages/JournalArchives.html',
+        controller: "JournalArchiveController",
     }).when("/AllPosts", {        
         title: 'AllPosts',
         templateUrl:base_url+'admin1/angular_pages/Allposts.html',
@@ -233,6 +250,17 @@ app.config(['$routeProvider',function ($routeProvider) {
           main_page: function(services, $route){            
             var Page_id = $route.current.params.pageID;
             return services.get_journalPage(Page_id);
+          }
+        }    
+    }).when("/EditJournalArchive/:ArchiveId", {        
+        title: 'Edit Journal Archive',
+        templateUrl:base_url+'admin1/angular_pages/edit-journal-archive.html',
+        controller: "EditJournalArchiveController",
+        resolve: {
+          main_page: function(services, $route){            
+            var archive_id = $route.current.params.ArchiveId;
+            console.log(archive_id);
+            //return services.get_journalArchive(Page_id);
           }
         }    
     })
@@ -294,3 +322,14 @@ app.controller('JournalPostsController', function($scope,$rootScope,$http){
         return $scope;
     });
 });
+app.controller('JournalArchiveController', function($scope,$rootScope,$http){        
+    /*$http({
+        url: base_url+'admin/get_journals_posts',
+        method: "POST"        
+    })
+    .then(function(response) {
+        console.log(response);
+        $scope.journal_posts = response.data;
+        return $scope;
+    });
+*/});

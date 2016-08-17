@@ -169,8 +169,7 @@ class Admin extends CI_Controller {
 	}
 	function update_journal_page() {
 		$this->load->model('Users_model');
-		$obj=json_decode(file_get_contents('php://input'));
-		
+		$obj=json_decode(file_get_contents('php://input'));		
 		if(isset($obj->id) && !empty($obj->id)) {
 			$data = $this->Users_model->update_journal_page($obj);			
 			if($data){

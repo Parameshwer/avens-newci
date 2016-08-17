@@ -1,0 +1,21 @@
+<div id="main-wrapper">
+	<div ng-include="'admin1/angular_pages/navbar.html'"></div>
+	<div class="main-wrap">
+		<div ng-include="'admin1/angular_pages/sidebar1.html'"></div>
+		<div class="main-content">
+			<h1 class="page-header">Journal Archives</h1>
+			<div class="create-btn text">
+				<a href="#/Journals/medical">Back to Journal Archives</a>				
+			</div>
+			<div class="create-btn"><a href="#/EditJournalArchive/0"class="btn btn-primary">Create Journal Archive</a></div>
+			<div ng-controller="JournalArchiveController">			
+				<div ng-if="journal_posts">
+					<table class="table table-striped">
+					<tr><td>here journal archive will come</td></tr>
+				</table>
+			</div>
+			<!-- <div ng-show="journal_posts.length == '0'">There are no Journal Pages found.</div> -->
+		</div>
+	</div>
+</div>
+</div>
