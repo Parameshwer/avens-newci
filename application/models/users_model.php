@@ -85,6 +85,18 @@ class Users_model extends CI_Model {
 		//print_r($query);				
 		return $query->result_array();
 	}
+	function get_journals_archives() {
+		$query = $this->db->query('SELECT a.id, a.archive_doi,a.archive_year,a.archive_volume, a.archive_fulltext,a.archive_pdf,a.archive_in, a.created_date,b.journal_name, c.category_name FROM wp_journal_archives a, wp_journals b, wp_journal_main_categories c WHERE a.journal_id = b.id AND b.main_category_id = c.category_id AND a.deleted = 1');	
+		//print_r($query);				
+		return $query->result_array();
+	}
+	function get_journal_archive($archive_id) {
+		$query = $this->db->query('SELECT a.id, a.archive_doi,a.archive_year,a.archive_volume, a.archive_fulltext,a.archive_pdf,a.archive_in, a.created_date,b.journal_name, c.category_name FROM wp_journal_archives a, wp_journals b, wp_journal_main_categories c WHERE a.journal_id = b.id AND b.main_category_id = c.category_id AND a.deleted = 1');	
+		//print_r($query);				
+		return $query->result_array();
+	}
+	
+
 	function get_main_category($cat_id) {		
 		//echo "SELECT * FROM wp_journal_main_categories WHERE category_id=".$cat_id."";exit;
 		$query = $this->db->query("SELECT * FROM wp_journal_main_categories WHERE category_id=$cat_id");

@@ -98,6 +98,17 @@ class Admin extends CI_Controller {
 		//echo $data;
 
 	}
+	function get_journals_archives() {
+		$this->load->model('Users_model');	
+		$data = $this->Users_model->get_journals_archives();
+		//$journal_data = $this->Users_model->get_journals_and_categories();
+
+		if(is_array($data)){
+			echo json_encode($data);
+		}
+		//echo $data;
+
+	}
 	function get_main_category() {
 		$this->load->model('Users_model');
 		$cat_id = $this->input->get('id');
@@ -183,6 +194,14 @@ class Admin extends CI_Controller {
 			
 		}		
 		echo json_encode($data);
+	}
+	function get_journal_archive() {
+		$this->load->model('Users_model');
+		$archive_id = $this->input->get('id');
+		$data = $this->Users_model->get_journal_archive($archive_id);
+		if(is_array($data)) {
+			echo json_encode($data);
+		}
 	}
 	function logout()
 	{

@@ -20,6 +20,10 @@ app.factory("services", ['$http', function($http) {
     obj.get_journals = function(journal_type) {        
         return $http.get(base_url+"admin/get_journals?name="+journal_type+"");
     }
+    obj.get_journalArchive = function(archive_id) {        
+        return $http.get(base_url+"admin/get_journal_archive?id="+archive_id+"");
+    }
+    
     obj.updateCategory = function (id,main_category) {        
         //return $http.get(base_url+"admin/insert_main_category?name="+main_category.category_name+"&id="+main_category.category_id+"");
         var params = [];
@@ -260,7 +264,7 @@ app.config(['$routeProvider',function ($routeProvider) {
           main_page: function(services, $route){            
             var archive_id = $route.current.params.ArchiveId;
             console.log(archive_id);
-            //return services.get_journalArchive(Page_id);
+            return services.get_journalArchive(Page_id);
           }
         }    
     })
@@ -323,13 +327,25 @@ app.controller('JournalPostsController', function($scope,$rootScope,$http){
     });
 });
 app.controller('JournalArchiveController', function($scope,$rootScope,$http){        
-    /*$http({
-        url: base_url+'admin/get_journals_posts',
+    $http({
+        url: base_url+'admin/get_journals_archives',
         method: "POST"        
     })
     .then(function(response) {
         console.log(response);
-        $scope.journal_posts = response.data;
+        $scope.journal_posts_archives = response.data;
         return $scope;
     });
-*/});
+
+ $scope.tinymceOptions = {
+    onChange: function(e) {
+      // put logic here for keypress and cut/paste changes
+    },
+    inline: false,
+    plugins : 'advlist autolink link image lists charmap print preview link media',
+    skin: 'lightgray',
+    theme : 'modern',
+    width : 600,
+    height : 300
+  };
+});
