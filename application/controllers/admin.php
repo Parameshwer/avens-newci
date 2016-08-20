@@ -161,6 +161,16 @@ class Admin extends CI_Controller {
 		
 		echo json_encode($status);		
 	}
+	function get_LatestArticles() {
+		$this->load->model('Users_model');	
+		$data = $this->Users_model->get_LatestArticles();
+		if(is_array($data)){
+			echo json_encode($data);
+		}
+		//echo $data;
+
+	}
+
 	function get_journal() {
 		$this->load->model('Users_model');
 		$journal_id = $this->input->get('id');
@@ -198,10 +208,54 @@ class Admin extends CI_Controller {
 	function get_journal_archive() {
 		$this->load->model('Users_model');
 		$archive_id = $this->input->get('id');
-		$data = $this->Users_model->get_journal_archive($archive_id);
+		$data['archive_info'] = $this->Users_model->get_journal_archive($archive_id);
+		$data['journal_info'] = $this->Users_model->get_journals_and_categories();
 		if(is_array($data)) {
 			echo json_encode($data);
 		}
+	}
+	function get_latest_Article() {
+		$this->load->model('Users_model');
+		$article_id = $this->input->get('id');
+		$data['article_info'] = $this->Users_model->get_latest_Article($article_id);		
+		$data['journal_info'] = $this->Users_model->get_journals_and_categories();
+		if(is_array($data)) {
+			echo json_encode($data);
+		}
+	}
+	function update_archive() {
+		$this->load->model('Users_model');
+		$obj=json_decode(file_get_contents('php://input'));				
+		if(isset($obj->id) && !empty($obj->id)) {
+			$data = $this->Users_model->update_archive($obj);			
+			if($data){
+				$status = array('status' => true,"message" => 'Journal Archive Edited Successfully');
+			}
+		} else {
+			$data = $this->Users_model->update_archive($obj);			
+			if($data) {
+				$status = array('status' => true,"message" => 'Journal Archive Added Successfully');			
+			}
+			
+		}		
+		echo json_encode($data);
+	}
+	function update_latest_article() {
+		$this->load->model('Users_model');
+		$obj=json_decode(file_get_contents('php://input'));				
+		if(isset($obj->id) && !empty($obj->id)) {
+			$data = $this->Users_model->update_latest_article($obj);			
+			if($data){
+				$status = array('status' => true,"message" => 'Latest Article Edited Successfully');
+			}
+		} else {
+			$data = $this->Users_model->update_latest_article($obj);			
+			if($data) {
+				$status = array('status' => true,"message" => 'Latest Article Added Successfully');			
+			}
+			
+		}		
+		echo json_encode($data);
 	}
 	function logout()
 	{

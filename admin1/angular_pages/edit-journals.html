@@ -13,7 +13,7 @@
 						<div class="form-group">
 							<label for="journal_name" class="col-sm-3 control-label">Journal Name</label>
 							<div class="col-sm-9">
-							<input type="text" ng-model="main_journal.journal_name" required class="form-control" id="journal_name" name="journal_name" required >
+							<input type="text" ng-model="main_journal.journal_name" required class="form-control" id="journal_name" name="journal_name" ng-blur="convertToJournalSlug(this)" required >
 							<span style="color:red" ng-show="myForm.journal_name.$dirty"><span ng-show="myForm.journal_name.$error.required">Journal name is required.</span></span>
 								<!-- <input type="hidden" name="id" value=""> -->
 							</div>

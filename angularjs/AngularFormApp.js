@@ -23,7 +23,9 @@ app.factory("services", ['$http', function($http) {
     obj.get_journalArchive = function(archive_id) {        
         return $http.get(base_url+"admin/get_journal_archive?id="+archive_id+"");
     }
-    
+    obj.get_LatestArticle = function(article_id) {        
+        return $http.get(base_url+"admin/get_latest_Article?id="+article_id+"");
+    }
     obj.updateCategory = function (id,main_category) {        
         //return $http.get(base_url+"admin/insert_main_category?name="+main_category.category_name+"&id="+main_category.category_id+"");
         var params = [];
@@ -48,6 +50,7 @@ app.factory("services", ['$http', function($http) {
         /*if(!id) {
             main_journal.main_category_id = 0;
         }*/
+        main_journal.journal_url_slug = main_journal.journal_name.toLowerCase().replace(/[^\w ]+/g,'').replace(/ +/g,'-');        
         $http({
             url: base_url+"admin/insert_journal",
             method: "POST",
@@ -87,6 +90,47 @@ app.factory("services", ['$http', function($http) {
             }
         });
     };
+    obj.updateJournalArchive = function (id,archive_info,scope) {        
+        //return $http.get(base_url+"admin/insert_main_category?name="+main_category.category_name+"&id="+main_category.category_id+"");
+        /*if(!id) {
+            archive_info.main_category_id = 0;
+        }*/
+        console.log(archive_info);        
+        $.each(scope.journal_info,function(i,v){
+            if(v.id == archive_info.journal_id) {                
+                console.log(v);
+                archive_info.journal_slug = v.journal_name.toLowerCase().replace(/[^\w ]+/g,'').replace(/ +/g,'-');                            
+            }
+        });
+        $http({
+            url: base_url+"admin/update_archive",
+            method: "POST",
+            headers: {'Content-Type': 'application/json'},
+            data : JSON.stringify(archive_info)          
+        })
+        .then(function(response) {
+            console.log(response);
+            if(response.status) {
+                window.location = base_url+'admin#/archives'                
+            }
+        });
+    };
+    obj.updateLatestArticle = function (id,article_info,scope) {        
+        console.log(article_info);
+        $http({
+            url: base_url+"admin/update_latest_article",
+            method: "POST",
+            headers: {'Content-Type': 'application/json'},
+            data : JSON.stringify(article_info)          
+        })
+        .then(function(response) {
+            console.log(response);
+            if(response.status) {
+                window.location = base_url+'admin#/LatestArticles'                
+            }
+        });
+    };    
+
     return obj;   
 }]);
 app.controller('EditMaincategoryController', function($scope,$rootScope,$routeParams,$location,services,main_category){        
@@ -117,6 +161,9 @@ app.controller('EditJournalController', function($scope,$rootScope,$routeParams,
     //$scope.selectedOption = $scope.options[1];
     $scope.isClean = function() {
        return angular.equals(original, $scope.main_journal);
+    }
+    $scope.convertToJournalSlug = function(elem) {
+        $('#journal_url_slug').val(elem.main_journal.journal_name.toLowerCase().replace(/[^\w ]+/g,'').replace(/ +/g,'-'));         
     }
     $scope.saveJournal = function(main_journal) {
         if (journal_id <= 0) {
@@ -175,13 +222,69 @@ app.controller('EditJournalPageController', function($scope,$rootScope,$routePar
 
     };
 });
+app.controller('EditLatestArticleController', function($scope,$rootScope,$routeParams,$location,services,latest_articles){        
+   var article_id = ($routeParams.ArchiveId) ? parseInt($routeParams.ArchiveId) : 0;
+    $rootScope.title = (article_id > 0) ? 'Edit Latest Article' : 'Add Latest Article';
+    $scope.buttonText = (article_id > 0) ? 'Update Latest Article' : 'Add New Latest Article';
 
-app.controller('EditJournalArchiveController', function($scope,$rootScope,$routeParams,$location,services) { 
+    $scope.latest_article = latest_articles.data.article_info[0];
+    $scope.journal_info = latest_articles.data.journal_info;
 
-    /*var page_id = ($routeParams.pageID) ? parseInt($routeParams.pageID) : 0;
-    $rootScope.title = (page_id > 0) ? 'Edit Journal Archive' : 'Add Journal Archive';
-    $scope.buttonText = (archive_id > 0) ? 'Update Journal Archive' : 'Add New Journal Archive';    */
+    $scope.saveLatestArticle = function(latest_article) {        
+        console.log(latest_article);        
+        if (article_id <= 0) {            
+            services.updateLatestArticle(0,latest_article,$scope);
+        }
+        else {
+            services.updateLatestArticle(archive_id, latest_article,$scope);
+        }
+    }
+});
+app.controller('EditJournalArchiveController', function($scope,$rootScope,$routeParams,$location,services,archive) { 
+    var archive_id = ($routeParams.ArchiveId) ? parseInt($routeParams.ArchiveId) : 0;
+    $rootScope.title = (archive_id > 0) ? 'Edit Journal Archive' : 'Add Journal Archive';
+    $scope.buttonText = (archive_id > 0) ? 'Update Journal Archive' : 'Add New Journal Archive';    
+    var archive_years = [];
+    for (var i = 2000; i <=  2016 ; i++) {
+        archive_years.push(i);
+    }
+    var original = archive.data.archive_info;
+    $scope.archive_info = original[0];
+    $scope.journal_info = archive.data.journal_info;  
+    $scope.volumes_arr = [{"id":"volume-1-issue-1","name":"volume 1 issue 1"},{"id":"volume-1-issue-2","name":"volume 1 issue 2"},{"id":"volume-2-issue-1","name":"volume 2 issue 1"},{"id":"volume-2-issue-2","name":"volume 2 issue 2"},{"id":"volume-3-issue-1","name":"volume 3 issue 1"},{"id":"volume-3-issue-2","name":"volume 3 issue 2"},{"id":"volume-4-issue-1","name":"volume 4 issue 1"},{"id":"volume-4-issue-2","name":"volume 4 issue 2"}];
+    $scope.archive_years = archive_years;
+    $scope.archive_type = [{"id":"1","name":"Archive In Press"},{"id":"2","name":"Current Issue"},{"id":"3","name":"Archive"}]
 
+    $scope.tinymceOptions = {
+        onChange: function(e) {
+          // put logic here for keypress and cut/paste changes
+        },
+        inline: false,
+        plugins : 'advlist autolink link image lists charmap print preview link media',
+        skin: 'lightgray',
+        theme : 'modern',
+        width : 600,
+        height : 300
+      };
+
+    $scope.convertToJournalSlug = function(elem) {        
+        $.each($scope.journal_info,function(i,v){
+            if(v.id == elem){                
+                    $('#journal_slug').val(v.journal_name.toLowerCase().replace(/[^\w ]+/g,'').replace(/ +/g,'-'));                            
+            }
+        });        
+
+    };
+    $scope.saveJournalArchive = function(archive_info) {        
+        console.log(archive_info);        
+        if (archive_id <= 0) {
+            alert('aa');
+            services.updateJournalArchive(0,archive_info,$scope);
+        }
+        else {
+            services.updateJournalArchive(archive_id, archive_info,$scope);
+        }
+    }
 });
 
 app.controller('JournalsController', function($scope,services) {    
@@ -222,6 +325,10 @@ app.config(['$routeProvider',function ($routeProvider) {
         title: 'Journal Archives',
         templateUrl:base_url+'admin1/angular_pages/JournalArchives.html',
         controller: "JournalArchiveController",
+    }).when("/LatestArticles", {        
+        title: 'Latest Articles',
+        templateUrl:base_url+'admin1/angular_pages/LatestArticles.html',
+        controller: "LatestArticlesController",
     }).when("/AllPosts", {        
         title: 'AllPosts',
         templateUrl:base_url+'admin1/angular_pages/Allposts.html',
@@ -261,10 +368,20 @@ app.config(['$routeProvider',function ($routeProvider) {
         templateUrl:base_url+'admin1/angular_pages/edit-journal-archive.html',
         controller: "EditJournalArchiveController",
         resolve: {
-          main_page: function(services, $route){            
+          archive: function(services, $route){            
             var archive_id = $route.current.params.ArchiveId;
             console.log(archive_id);
-            return services.get_journalArchive(Page_id);
+            return services.get_journalArchive(archive_id);
+          }
+        }    
+    }).when("/EditLatestArticle/:ArticleId", {        
+        title: 'Edit Latest Article',
+        templateUrl:base_url+'admin1/angular_pages/edit-latest-article.html',
+        controller: "EditLatestArticleController",
+        resolve: {
+          latest_articles: function(services, $route){            
+            var article_id = $route.current.params.ArticleId;            
+            return services.get_LatestArticle(article_id);
           }
         }    
     })
@@ -348,4 +465,15 @@ app.controller('JournalArchiveController', function($scope,$rootScope,$http){
     width : 600,
     height : 300
   };
+});
+app.controller('LatestArticlesController', function($scope,$rootScope,$http){        
+    $http({
+        url: base_url+'admin/get_LatestArticles',
+        method: "POST"        
+    })
+    .then(function(response) {
+        console.log(response);
+        $scope.latest_articles = response.data;
+        return $scope;
+    });
 });

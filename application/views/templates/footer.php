@@ -235,6 +235,71 @@ jQuery('body').on('click',function(e){
 			jQuery(this).click(false);
 		    jQuery(this).attr("readonly", true);
 		}
+	});		
+		var sort_type;
+	function intial_load(){
+		jQuery("input[name=category-wise]").attr('checked',true);
+		jQuery('#journal-ajax').html('<div class="text-center" style="padding:10px;margin-top:20px;"><strong>Loading..</strong></div>');
+		jQuery.get("<?php echo base_url(); ?>/journal-ajax/",
+		{
+			sort_type: 'category-wise'			        
+		},
+		function(data, status){
+			if(status == 'success'){
+				jQuery('#journal-ajax').html(data);
+			}					    			      
+		});
+	}
+	if(sort_type == '' || sort_type == null){
+		intial_load();		
+	}
+	else{
+
+		var sort_array = ['medical','biotechnology','biology','pharmaceutical'];
+		
+		var sort_type;
+		if(sort_type == 'medical' &&  jQuery.inArray( "medical", sort_array ) > -1){
+			jQuery("input[name=medical]").attr('checked',true);	
+		}
+		else if(sort_type == 'biotechnology' &&  jQuery.inArray( "medical", sort_array ) > -1){
+			jQuery("input[name=biotechnology]").attr('checked',true);		
+		}
+		else if(sort_type == 'biology' &&  jQuery.inArray( "medical", sort_array ) > -1){
+			jQuery("input[name=biology]").attr('checked',true);		
+		}
+		else if(sort_type == 'pharmaceutical' &&  jQuery.inArray( "medical", sort_array ) > -1){
+			jQuery("input[name=pharmaceutical]").attr('checked',true);		
+		}
+		else{
+			intial_load();
+		}
+		alert("nani");
+		//jQuery("input[name=category-wise]").attr('checked',true);
+		jQuery('#journal-ajax').html('<div class="text-center" style="padding:10px;margin-top:20px;"><strong>Loading..</strong></div>');
+		jQuery.get("<?php echo base_url(); ?>/journal-ajax/",
+		{
+			sort_type: sort_type			        
+		},
+		function(data, status){
+			if(status == 'success'){
+				jQuery('#journal-ajax').html(data);
+			}					    			      
+		});	
+	}
+	jQuery('.sort_journals').on('click',function(){
+		jQuery('.sort_journals').attr('checked',false);
+		jQuery(this).attr('checked',true);
+		var sort_type = jQuery(this).val();
+		jQuery('#journal-ajax').html('<div class="text-center" style="padding:10px;margin-top:20px;"><strong>Loading..</strong></div>');
+		jQuery.get("<?php echo base_url(); ?>/journal-ajax/",
+		{
+			sort_type: sort_type			        
+		},
+		function(data, status){
+			if(status == 'success'){
+				jQuery('#journal-ajax').html(data);
+			}						    			      
+		});
 	});
 	});
 </script>

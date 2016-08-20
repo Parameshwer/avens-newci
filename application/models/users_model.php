@@ -80,6 +80,10 @@ class Users_model extends CI_Model {
 		$query = $this->db->query('SELECT * FROM wp_journals INNER JOIN wp_journal_main_categories ON wp_journals.main_category_id = wp_journal_main_categories.category_id');				
 		return $query->result_array();
 	}
+	function get_LatestArticles() {
+		$query = $this->db->query('SELECT wp_latest_articles.id,wp_latest_articles.article_image,wp_latest_articles.article_name,wp_latest_articles.created_date,wp_latest_articles.author_name,wp_latest_articles.pdf_link,wp_journals.journal_name FROM wp_latest_articles INNER JOIN wp_journals ON wp_journals.id = wp_latest_articles.article_category WHERE wp_latest_articles.deleted = "1"');				
+		return $query->result_array();	
+	}
 	function get_journals_posts() {
 		$query = $this->db->query('SELECT * FROM wp_journal_posts WHERE deleted="1"');	
 		//print_r($query);				
@@ -91,11 +95,16 @@ class Users_model extends CI_Model {
 		return $query->result_array();
 	}
 	function get_journal_archive($archive_id) {
-		$query = $this->db->query('SELECT a.id, a.archive_doi,a.archive_year,a.archive_volume, a.archive_fulltext,a.archive_pdf,a.archive_in, a.created_date,b.journal_name, c.category_name FROM wp_journal_archives a, wp_journals b, wp_journal_main_categories c WHERE a.journal_id = b.id AND b.main_category_id = c.category_id AND a.deleted = 1');	
+		$query = $this->db->query('SELECT * FROM  wp_journal_archives WHERE id = "'.$archive_id.'" AND deleted = 1');	
 		//print_r($query);				
 		return $query->result_array();
 	}
-	
+	function get_latest_Article($article_id) {
+		
+		$query = $this->db->query('SELECT * FROM  wp_latest_articles WHERE id = "'.$article_id.'" AND deleted = 1');	
+		//print_r($query);				
+		return $query->result_array();
+	}
 
 	function get_main_category($cat_id) {		
 		//echo "SELECT * FROM wp_journal_main_categories WHERE category_id=".$cat_id."";exit;
@@ -122,9 +131,9 @@ class Users_model extends CI_Model {
 	function insert_journal($data) {
 				
 		if($data->id) {
-		$query = $this->db->query("UPDATE wp_journals SET journal_name='".$data->journal_name."', updated_date ='".date('Y-m-d')."',issn_number ='".$data->issn_number."',journal_meta_keywords ='".$data->journal_meta_keywords."',journal_ic_value ='".$data->journal_ic_value."',main_category_id ='".$data->main_category_id."',journal_description ='".$data->journal_description."' WHERE id=$data->id");
+		$query = $this->db->query("UPDATE wp_journals SET journal_url_slug='".$data->journal_url_slug."',journal_name='".$data->journal_name."', updated_date ='".date('Y-m-d')."',issn_number ='".$data->issn_number."',journal_meta_keywords ='".$data->journal_meta_keywords."',journal_ic_value ='".$data->journal_ic_value."',main_category_id ='".$data->main_category_id."',journal_description ='".$data->journal_description."' WHERE id=$data->id");
 		} else {
-		   $query = $this->db->query("INSERT INTO wp_journals (journal_name, created_date, updated_date, issn_number,journal_meta_keywords,journal_ic_value,main_category_id,journal_description,deleted) VALUES ('".$data->journal_name."','".date('Y-m-d')."','".date('Y-m-d')."','".$data->issn_number."','".$data->journal_meta_keywords."','".$data->journal_ic_value."','".$data->main_category_id."','".$data->journal_description."','1')");
+		   $query = $this->db->query("INSERT INTO wp_journals (journal_url_slug,journal_name, created_date, updated_date, issn_number,journal_meta_keywords,journal_ic_value,main_category_id,journal_description,deleted) VALUES ('".$data->journal_url_slug."','".$data->journal_name."','".date('Y-m-d')."','".date('Y-m-d')."','".$data->issn_number."','".$data->journal_meta_keywords."','".$data->journal_ic_value."','".$data->main_category_id."','".$data->journal_description."','1')");
 		}
 		return $query;
 		//return $query->result_array();
@@ -144,5 +153,26 @@ class Users_model extends CI_Model {
 		return $query;
 		//return $query->result_array();
 	}
+	function update_archive($data) {		
+		if(isset($data->id) && !empty($data->id)) {
+			
+		$query = $this->db->query("UPDATE wp_journal_archives SET journal_id='".$data->journal_id."',category_id='".$data->category_id."',archive_desc='".$data->archive_desc."', archive_doi='".$data->archive_doi."',archive_year='".$data->archive_year."',archive_volume='".$data->archive_volume."',archive_fulltext='".$data->archive_fulltext."',archive_pdf='".$data->archive_pdf."',journal_slug='".$data->journal_slug."',updated_date='".date('Y-m-d')."',archive_in='".$data->archive_in."' WHERE id=$data->id");
+		} else {
+		   $query = $this->db->query("INSERT INTO wp_journal_archives (journal_id, category_id, archive_desc,archive_doi, archive_year, archive_volume, archive_fulltext, archive_pdf, archive_in, journal_slug,created_date, updated_date, deleted) VALUES ('".$data->journal_id."','".$data->category_id."','".$data->archive_desc."','".$data->archive_doi."','".$data->archive_year."','".$data->archive_volume."','".$data->archive_fulltext."','".$data->archive_pdf."','".$data->archive_in."','".$data->journal_slug."','".date('Y-m-d')."','".date('Y-m-d')."','1')");
+		}
+		return $query;
+		//return $query->result_array();
+	}
+	function update_latest_article($data) {
+	//print_r($data);exit;		
+		if(isset($data->id) && !empty($data->id)) {
+			
+		$query = $this->db->query("UPDATE wp_latest_articles SET article_name='".$data->article_name."', pdf_link='".$data->pdf_link."',article_category='".$data->article_category."', article_image='".$data->article_image."',author_name	='".$data->author_name	."',updated_date='".date('Y-m-d')."' WHERE id=$data->id");
+		} else {
+		   $query = $this->db->query("INSERT INTO wp_latest_articles (article_name, pdf_link, article_category,article_image, author_name, updated_date, created_date, deleted) VALUES ('".$data->article_name."','".$data->pdf_link."','".$data->article_category."','".$data->article_image."','".$data->author_name."','".date('Y-m-d')."','".date('Y-m-d')."','1')");
+		}
+		return $query;
+		//return $query->result_array();
+	}	
 }
 

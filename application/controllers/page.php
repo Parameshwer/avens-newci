@@ -71,7 +71,7 @@ class Page extends CI_Controller {
 	        $data['title'] = "Home Page"; // Capitalize the first letter
 
 	        $this->load->view('templates/header', $data);
-	        $this->load->view('pages/submit_manuscript.php', $data);
+	        $this->load->view('pages/journals.php', $data);
 	        $this->load->view('templates/footer', $data);
 	}
 	public function submit_manuscript()
