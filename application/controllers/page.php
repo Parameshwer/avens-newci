@@ -158,4 +158,24 @@ class Page extends CI_Controller {
 	        $this->load->view('pages/contact.php', $data);
 	        $this->load->view('templates/footer', $data);
 	}
+	public function get_journals() {			
+		$this->load->model('App_model');	
+		$data['j_info'] = $this->App_model->get_journals($this->input->get('sort_type'));
+		$data['sort_type'] = $this->input->get('sort_type');
+		/*$temp = array();
+		foreach ($data as $key => $value) {
+			if($value['category_name'] == 'Medical') {
+				$temp['medical'][] = $value;
+			} else if($value['category_name'] == 'Biotechnology') {
+				$temp['biotechnology'][] = $value;
+			} else if($value['category_name'] == 'Pharmaseutical') {
+				$temp['pharmaceutical'][] = $value;
+			} else if($value['category_name'] == 'Biology') {
+				$temp['biology'][] = $value;
+			}
+		}*/		
+		if(is_array($data)){
+			echo json_encode($data);
+		}		
+	}	
 }

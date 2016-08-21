@@ -132,7 +132,7 @@ jQuery('.nav-controls .custom-next').on('click',function(e){
 });
 
 var logo_box_height = jQuery('#logo-box').height();
-//var wp_admin_nav = jQuery('#wpadminbar').height();
+
 var admin_bar_height = (jQuery('#wpadminbar').height())?jQuery('#wpadminbar').height():'0';
 var temp_height = admin_bar_height+logo_box_height;
 
@@ -168,140 +168,190 @@ jQuery('body').on('click',function(e){
 });
 </script>
 <script type="text/javascript" src="<?php echo base_url(); ?>public/js/jquery.validator.js"></script>
-	<script type="text/javascript">
-		jQuery(document).ready(function(){
-			jQuery("#form_collab").validate({
-				rules: {
-					institute_name: "required",
-					email: {
-						required: true,
-						email: true
-					},
-					mailing_address: "required",
-					country:"required",
-					website_rrl:"required"
+<script type="text/javascript">
+	jQuery(document).ready(function(){
+		jQuery("#form_collab").validate({
+			rules: {
+				institute_name: "required",
+				email: {
+					required: true,
+					email: true
 				},
-				messages: {
-					institute_name: "Please enter your Institute Name",
-					email: "Please enter a valid email address",
-					mailing_address: "Please enter your mailing address",
-					country: "Please enter your country",
-					website_rrl: "Please enter your website url"
+				mailing_address: "required",
+				country:"required",
+				website_rrl:"required"
+			},
+			messages: {
+				institute_name: "Please enter your Institute Name",
+				email: "Please enter a valid email address",
+				mailing_address: "Please enter your mailing address",
+				country: "Please enter your country",
+				website_rrl: "Please enter your website url"
 
-				},
-				success: function(){
-					jQuery(this).click(false);
-					jQuery(this).attr("readonly", true);
-				}
-			});
-		jQuery(".contact-form").validate({
-		rules: {
-			first_name: "required",
-			email_id: {
-				required: true,
-				email: true
+			},
+			success: function(){
+				jQuery(this).click(false);
+				jQuery(this).attr("readonly", true);
 			}
-		},
-		messages: {
-			first_name: "Please enter your firstname",
-			email_id: "Please enter a valid email address"
+		});
+		jQuery(".contact-form").validate({
+			rules: {
+				first_name: "required",
+				email_id: {
+					required: true,
+					email: true
+				}
+			},
+			messages: {
+				first_name: "Please enter your firstname",
+				email_id: "Please enter a valid email address"
 
-		},
-		success: function(){
-			jQuery(this).click(false);
-		    jQuery(this).attr("readonly", true);
-		}
-	});
+			},
+			success: function(){
+				jQuery(this).click(false);
+				jQuery(this).attr("readonly", true);
+			}
+		});
 
 		jQuery("#manuscript_form").validate({
-		rules: {
-			firstname: "required",
-			email: {
-				required: true,
-				email: true
+			rules: {
+				firstname: "required",
+				email: {
+					required: true,
+					email: true
+				},
+				phoneno:{
+					number: true,
+					required: true,
+				},
 			},
-                         phoneno:{
-                                number: true,
-                                required: true,
-                        },
-		},
-		messages: {
-			first_name: "Please enter your Firstname",
-			email_id: "Please enter a valid Email Address",
-                        phoneno: "Please enter a valid Phone Number"
+			messages: {
+				first_name: "Please enter your Firstname",
+				email_id: "Please enter a valid Email Address",
+				phoneno: "Please enter a valid Phone Number"
 
-		},
-		success: function(){
-			jQuery(this).click(false);
-		    jQuery(this).attr("readonly", true);
+			},
+			success: function(){
+				jQuery(this).click(false);
+				jQuery(this).attr("readonly", true);
+			}
+		});		
+		var sort_type,data = [];
+		function intial_load(){
+			jQuery("input[name=category-wise]").attr('checked',true);
+			jQuery('#journal-ajax').html('<div class="text-center" style="padding:10px;margin-top:20px;"><strong>Loading..</strong></div>');
+			/*jQuery.get("<?php echo base_url(); ?>page/get_journalss",
+			{
+				sort_type: 'category-wise'			        
+			},{
+				dataType: "json",
+			},
+			function(datad, status){
+				console.log('sss');
+				console.log(datad.j_info);					
+				if(status == 'success') {
+					buildmarkup(data);
+				}					    			      
+			});*/
+			var params = [];
+			params.push('sort_type=category-wise');
+			 jQuery.ajax({
+	            data: params.join('&'),                    
+	            type: "GET",
+	            dataType: "json",
+	            url: "http://localhost/avens-angular/page/get_journals",            
+	            success: function (data) {                
+	                buildmarkup(data);
+	            }
+	        });
 		}
-	});		
-		var sort_type;
-	function intial_load(){
-		jQuery("input[name=category-wise]").attr('checked',true);
-		jQuery('#journal-ajax').html('<div class="text-center" style="padding:10px;margin-top:20px;"><strong>Loading..</strong></div>');
-		jQuery.get("<?php echo base_url(); ?>/journal-ajax/",
-		{
-			sort_type: 'category-wise'			        
-		},
-		function(data, status){
-			if(status == 'success'){
-				jQuery('#journal-ajax').html(data);
-			}					    			      
-		});
-	}
-	if(sort_type == '' || sort_type == null){
-		intial_load();		
-	}
-	else{
-
-		var sort_array = ['medical','biotechnology','biology','pharmaceutical'];
-		
-		var sort_type;
-		if(sort_type == 'medical' &&  jQuery.inArray( "medical", sort_array ) > -1){
-			jQuery("input[name=medical]").attr('checked',true);	
-		}
-		else if(sort_type == 'biotechnology' &&  jQuery.inArray( "medical", sort_array ) > -1){
-			jQuery("input[name=biotechnology]").attr('checked',true);		
-		}
-		else if(sort_type == 'biology' &&  jQuery.inArray( "medical", sort_array ) > -1){
-			jQuery("input[name=biology]").attr('checked',true);		
-		}
-		else if(sort_type == 'pharmaceutical' &&  jQuery.inArray( "medical", sort_array ) > -1){
-			jQuery("input[name=pharmaceutical]").attr('checked',true);		
+		if(sort_type == '' || sort_type == null){
+			intial_load();		
 		}
 		else{
-			intial_load();
+
+			var sort_array = ['medical','biotechnology','biology','pharmaceutical'];
+
+			var sort_type;
+			if(sort_type == 'medical' &&  jQuery.inArray( "medical", sort_array ) > -1){
+				jQuery("input[name=medical]").attr('checked',true);	
+			}
+			else if(sort_type == 'biotechnology' &&  jQuery.inArray( "medical", sort_array ) > -1){
+				jQuery("input[name=biotechnology]").attr('checked',true);		
+			}
+			else if(sort_type == 'biology' &&  jQuery.inArray( "medical", sort_array ) > -1){
+				jQuery("input[name=biology]").attr('checked',true);		
+			}
+			else if(sort_type == 'pharmaceutical' &&  jQuery.inArray( "medical", sort_array ) > -1){
+				jQuery("input[name=pharmaceutical]").attr('checked',true);		
+			}
+			else{
+				intial_load();
+			}
+			alert("nani");
+			jQuery('#journal-ajax').html('<div class="text-center" style="padding:10px;margin-top:20px;"><strong>Loading..</strong></div>');
+			jQuery.get("<?php echo base_url(); ?>page/get_journals",
+			{
+				sort_type: sort_type			        
+			},
+			function(data, status){
+				if(status == 'success'){
+					buildmarkup(data);
+				}					    			      
+			});	
 		}
-		alert("nani");
-		//jQuery("input[name=category-wise]").attr('checked',true);
-		jQuery('#journal-ajax').html('<div class="text-center" style="padding:10px;margin-top:20px;"><strong>Loading..</strong></div>');
-		jQuery.get("<?php echo base_url(); ?>/journal-ajax/",
-		{
-			sort_type: sort_type			        
-		},
-		function(data, status){
-			if(status == 'success'){
-				jQuery('#journal-ajax').html(data);
-			}					    			      
-		});	
-	}
-	jQuery('.sort_journals').on('click',function(){
-		jQuery('.sort_journals').attr('checked',false);
-		jQuery(this).attr('checked',true);
-		var sort_type = jQuery(this).val();
-		jQuery('#journal-ajax').html('<div class="text-center" style="padding:10px;margin-top:20px;"><strong>Loading..</strong></div>');
-		jQuery.get("<?php echo base_url(); ?>/journal-ajax/",
-		{
-			sort_type: sort_type			        
-		},
-		function(data, status){
-			if(status == 'success'){
-				jQuery('#journal-ajax').html(data);
-			}						    			      
+		jQuery('.sort_journals').on('click',function(){
+			jQuery('.sort_journals').attr('checked',false);
+			jQuery(this).attr('checked',true);
+			var sort_type = jQuery(this).val();
+			jQuery('#journal-ajax').html('<div class="text-center" style="padding:10px;margin-top:20px;"><strong>Loading..</strong></div>');
+			jQuery.get("<?php echo base_url(); ?>page/get_journals",
+			{
+				sort_type: sort_type			        
+			},
+			function(data, status){
+				if(status == 'success'){
+					buildmarkup(data);
+				}						    			      
+			});
 		});
 	});
-	});
+
+	function buildmarkup(responce) {
+	console.log(responce.j_info);		
+		var data = [],first_loop =true;
+		data.push('<div class="journal-text-box"><ul>');
+		jQuery.each(responce.j_info, function(i,v){			
+			if(v.category_name == 'Medical') {
+				if(first_loop) {				
+					data.push('<li><h3>Medical</h3><div class="post-list">');				
+				}
+				data.push('<ul class="cat-ul">');
+  				data.push('<li><a href="<?php echo base_url(); ?>'+v.journal_url_slug+'/home">'+v.journal_name+'</a><span class="pull-right"></span></li>');
+				data.push('</ul>');								
+				if(first_loop) {
+					data.push('</div></li>');				
+				}
+
+				first_loop = false;
+			}
+			else if(v.category_name == 'Biology') {
+				if(first_loop) {				
+					data.push('<li><h3>Biology</h3><div class="post-list">');				
+				}
+				data.push('<ul class="cat-ul">');
+  				data.push('<li><a href="<?php echo base_url(); ?>'+v.journal_url_slug+'/home">'+v.journal_name+'</a><span class="pull-right"></span></li>');
+				data.push('</ul>');								
+				if(first_loop) {
+					data.push('</div></li>');				
+				}
+
+				first_loop = false;
+			}
+		});
+		data.push('</ul></div>');
+		jQuery('#journal-ajax').html(data.join(''));
+	}
 </script>
 
 </body>
