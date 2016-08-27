@@ -236,70 +236,7 @@ jQuery('body').on('click',function(e){
 				jQuery(this).attr("readonly", true);
 			}
 		});		
-		var sort_type,data = [];
-		function intial_load(){
-			jQuery("input[name=category-wise]").attr('checked',true);
-			jQuery('#journal-ajax').html('<div class="text-center" style="padding:10px;margin-top:20px;"><strong>Loading..</strong></div>');
-			/*jQuery.get("<?php echo base_url(); ?>page/get_journalss",
-			{
-				sort_type: 'category-wise'			        
-			},{
-				dataType: "json",
-			},
-			function(datad, status){
-				console.log('sss');
-				console.log(datad.j_info);					
-				if(status == 'success') {
-					buildmarkup(data);
-				}					    			      
-			});*/
-			var params = [];
-			params.push('sort_type=category-wise');
-			 jQuery.ajax({
-	            data: params.join('&'),                    
-	            type: "GET",
-	            dataType: "json",
-	            url: "http://localhost/avens-angular/page/get_journals",            
-	            success: function (data) {                
-	                buildmarkup(data);
-	            }
-	        });
-		}
-		if(sort_type == '' || sort_type == null){
-			intial_load();		
-		}
-		else{
-
-			var sort_array = ['medical','biotechnology','biology','pharmaceutical'];
-
-			var sort_type;
-			if(sort_type == 'medical' &&  jQuery.inArray( "medical", sort_array ) > -1){
-				jQuery("input[name=medical]").attr('checked',true);	
-			}
-			else if(sort_type == 'biotechnology' &&  jQuery.inArray( "medical", sort_array ) > -1){
-				jQuery("input[name=biotechnology]").attr('checked',true);		
-			}
-			else if(sort_type == 'biology' &&  jQuery.inArray( "medical", sort_array ) > -1){
-				jQuery("input[name=biology]").attr('checked',true);		
-			}
-			else if(sort_type == 'pharmaceutical' &&  jQuery.inArray( "medical", sort_array ) > -1){
-				jQuery("input[name=pharmaceutical]").attr('checked',true);		
-			}
-			else{
-				intial_load();
-			}
-			alert("nani");
-			jQuery('#journal-ajax').html('<div class="text-center" style="padding:10px;margin-top:20px;"><strong>Loading..</strong></div>');
-			jQuery.get("<?php echo base_url(); ?>page/get_journals",
-			{
-				sort_type: sort_type			        
-			},
-			function(data, status){
-				if(status == 'success'){
-					buildmarkup(data);
-				}					    			      
-			});	
-		}
+		
 		jQuery('.sort_journals').on('click',function(){
 			jQuery('.sort_journals').attr('checked',false);
 			jQuery(this).attr('checked',true);
@@ -309,49 +246,12 @@ jQuery('body').on('click',function(e){
 			{
 				sort_type: sort_type			        
 			},
-			function(data, status){
-				if(status == 'success'){
-					buildmarkup(data);
-				}						    			      
+			function(data, status){				
+				jQuery('#journal-ajax').html(data);					    			      
 			});
 		});
 	});
-
-	function buildmarkup(responce) {
-	console.log(responce.j_info);		
-		var data = [],first_loop =true;
-		data.push('<div class="journal-text-box"><ul>');
-		jQuery.each(responce.j_info, function(i,v){			
-			if(v.category_name == 'Medical') {
-				if(first_loop) {				
-					data.push('<li><h3>Medical</h3><div class="post-list">');				
-				}
-				data.push('<ul class="cat-ul">');
-  				data.push('<li><a href="<?php echo base_url(); ?>'+v.journal_url_slug+'/home">'+v.journal_name+'</a><span class="pull-right"></span></li>');
-				data.push('</ul>');								
-				if(first_loop) {
-					data.push('</div></li>');				
-				}
-
-				first_loop = false;
-			}
-			else if(v.category_name == 'Biology') {
-				if(first_loop) {				
-					data.push('<li><h3>Biology</h3><div class="post-list">');				
-				}
-				data.push('<ul class="cat-ul">');
-  				data.push('<li><a href="<?php echo base_url(); ?>'+v.journal_url_slug+'/home">'+v.journal_name+'</a><span class="pull-right"></span></li>');
-				data.push('</ul>');								
-				if(first_loop) {
-					data.push('</div></li>');				
-				}
-
-				first_loop = false;
-			}
-		});
-		data.push('</ul></div>');
-		jQuery('#journal-ajax').html(data.join(''));
-	}
+		
 </script>
 
 </body>

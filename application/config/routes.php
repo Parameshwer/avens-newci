@@ -57,5 +57,6 @@ $route['(:any)'] = 'static_pages/$1';*/
 /*$route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;*/
 $route['admin'] = 'admin/login';
+$route['medical/(:any)/(:any)'] = 'medical/index/$1/$2';
 //$route['admin'] = 'admin';
 $route['default_controller'] = 'page';

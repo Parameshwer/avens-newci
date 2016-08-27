@@ -67,9 +67,9 @@ class Page extends CI_Controller {
 	                // Whoops, we don't have a page for that!
 	                show_404();
 	        }
-
-	        $data['title'] = "Home Page"; // Capitalize the first letter
-
+			$this->load->model('App_model');		        
+	        $data['title'] = "journal Page"; // Capitalize the first letter
+	        $data['j_info'] = $this->App_model->get_journals('category-wise');	        
 	        $this->load->view('templates/header', $data);
 	        $this->load->view('pages/journals.php', $data);
 	        $this->load->view('templates/footer', $data);
@@ -161,7 +161,7 @@ class Page extends CI_Controller {
 	public function get_journals() {			
 		$this->load->model('App_model');	
 		$data['j_info'] = $this->App_model->get_journals($this->input->get('sort_type'));
-		$data['sort_type'] = $this->input->get('sort_type');
+		$data['sort_type'] = $this->input->get('sort_type');		
 		/*$temp = array();
 		foreach ($data as $key => $value) {
 			if($value['category_name'] == 'Medical') {
@@ -174,8 +174,9 @@ class Page extends CI_Controller {
 				$temp['biology'][] = $value;
 			}
 		}*/		
-		if(is_array($data)){
+		/*if(is_array($data)){
 			echo json_encode($data);
-		}		
+		}	*/
+		echo $this->load->view('pages/ajax_journals', $data,TRUE);	
 	}	
 }
