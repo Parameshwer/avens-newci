@@ -79,8 +79,8 @@
 		<div class="col-sm-8">		
 			<div class="post-text-box">				
 				<div id="post-content">
-
-					<h1>Archive</h1>  <span class="rss-button ddddd"><a target="_blank" href="http://www.avensonline.org/diabetes-endocrinology/archive-11/feed/?withoutcomments=1">Rss Feed&nbsp;<img src="http://www.avensonline.org/wp-content/themes/twentythirteen/images/rss.png" alt="Rss Feed"></a></span>
+					<h1><?php echo $post_info[0]['post_name']; ?></h1>
+					<?php echo $post_info[0]['post_content']; ?>
 				</div>  	
 			</div>
 		</div>

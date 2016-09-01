@@ -1,4 +1,4 @@
-var app = angular.module('myApp', ['ngRoute','ui.tinymce']);
+var app = angular.module('myApp', ['ngRoute','ui.tinymce','textAngular']);
 var base_url = "http://localhost/avens-angular/";
 //console.log(app);
 app.factory("services", ['$http', function($http) {
@@ -133,6 +133,7 @@ app.factory("services", ['$http', function($http) {
 
     return obj;   
 }]);
+
 app.controller('EditMaincategoryController', function($scope,$rootScope,$routeParams,$location,services,main_category){        
     var main_cat_id = ($routeParams.MaincatID) ? parseInt($routeParams.MaincatID) : 0;
     $rootScope.title = (main_cat_id > 0) ? 'Edit Category' : 'Add Category';
@@ -191,15 +192,14 @@ app.controller('EditJournalPageController', function($scope,$rootScope,$routePar
     }
     $scope.saveJournalPage = function(main_page) {        
         console.log(main_page);        
-        if (page_id <= 0) {
-            alert('aa');
+        if (page_id <= 0) {            
             services.updateJournalPage(0,main_page,$scope);
         }
         else {
             services.updateJournalPage(page_id, main_page,$scope);
         }
     }
-    $scope.tinymceOptions = {
+    /*$scope.tinymceOptions = {
         onChange: function(e) {
           // put logic here for keypress and cut/paste changes
         },
@@ -209,7 +209,7 @@ app.controller('EditJournalPageController', function($scope,$rootScope,$routePar
         theme : 'modern',
         width : 600,
         height : 300
-      };
+      };*/
     $scope.convertToPostSlug = function(elem) {        
         $('#journal_post_slug').val(elem.main_page.post_name.toLowerCase().replace(/[^\w ]+/g,'').replace(/ +/g,'-'));         
     };
@@ -222,6 +222,15 @@ app.controller('EditJournalPageController', function($scope,$rootScope,$routePar
 
     };
 });
+
+app.controller('wysiwygeditor', ['$scope', 'textAngularManager', function wysiwygeditor($scope, textAngularManager) {
+    $scope.version = textAngularManager.getVersion();
+    $scope.versionNumber = $scope.version.substring(1);
+    $scope.orightml = '';
+    $scope.htmlcontent = $scope.orightml;
+    $scope.disabled = false;
+}]);
+
 app.controller('EditLatestArticleController', function($scope,$rootScope,$routeParams,$location,services,latest_articles){        
    var article_id = ($routeParams.ArchiveId) ? parseInt($routeParams.ArchiveId) : 0;
     $rootScope.title = (article_id > 0) ? 'Edit Latest Article' : 'Add Latest Article';
@@ -277,8 +286,7 @@ app.controller('EditJournalArchiveController', function($scope,$rootScope,$route
     };
     $scope.saveJournalArchive = function(archive_info) {        
         console.log(archive_info);        
-        if (archive_id <= 0) {
-            alert('aa');
+        if (archive_id <= 0) {            
             services.updateJournalArchive(0,archive_info,$scope);
         }
         else {
