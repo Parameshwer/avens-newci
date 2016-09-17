@@ -35,7 +35,7 @@
 
 <div class="journal-name">		
 	<div class="container">
-		<h1 class="entry-title">Advances in Diabetes & Endocrinology</h1>									
+		<h1 class="entry-title"><?php echo $get_sidebar_links[0]['journal_name']; ?></h1>									
 	</div>
 </div>
 <div class="container">
@@ -62,7 +62,7 @@
 							<?php
 							
 								foreach ($static_page as $key => $value) {
-									echo '<li><a class="" href="'.base_url().''.strtolower($archive_info[0]['category_name']).'/'.$archive_info[0]['journal_url_slug'].'/'.$value.'/">'.$key.'</a></li>';
+									echo '<li><a class="" href="'.base_url().''.strtolower($this->uri->segment(1)).'/'.$this->uri->segment(2).'/'.$value.'/">'.$key.'</a></li>';
 								}
 							 ?>
 							</ul>
@@ -71,27 +71,41 @@
 				</div>
 				<div class="journal-info-box">
 
-
+				<?php if(isset($archive_info) && !empty($archive_info)){ ?>
 					<img src="http://www.avensonline.org/wp-content/uploads/2015/05/glycemic_sidenav.jpg" class="img-responsive">
 					<h1 class="entry-title"><?php echo $archive_info[0]['journal_name']; ?></h1>
+				<?php } ?>
 				</div>
 			</div>
 		</div>		
 		<div class="col-sm-8">		
 			<div class="post-text-box">				
 				<div id="post-content">
-					<h1>Articles in Press</h1>
+				<?php
+					if($this->uri->segment(3) == 'current-issue') {
+						echo '<h1>Current Issue</h1>';
+					}else if($this->uri->segment(3) == 'article-in-press'){
+						echo '<h1>Article In Press</h1>';	
+					}
+					else if($this->uri->segment(3) == 'archive'){
+						echo '<h1>Archive</h1>';	
+					}
+				?>
+
 					<?php 
+					//print_r($archive_info);exit;
 						$i = 0;
-						foreach ($archive_info as $key => $value) {							
+						foreach ($archive_info as $key => $value) {
 							if($i == '0') {
-								echo '<p>'.$value['archive_volume'].'</p>';								
+								echo '<p><b>'.$value['archive_volume'].'</b></p>';								
 							}
-							echo '<div>'.$value['archive_desc'].'</div>';
+							echo '<div class="archive-box"><div>'.$value['archive_desc'].'</div>';
+						if(isset($archive_info['0']['archive_fulltext']) && !empty($archive_info['0']['archive_pdf'])) {
 							echo '<div class="btn-wrapper">
-<p><a href="'.$value['archive_fulltext'].'" target="_blank" class="icon-fulltext">Full Text</a><a href="'.$value['archive_pdf'].'" target="_blank" class="icon-pdf"> PDF</a></p></div>';
+<p><a href="'.$value['archive_fulltext'].'" target="_blank" class="icon-fulltext">Full Text</a><a href="'.$value['archive_pdf'].'" target="_blank" class="icon-pdf"> PDF</a></p></div></div>';
+	}
 							$i++;
-						}
+						}					
 						
 					?>
 				</div>  	

@@ -3241,3 +3241,5 @@ footer.entry-meta {
     font-size: 14px;
     right: 15px;
 }
+
+.post-text-box .archive-box {margin-bottom: 20px;border-bottom: 1px solid #eee;padding-bottom: 10px;}
