@@ -100,10 +100,11 @@
 								echo '<p><b>'.$value['archive_volume'].'</b></p>';								
 							}
 							echo '<div class="archive-box"><div>'.$value['archive_desc'].'</div>';
-						if(isset($archive_info['0']['archive_fulltext']) && !empty($archive_info['0']['archive_pdf'])) {
+						if(!empty($value['archive_fulltext']) && !empty($value['archive_pdf'])) {
 							echo '<div class="btn-wrapper">
-<p><a href="'.$value['archive_fulltext'].'" target="_blank" class="icon-fulltext">Full Text</a><a href="'.$value['archive_pdf'].'" target="_blank" class="icon-pdf"> PDF</a></p></div></div>';
+<p><a href="'.$value['archive_fulltext'].'" target="_blank" class="icon-fulltext">Full Text</a><a href="'.$value['archive_pdf'].'" target="_blank" class="icon-pdf"> PDF</a></p></div>';
 	}
+	echo '</div>';
 							$i++;
 						}					
 						
