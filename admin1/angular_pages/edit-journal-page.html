@@ -76,14 +76,14 @@ tinymce.init({
 								  <optgroup label="Medical">
 								    <option ng-repeat="j in journal_info" ng-selected="main_page.journal_id==j.id?'selected':''" ng-if="j.category_name == 'Medical'" value="{{j.id}}">{{j.journal_name}}</option>    
 								  </optgroup>
-								  <optgroup label="Biotechnolgy">
-								    <option ng-repeat="j in journal_info" ng-selected="main_page.journal_id==j.id?'selected':''" ng-if="j.category_name == 'Biotechnolgy'" value="{{j.id}}">{{j.journal_name}}</option>    
+								  <optgroup label="Biotechnology">
+								    <option ng-repeat="j in journal_info" ng-selected="main_page.journal_id==j.id?'selected':''" ng-if="j.category_name == 'Biotechnology'" value="{{j.id}}">{{j.journal_name}}</option>    
 								  </optgroup>
 								  <optgroup label="Biology">
 								    <option ng-repeat="j in journal_info" ng-selected="main_page.journal_id==j.id?'selected':''" ng-if="j.category_name == 'Biology'" value="{{j.id}}">{{j.journal_name}}</option>    
 								  </optgroup>
-								  <optgroup label="Pharmaseutical">
-								    <option ng-repeat="j in journal_info" ng-selected="main_page.journal_id==j.id?'selected':''" ng-if="j.category_name == 'Pharmaseutical'" value="{{j.id}}">{{j.journal_name}}</option>    
+								  <optgroup label="Pharmaceutical">
+								    <option ng-repeat="j in journal_info" ng-selected="main_page.journal_id==j.id?'selected':''" ng-if="j.category_name == 'Pharmaceutical'" value="{{j.id}}">{{j.journal_name}}</option>    
 								  </optgroup>								  
 								</select>
 								<span style="color:red" ng-show="journal_post_form.journal_id.$dirty"><span ng-show="journal_post_form.journal_id.$error.required">This is required.</span></span>

@@ -85,6 +85,7 @@ class Users_model extends CI_Model {
 		return $query->result_array();	
 	}
 	function get_journals_posts() {
+		//$query = $this->db->query('SELECT * FROM wp_journal_posts WHERE deleted="1" ORDER BY updated_date DESC');	
 		$query = $this->db->query('SELECT * FROM wp_journal_posts WHERE deleted="1"');	
 		//print_r($query);				
 		return $query->result_array();

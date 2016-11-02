@@ -250,6 +250,11 @@ jQuery('body').on('click',function(e){
 				jQuery('#journal-ajax').html(data);					    			      
 			});
 		});
+		 
+		jQuery('#myTabs a').click(function (e) {
+			e.preventDefault()
+			jQuery(this).tab('show')
+		});
 	});
 		
 </script>

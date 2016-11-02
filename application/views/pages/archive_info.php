@@ -46,9 +46,9 @@
 				<a href="#" id="mobile-post-navbtn">Menu</a>
 				<ul class="mobile-post-nav">
 					<?php
-						foreach ($static_page as $key => $value) {
-							echo '<li><a class="" href="">'.$key.'</a></li>';
-						}
+					foreach ($static_page as $key => $value) {
+						echo '<li><a class="" href="">'.$key.'</a></li>';
+					}
 					?>
 				</ul>
 			</div>
@@ -59,29 +59,29 @@
 					<div id="journal-sidebar">
 						<div id="nav-post">
 							<ul class="post-nav">
-							<?php
-							
+								<?php
+
 								foreach ($static_page as $key => $value) {
 									echo '<li><a class="" href="'.base_url().''.strtolower($this->uri->segment(1)).'/'.$this->uri->segment(2).'/'.$value.'/">'.$key.'</a></li>';
 								}
-							 ?>
+								?>
 							</ul>
 						</div>
 					</div>
 				</div>
 				<div class="journal-info-box">
 
-				<?php if(isset($archive_info) && !empty($archive_info)){ ?>
+					<?php if(isset($archive_info) && !empty($archive_info)){ ?>
 					<img src="http://www.avensonline.org/wp-content/uploads/2015/05/glycemic_sidenav.jpg" class="img-responsive">
 					<h1 class="entry-title"><?php echo $archive_info[0]['journal_name']; ?></h1>
-				<?php } ?>
+					<?php } ?>
 				</div>
 			</div>
 		</div>		
 		<div class="col-sm-8">		
 			<div class="post-text-box">				
 				<div id="post-content">
-				<?php
+					<?php
 					if($this->uri->segment(3) == 'current-issue') {
 						echo '<h1>Current Issue</h1>';
 					}else if($this->uri->segment(3) == 'article-in-press'){
@@ -90,37 +90,76 @@
 					else if($this->uri->segment(3) == 'archive'){
 						echo '<h1>Archive</h1>';	
 					}
-				?>
+					?>
 
 					<?php 
-					//print_r($archive_info);exit;
+
+					if($this->uri->segment(3) == 'archive') {
+//print_r($archive_info);exit;
+						$year_arr = array();
+						$volume_arr = array();
+						foreach ($archive_info as $key => $value) {						
+							array_push($year_arr, $value['archive_year']);
+							array_push($volume_arr, $value['archive_volume']);
+						}
+
+
+						echo '<ul id="myTabs" class="nav nav-tabs" role="tablist">';
+						$f_flag = true;
+						foreach (array_unique($year_arr) as $key => $value) {
+							if($f_flag) {
+								echo '<li class="dddddd active"><a href="#'.$value.'" id="'.$value.'-tab" role="tab" data-toggle="tab" aria-controls="'.$value.'" aria-expanded="false">'.$value.'</a></li>';
+							} else {
+								echo '<li><a href="#'.$value.'" id="'.$value.'-tab" role="tab" data-toggle="tab" aria-controls="'.$value.'" aria-expanded="false">'.$value.'</a></li>';
+							}
+							$f_flag = false;
+						}								
+						echo '</ul>';
+						$s_flag = true;
+						echo '<div id="myTabContent" class="tab-content">';
+						foreach (array_unique($year_arr) as $k => $v) {
+							if($s_flag) {
+								echo '<div class="tab-pane fade active in" id="'.$v.'" aria-labelledby="'.$v.'-tab">';		
+							} else {
+								echo '<div class="tab-pane fade active " id="'.$v.'" aria-labelledby="'.$v.'-tab">';		
+							}
+							echo '<div class="post-archive-box"><p class="month"><strong>volume 1 issue 1</strong></p>';
+							echo '<div class="post-archive-box-inner">';
+							foreach ($archive_info as $key => $value) {									
+								if($v == $value['archive_year']) {
+									echo $value['archive_desc'];
+									echo '<div class="btn-wrapper">
+<p><a href="'.$value['archive_fulltext'].'" target="_blank" class="icon-fulltext">Full Text</a><a href="'.$value['archive_pdf'].'" target="_blank" class="icon-pdf">PDF</a></p></div>';
+								}
+							}
+							echo '</div>';
+							echo '</div></div>';
+							$s_flag = false;
+						};
+
+						echo '</div>';
+					} else {
 						$i = 0;
 						foreach ($archive_info as $key => $value) {
 							if($i == '0') {
 								echo '<p><b>'.$value['archive_volume'].'</b></p>';								
 							}
 							echo '<div class="archive-box"><div>'.$value['archive_desc'].'</div>';
-						if(!empty($value['archive_fulltext']) && !empty($value['archive_pdf'])) {
-							echo '<div class="btn-wrapper">
-<p><a href="'.$value['archive_fulltext'].'" target="_blank" class="icon-fulltext">Full Text</a><a href="'.$value['archive_pdf'].'" target="_blank" class="icon-pdf"> PDF</a></p></div>';
-	}
-	echo '</div>';
+							if(!empty($value['archive_fulltext']) && !empty($value['archive_pdf'])) {
+								echo '<div class="btn-wrapper">
+								<p><a href="'.$value['archive_fulltext'].'" target="_blank" class="icon-fulltext">Full Text</a><a href="'.$value['archive_pdf'].'" target="_blank" class="icon-pdf"> PDF</a></p></div>';
+							}
+							echo '</div>';
 							$i++;
 						}					
-						
+
+					}
+
 					?>
 				</div>  	
 			</div>
 		</div>
 	</div>
-<!--
-</div>
-</div>
-</div>
-</div>
-
-
-</div><!-- #content -->
 </div><!-- #primary -->
 
 

@@ -180,9 +180,11 @@ app.controller('EditJournalPageController', function($scope,$rootScope,$routePar
     var page_id = ($routeParams.pageID) ? parseInt($routeParams.pageID) : 0;
     $rootScope.title = (page_id > 0) ? 'Edit Journal Page' : 'Add Journal Page';
     $scope.buttonText = (page_id > 0) ? 'Update Journal Page' : 'Add New Journal Page';    
-    console.log(page_id);
     var original = main_page.data.post_info;
-    console.log(original[0]); 
+    
+    if(page_id == 0) {
+        original.post_content = '';
+    }
     $scope.main_page = original[0];
     $scope.journal_info = main_page.data.journal_info;    
     //$scope.options = [{ name: "Medical", id: 10 }, { name: "Biotechnolgy", id: 20 },{ name: "Pharmaseutical", id: 30 },{ name: "Biology", id: 40 }];
