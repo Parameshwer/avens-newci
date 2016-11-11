@@ -95,50 +95,61 @@
 					<?php 
 
 					if($this->uri->segment(3) == 'archive') {
-//print_r($archive_info);exit;
+
 						$year_arr = array();
-						$volume_arr = array();
 						foreach ($archive_info as $key => $value) {						
-							array_push($year_arr, $value['archive_year']);
-							array_push($volume_arr, $value['archive_volume']);
+							array_push($year_arr, $value['archive_year']);							
 						}
 
 
-						echo '<ul id="myTabs" class="nav nav-tabs" role="tablist">';
+						$temp_arr = array();
+						foreach ($archive_info as $key => $value) {
+							$temp_arr[$value['archive_year']][$value['archive_volume']][] = $value;
+						}
 						$f_flag = true;
-						foreach (array_unique($year_arr) as $key => $value) {
+						echo '<ul id="myTabs" class="nav nav-tabs" role="tablist">';
+						foreach ($temp_arr as $key => $value) {
+							//print_r($key);
+							//echo $key;
 							if($f_flag) {
-								echo '<li class="dddddd active"><a href="#'.$value.'" id="'.$value.'-tab" role="tab" data-toggle="tab" aria-controls="'.$value.'" aria-expanded="false">'.$value.'</a></li>';
+								echo '<li class="dddddd active"><a href="#'.$key.'" id="'.$key.'-tab" role="tab" data-toggle="tab" aria-controls="'.$key.'" aria-expanded="false">'.$key.'</a></li>';
 							} else {
-								echo '<li><a href="#'.$value.'" id="'.$value.'-tab" role="tab" data-toggle="tab" aria-controls="'.$value.'" aria-expanded="false">'.$value.'</a></li>';
+								echo '<li><a href="#'.$key.'" id="'.$key.'-tab" role="tab" data-toggle="tab" aria-controls="'.$key.'" aria-expanded="false">'.$key.'</a></li>';
 							}
-							$f_flag = false;
-						}								
+							$f_flag = false;							
+						}
 						echo '</ul>';
 						$s_flag = true;
 						echo '<div id="myTabContent" class="tab-content">';
-						foreach (array_unique($year_arr) as $k => $v) {
+						foreach ($temp_arr as $key => $value) {							
+							/*foreach ($value as $k => $v) {
+								echo '<div class="post-archive-box"><p class="month"><strong>'.$k.'</strong></p>';
+							}*/
+							
 							if($s_flag) {
-								echo '<div class="tab-pane fade active in" id="'.$v.'" aria-labelledby="'.$v.'-tab">';		
+								echo '<div class="tab-pane fade active in" id="'.$key.'" aria-labelledby="'.$key.'-tab">';		
 							} else {
-								echo '<div class="tab-pane fade active " id="'.$v.'" aria-labelledby="'.$v.'-tab">';		
+								echo '<div class="tab-pane fade active " id="'.$key.'" aria-labelledby="'.$key.'-tab">';		
 							}
-							echo '<div class="post-archive-box"><p class="month"><strong>volume 1 issue 1</strong></p>';
-							echo '<div class="post-archive-box-inner">';
-							foreach ($archive_info as $key => $value) {									
-								if($v == $value['archive_year']) {
-									echo $value['archive_desc'];
+							//echo '</div>';
+							foreach ($value as $k => $v) {
+								echo '<div class="post-archive-box"><p class="month"><strong>'.$k.'</strong></p>';
+								echo '<div class="post-archive-box-inner" style="display:none">';
+								foreach ($v as $a => $b) {
+									//if($v == $value['archive_year']) {
+									echo $b['archive_desc'];
 									echo '<div class="btn-wrapper">
-<p><a href="'.$value['archive_fulltext'].'" target="_blank" class="icon-fulltext">Full Text</a><a href="'.$value['archive_pdf'].'" target="_blank" class="icon-pdf">PDF</a></p></div>';
+<p><a href="'.$b['archive_fulltext'].'" target="_blank" class="icon-fulltext">Full Text</a><a href="'.$b['archive_pdf'].'" target="_blank" class="icon-pdf">PDF</a></p></div>';
+								//}
 								}
+								echo '</div></div>';
 							}
 							echo '</div>';
-							echo '</div></div>';
 							$s_flag = false;
-						};
-
+						}
 						echo '</div>';
-					} else {
+					}
+					 else {
 						$i = 0;
 						foreach ($archive_info as $key => $value) {
 							if($i == '0') {
