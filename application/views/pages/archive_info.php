@@ -136,11 +136,13 @@
 								echo '<div class="post-archive-box"><p class="month"><strong>'.$k.'</strong></p>';
 								echo '<div class="post-archive-box-inner" style="display:none">';
 								foreach ($v as $a => $b) {
+									echo '<div class="archive-info">';
 									//if($v == $value['archive_year']) {
 									echo $b['archive_desc'];
 									echo '<div class="btn-wrapper">
 <p><a href="'.$b['archive_fulltext'].'" target="_blank" class="icon-fulltext">Full Text</a><a href="'.$b['archive_pdf'].'" target="_blank" class="icon-pdf">PDF</a></p></div>';
 								//}
+									echo '</div>';
 								}
 								echo '</div></div>';
 							}
