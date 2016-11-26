@@ -115,9 +115,9 @@
         }
         foreach ($j_info as $key => $value) {
           if($key == '0'){
-            echo '<h3>Pharmaseutical</h3>';
+            echo '<h3>Pharmaceutical</h3>';
           }
-          if($value['category_name'] == 'Pharmaseutical') {
+          if($value['category_name'] == 'Pharmaceutical') {
             echo '<ul class="cat-ul">';
             echo '<li><a title='.$value['journal_name'].' href="'.base_url().''.strtolower($value['category_name']).'/'.$value['journal_url_slug'].'/home">'.$value['journal_name'].'</a>';
             if($value['issn_number']) {
