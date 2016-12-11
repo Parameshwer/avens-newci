@@ -272,7 +272,7 @@ app.controller('EditJournalArchiveController', function($scope,$rootScope,$route
                         {"id":"volume-4-issue-1","name":"volume 4 issue 1"},{"id":"volume-4-issue-2","name":"volume 4 issue 2"},
                         {"id":"volume-4-issue-3","name":"volume 4 issue 3"}];    
     $scope.archive_years = archive_years;
-    $scope.archive_type = [{"id":"1","name":"Archive In Press"},{"id":"2","name":"Current Issue"},{"id":"3","name":"Archive"}]
+    $scope.archive_type = [{"id":"1","name":"Archive In Press"},{"id":"2","name":"Current Issue"},{"id":"3","name":"Archive"},{"id":"4","name":"Special Issues"}]
 
     $scope.tinymceOptions = {
         onChange: function(e) {

@@ -29,15 +29,16 @@ class App_model extends CI_Model {
 	function get_archive_info($cat_name,$journal_name,$post_name) {
 		if($post_name == 'article-in-press') {
 			$archive_type = '1';			
-			$query  = $this->db->query('SELECT * FROM wp_journal_archives jp JOIN wp_journals j on jp.journal_id = j.id INNER JOIN wp_journal_main_categories mc on mc.category_id = j.main_category_id WHERE jp.archive_in = "'.$archive_type.'" AND mc.category_name = "'.$cat_name.'" AND j.journal_url_slug = "'.$journal_name.'"');
 		} else if($post_name == 'current-issue') {
-			$archive_type = '2';			
-			$query  = $this->db->query('SELECT * FROM wp_journal_archives jp JOIN wp_journals j on jp.journal_id = j.id INNER JOIN wp_journal_main_categories mc on mc.category_id = j.main_category_id WHERE jp.archive_in = "'.$archive_type.'" AND mc.category_name = "'.$cat_name.'" AND j.journal_url_slug = "'.$journal_name.'"');
+			$archive_type = '2';						
 		} else if($post_name == 'archive') {			
-			$archive_type = '3';			
-			$query  = $this->db->query('SELECT * FROM wp_journals j JOIN wp_journal_archives jp on jp.journal_id = j.id INNER JOIN wp_journal_main_categories mc on mc.category_id = j.main_category_id WHERE jp.archive_in = "'.$archive_type.'" AND mc.category_name = "'.$cat_name.'" AND j.journal_url_slug = "'.$journal_name.'"');
+			$archive_type = '3';						
+		}else if($post_name == 'special-issues') {			
+			$archive_type = '4';						
 		}
-		
+
+		$query  = $this->db->query('SELECT * FROM wp_journal_archives jp JOIN wp_journals j on jp.journal_id = j.id INNER JOIN wp_journal_main_categories mc on mc.category_id = j.main_category_id WHERE jp.archive_in = "'.$archive_type.'" AND mc.category_name = "'.$cat_name.'" AND j.journal_url_slug = "'.$journal_name.'"');
+
 		return $query->result_array();
 	}
 	function get_sidebar_links($cat_name,$journal_name,$post_name) {
@@ -47,6 +48,8 @@ class App_model extends CI_Model {
 			$archive_type = '2';
 		} else if($post_name == 'archive') {
 			$archive_type = '3';
+		} else if($post_name == 'special-issues') {
+			$archive_type = '4';
 		}
 		if($archive_type == '3') {
 			$query = $this->db->query('SELECT * FROM wp_journal_archives jp INNER JOIN wp_journals j on jp.journal_id = j.id INNER JOIN wp_journal_main_categories mc on mc.category_id = j.main_category_id WHERE mc.category_name = "'.$cat_name.'" AND j.journal_url_slug = "'.$journal_name.'"');

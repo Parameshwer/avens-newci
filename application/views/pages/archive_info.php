@@ -89,6 +89,8 @@
 					}
 					else if($this->uri->segment(3) == 'archive'){
 						echo '<h1>Archive</h1>';	
+					}else if($this->uri->segment(3) == 'special-issues'){
+						echo '<h1>Special Issues</h1>';	
 					}
 					?>
 
@@ -112,7 +114,7 @@
 							//print_r($key);
 							//echo $key;
 							if($f_flag) {
-								echo '<li class="dddddd active"><a href="#'.$key.'" id="'.$key.'-tab" role="tab" data-toggle="tab" aria-controls="'.$key.'" aria-expanded="false">'.$key.'</a></li>';
+								echo '<li class="active"><a href="#'.$key.'" id="'.$key.'-tab" role="tab" data-toggle="tab" aria-controls="'.$key.'" aria-expanded="false">'.$key.'</a></li>';
 							} else {
 								echo '<li><a href="#'.$key.'" id="'.$key.'-tab" role="tab" data-toggle="tab" aria-controls="'.$key.'" aria-expanded="false">'.$key.'</a></li>';
 							}

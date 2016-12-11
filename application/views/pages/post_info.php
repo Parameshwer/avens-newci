@@ -52,6 +52,7 @@
 				</ul>
 			</div>
 			<div>
+			
 				<div id="journal-sidebar-wrapper">
 
 
