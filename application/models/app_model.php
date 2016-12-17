@@ -59,6 +59,10 @@ class App_model extends CI_Model {
 		
 		return $query->result_array();
 	}
-	
+	function get_latest_journals($position) {
+		//$query = $this->db->query("SELECT * FROM `wp_latest_articles` LIMIT $position, 5");
+		$query = $this->db->query("SELECT * FROM wp_latest_articles la INNER JOIN wp_journals j on la.article_category = j.id INNER JOIN wp_journal_main_categories mc on mc.category_id = j.main_category_id LIMIT $position, 5");
+		return $query->result_array();
+	}
 }
 

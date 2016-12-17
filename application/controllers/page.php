@@ -178,5 +178,24 @@ class Page extends CI_Controller {
 			echo json_encode($data);
 		}	*/
 		echo $this->load->view('pages/ajax_journals', $data,TRUE);	
+	}
+
+	public function get_latest_journals() {
+		$this->load->model('App_model');
+
+		//sanitize post value
+		if($this->input->post("page")) {
+			$page_number = $this->input->post("page");
+		if(!is_numeric($page_number)){die('Invalid page number!');} //incase of invalid page number
+		} else{
+			$page_number = 1;
+		}
+
+		//get current starting point of records
+		$position = (($page_number-1) * 5);
+
+		$data['latest_articles'] = $this->App_model->get_latest_journals($position);
+
+		echo $this->load->view('pages/ajax_latest_articles', $data,TRUE);	
 	}	
-}
+} 

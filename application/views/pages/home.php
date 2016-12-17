@@ -71,70 +71,9 @@
 								</a>
 							</div>
 						</div>
-						<div id="latest-articles-inner">
-
-							<div id="latest-article-results"><div class="media">
-								<div class="media-left">
-									<img width="150" height="150" src="<?php echo base_url() ?>public/images/JHT-02-0013-150x150.jpg" class="attachment-thumbnail wp-post-image" alt="JHT-02-0013">		
-								</div>
-								<div class="media-body">
-
-									<h1 style="text-align: left;"><a href="<?php echo base_url() ?>public/images/JHT-2380-6842-02-0013.pdf" target="_blank">Provisional Study of Kuwait Adult Hematology Reference Range</a></h1>
-									<p>Hassan A. Al-Jafar</p>
-									<p style="text-align: right;"><a href="<?php echo base_url(); ?>journals/">Journal of Hematology &amp; Thrombosis</a>		
-									</p>	
-								</div>
-							</div>
-							<div class="media">
-								<div class="media-left">
-									<img width="150" height="150" src="<?php echo base_url() ?>public/images/avascular-necrosis-150x150.jpg" class="attachment-thumbnail wp-post-image" alt="avascular necrosis">		
-								</div>
-								<div class="media-body">
-
-									<h1 style="text-align: left;"><a href="<?php echo base_url() ?>public/images/JOBY-2377-987X-03-0022.pdf" target="_blank">Implant Placement in a Patient Presenting Avascular Bone Necrosis: A Histological Report</a></h1>
-									<p>Sang Choon Cho</p>
-									<p style="text-align: right;"><a href="<?php echo base_url(); ?>journals/">Journal of Oral Biology</a>		
-									</p>	
-								</div>
-							</div>
-							<div class="media">
-								<div class="media-left">
-									<img width="150" height="150" src="<?php echo base_url() ?>public/images/JCMCR-150x150.jpg" class="attachment-thumbnail wp-post-image" alt="JCMCR">		
-								</div>
-								<div class="media-body">
-
-									<h1 style="text-align: left;"><a href="<?php echo base_url() ?>public/images/JCMCR-2332-4120-03-0017.pdf" target="_blank">Autoimmune Progesterone Dermatıtıs durıng Pregnancy Results in a Full-Term Delivery</a></h1>
-									<p>Gulin Feykan Yegin Akcay</p>
-									<p style="text-align: right;"><a href="<?php echo base_url(); ?>journals/">Journal of Clinical &amp; Medical Case Reports</a>		
-									</p>	
-								</div>
-							</div>
-							<div class="media">
-								<div class="media-left">
-									<img width="150" height="150" src="<?php echo base_url() ?>public/images/JSUR-04-0028-150x150.jpg" class="attachment-thumbnail wp-post-image" alt="JSUR-04-0028">		
-								</div>
-								<div class="media-body">
-
-									<h1 style="text-align: left;"><a href="<?php echo base_url() ?>public/images/JSUR-2332-4139-04-0028.pdf" target="_blank">Biopsies of the Internal Mammary Sentinel Lymph Nodes in Breast Cancer</a></h1>
-									<p>Mirela Roman</p>
-									<p style="text-align: right;"><a href="<?php echo base_url(); ?>journals/">Journal of Surgery</a>		
-									</p>	
-								</div>
-							</div>
-							<div class="media">
-								<div class="media-left">
-									<img width="150" height="150" src="<?php echo base_url() ?>public/images/JSUR-04-0027-150x150.png" class="attachment-thumbnail wp-post-image" alt="JSUR-04-0027">		
-								</div>
-								<div class="media-body">
-
-									<h1 style="text-align: left;"><a href="<?php echo base_url() ?>public/images/JSUR-2332-4139-04-0027.pdf" target="_blank">Surgical Procedures with Questionable Indications: A Letter from Russia</a></h1>
-									<p>Sergei V. Jargin</p>
-									<p style="text-align: right;"><a href="<?php echo base_url(); ?>journals/">Journal of Surgery</a>		
-									</p>	
-								</div>
-							</div>
-						</div>		
-						<div class="paginatio-custom"><div class="pagination"><ul class="pagination bootpag"><li data-lp="1" class="prev disabled"><a href="javascript:void(0);">«</a></li><li data-lp="1" class="disabled"><a href="javascript:void(0);">1</a></li><li data-lp="2"><a href="javascript:void(0);">2</a></li><li data-lp="3"><a href="javascript:void(0);">3</a></li><li data-lp="4"><a href="javascript:void(0);">4</a></li><li data-lp="5"><a href="javascript:void(0);">5</a></li><li data-lp="2" class="next"><a href="javascript:void(0);">Next</a></li></ul></div></div>
+						<div id="latest-articles-inner">						
+					<div id="latest-article-results"></div>		
+					<div class="paginatio-custom"><div class="pagination"></div></div>
 					</div>
 				</div>
 				<div id="collab-section">					
