@@ -61,8 +61,11 @@
 							<ul class="post-nav">
 								<?php
 
-								foreach ($static_page as $key => $value) {
+								/*foreach ($static_page as $key => $value) {
 									echo '<li><a class="" href="'.base_url().''.strtolower($this->uri->segment(1)).'/'.$this->uri->segment(2).'/'.$value.'/">'.$key.'</a></li>';
+								}*/
+								foreach ($links_info as $key => $value) {									
+									echo '<li><a class="" href="'.base_url().''.strtolower($value['category_name']).'/'.$value['journal_slug'].'/'.$value['post_slug'].'/">'.$value['post_name'].'</a></li>';	
 								}
 								?>
 							</ul>
@@ -82,14 +85,14 @@
 			<div class="post-text-box">				
 				<div id="post-content">
 					<?php
-					if($this->uri->segment(3) == 'current-issue') {
+					if(strpos($this->uri->segment(3), 'current-issue') !== false) {
 						echo '<h1>Current Issue</h1>';
-					}else if($this->uri->segment(3) == 'article-in-press'){
+					}else if(strpos($this->uri->segment(3), 'articles-in-press') !== false) {
 						echo '<h1>Article In Press</h1>';	
 					}
-					else if($this->uri->segment(3) == 'archive'){
+					else if(strpos($this->uri->segment(3), 'archive') !== false) {
 						echo '<h1>Archive</h1>';	
-					}else if($this->uri->segment(3) == 'special-issues'){
+					}else if(strpos($this->uri->segment(3), 'special-issues') !== false) {
 						echo '<h1>Special Issues</h1>';	
 					}
 					?>

@@ -62,7 +62,7 @@ class Page extends CI_Controller {
 	}
 	public function journals()
 	{						
-	        if ( ! file_exists(APPPATH.'views/pages/submit_manuscript.php'))
+	        if ( ! file_exists(APPPATH.'views/pages/journals.php'))
 	        {
 	                // Whoops, we don't have a page for that!
 	                show_404();

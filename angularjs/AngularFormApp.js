@@ -50,7 +50,7 @@ app.factory("services", ['$http', function($http) {
         /*if(!id) {
             main_journal.main_category_id = 0;
         }*/
-        main_journal.journal_url_slug = main_journal.journal_name.toLowerCase().replace(/[^\w ]+/g,'').replace(/ +/g,'-');        
+        //main_journal.journal_url_slug = main_journal.journal_name.toLowerCase().replace(/[^\w ]+/g,'').replace(/ +/g,'-');        
         $http({
             url: base_url+"admin/insert_journal",
             method: "POST",
@@ -70,13 +70,14 @@ app.factory("services", ['$http', function($http) {
             journal_page.main_category_id = 0;
         }*/
         console.log(journal_page);
-        journal_page.journal_post_slug = journal_page.post_name.toLowerCase().replace(/[^\w ]+/g,'').replace(/ +/g,'-');        
+       /* journal_page.journal_post_slug = journal_page.post_name.toLowerCase().replace(/[^\w ]+/g,'').replace(/ +/g,'-');        
         $.each(scope.journal_info,function(i,v){
             if(v.id == journal_page.journal_id) {                
                 console.log(v);
                 journal_page.journal_slug = v.journal_name.toLowerCase().replace(/[^\w ]+/g,'').replace(/ +/g,'-');                            
             }
-        });
+        });*/
+        journal_page.journal_post_slug = journal_page.journal_post_slug;        
         $http({
             url: base_url+"admin/update_journal_page",
             method: "POST",
@@ -164,7 +165,7 @@ app.controller('EditJournalController', function($scope,$rootScope,$routeParams,
        return angular.equals(original, $scope.main_journal);
     }
     $scope.convertToJournalSlug = function(elem) {
-        $('#journal_url_slug').val(elem.main_journal.journal_name.toLowerCase().replace(/[^\w ]+/g,'').replace(/ +/g,'-'));         
+        //$('#journal_url_slug').val(elem.main_journal.journal_name.toLowerCase().replace(/[^\w ]+/g,'').replace(/ +/g,'-'));         
     }
     $scope.saveJournal = function(main_journal) {
         if (journal_id <= 0) {
@@ -213,14 +214,14 @@ app.controller('EditJournalPageController', function($scope,$rootScope,$routePar
         height : 300
       };*/
     $scope.convertToPostSlug = function(elem) {        
-        $('#journal_post_slug').val(elem.main_page.post_name.toLowerCase().replace(/[^\w ]+/g,'').replace(/ +/g,'-'));         
+        //$('#journal_post_slug').val(elem.main_page.post_name.toLowerCase().replace(/[^\w ]+/g,'').replace(/ +/g,'-'));         
     };
     $scope.convertToJournalSlug = function(elem) {        
-        $.each($scope.journal_info,function(i,v){
+       /* $.each($scope.journal_info,function(i,v){
             if(v.id == elem){                
                     $('#journal_slug').val(v.journal_name.toLowerCase().replace(/[^\w ]+/g,'').replace(/ +/g,'-'));                            
             }
-        });        
+        });*/        
 
     };
 });

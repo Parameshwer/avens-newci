@@ -77,7 +77,7 @@
               echo '<h3>Medical</h3>';
             }
             echo '<ul class="cat-ul">';
-            echo '<li><a title='.$value['journal_name'].' href="'.base_url().''.strtolower($value['category_name']).'/'.$value['journal_url_slug'].'/home">'.$value['journal_name'].'</a>';
+            echo '<li><a title='.$value['journal_name'].' href="'.base_url().''.strtolower($value['category_name']).'/'.$value['journal_url_slug'].'/'.$value['post_slug'].'">'.$value['journal_name'].'</a>';
             if($value['issn_number']) {
               echo '<span class="pull-right"><p></p></span>';
             }
@@ -91,7 +91,7 @@
           }
           if($value['category_name'] == 'Biotechnology') {
             echo '<ul class="cat-ul">';
-            echo '<li><a title='.$value['journal_name'].' href="'.base_url().''.strtolower($value['category_name']).'/'.$value['journal_url_slug'].'/home">'.$value['journal_name'].'</a>';
+            echo '<li><a title='.$value['journal_name'].' href="'.base_url().''.strtolower($value['category_name']).'/'.$value['journal_url_slug'].'/'.$value['post_slug'].'">'.$value['journal_name'].'</a>';
             if($value['issn_number']) {
               echo '<span class="pull-right"><p></p></span>';
             }
@@ -105,7 +105,7 @@
           }
           if($value['category_name'] == 'Biology') {
             echo '<ul class="cat-ul">';
-            echo '<li><a title='.$value['journal_name'].' href="'.base_url().''.strtolower($value['category_name']).'/'.$value['journal_url_slug'].'/home">'.$value['journal_name'].'</a>';
+            echo '<li><a title='.$value['journal_name'].' href="'.base_url().''.strtolower($value['category_name']).'/'.$value['journal_url_slug'].'/'.$value['post_slug'].'">'.$value['journal_name'].'</a>';
             if($value['issn_number']) {
               echo '<span class="pull-right"><p></p></span>';
             }
@@ -119,7 +119,7 @@
           }
           if($value['category_name'] == 'Pharmaceutical') {
             echo '<ul class="cat-ul">';
-            echo '<li><a title='.$value['journal_name'].' href="'.base_url().''.strtolower($value['category_name']).'/'.$value['journal_url_slug'].'/home">'.$value['journal_name'].'</a>';
+            echo '<li><a title='.$value['journal_name'].' href="'.base_url().''.strtolower($value['category_name']).'/'.$value['journal_url_slug'].'/'.$value['post_slug'].'">'.$value['journal_name'].'</a>';
             if($value['issn_number']) {
               echo '<span class="pull-right"><p></p></span>';
             }

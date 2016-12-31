@@ -34,6 +34,7 @@ class Users_model extends CI_Model {
 		{
 		    $udata = unserialize($row->user_data);
 		    /* put data in array using username as key */
+		
 		    $user['user_name'] = $udata['user_name']; 
 		    $user['is_logged_in'] = $udata['is_logged_in']; 
 		}
@@ -86,7 +87,9 @@ class Users_model extends CI_Model {
 	}
 	function get_journals_posts() {
 		//$query = $this->db->query('SELECT * FROM wp_journal_posts WHERE deleted="1" ORDER BY updated_date DESC');	
-		$query = $this->db->query('SELECT * FROM wp_journal_posts WHERE deleted="1"');	
+		//$query = $this->db->query('SELECT * FROM wp_journal_posts WHERE deleted="1"');	
+
+		$query = $this->db->query('SELECT * FROM wp_journal_posts jp INNER JOIN wp_journals j on jp.journal_id = j.id INNER JOIN wp_journal_main_categories mc on mc.category_id = j.main_category_id WHERE jp.deleted="1"');
 		//print_r($query);				
 		return $query->result_array();
 	}
@@ -147,7 +150,7 @@ class Users_model extends CI_Model {
 		
 		if(isset($data->id) && !empty($data->id)) {
 			
-		$query = $this->db->query("UPDATE wp_journal_posts SET post_name='".$data->post_name."', updated_date ='".date('Y-m-d')."',category_id ='".$data->category_id."',post_slug ='".$data->journal_post_slug."',journal_slug ='".$data->journal_slug."',post_content ='".$data->post_content."',journal_id ='".$data->journal_id."' WHERE id=$data->id");
+		$query = $this->db->query("UPDATE wp_journal_posts SET post_name='".$data->post_name."', updated_date ='".date('Y-m-d')."',category_id ='".$data->category_id."',post_slug ='".$data->post_slug."',journal_slug ='".$data->journal_slug."',post_content ='".$data->post_content."',journal_id ='".$data->journal_id."' WHERE id=$data->id");
 		} else {
 		   $query = $this->db->query("INSERT INTO wp_journal_posts (post_name, created_date, updated_date, category_id,post_slug,journal_slug,post_content,journal_id,deleted) VALUES ('".$data->post_name."','".date('Y-m-d')."','".date('Y-m-d')."','".$data->category_id."','".$data->journal_post_slug."','".$data->journal_slug."','".$data->post_content."','$data->journal_id','1')");
 		}
