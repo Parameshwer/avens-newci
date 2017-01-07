@@ -64,8 +64,8 @@
 								/*foreach ($static_page as $key => $value) {
 									echo '<li><a class="" href="'.base_url().''.strtolower($this->uri->segment(1)).'/'.$this->uri->segment(2).'/'.$value.'/">'.$key.'</a></li>';
 								}*/
-								foreach ($links_info as $key => $value) {									
-									echo '<li><a class="" href="'.base_url().''.strtolower($value['category_name']).'/'.$value['journal_slug'].'/'.$value['post_slug'].'/">'.$value['post_name'].'</a></li>';	
+								foreach ($links_info as $key => $value) {
+									echo '<li><a class="" href="'.base_url().''.strtolower($value['category_name']).'/'.$value['journal_url_slug'].'/'.$value['post_slug'].'/">'.$value['post_name'].'</a></li>';
 								}
 								?>
 							</ul>
@@ -99,7 +99,7 @@
 
 					<?php 
 
-					if($this->uri->segment(3) == 'archive') {
+					if(strpos($this->uri->segment(3), 'archive') !== false) {
 
 						$year_arr = array();
 						foreach ($archive_info as $key => $value) {						

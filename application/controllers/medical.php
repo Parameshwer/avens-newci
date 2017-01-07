@@ -20,7 +20,7 @@ class Medical extends CI_Controller {
     	}*/ else if((strpos($this->uri->segment(3), 'home') !== false) || (strpos($this->uri->segment(3), 'aims-scope') !== false) || (strpos($this->uri->segment(3), 'editorial-board') !== false) || (strpos($this->uri->segment(3), 'manuscript-work-flow') !== false) || (strpos($this->uri->segment(3), 'current-issue') !== false) || (strpos($this->uri->segment(3), 'articles-in-press') !== false) || (strpos($this->uri->segment(3), 'archive') !== false) || (strpos($this->uri->segment(3), 'instructions-to-author') !== false)) {    		
     		$data['post_info'] = $this->App_model->get_journal_post($this->uri->segment(1),$this->uri->segment(2),$this->uri->segment(3));
     		$data['links_info'] = $this->App_model->get_sidebar_slugs($this->uri->segment(1),$this->uri->segment(2),$this->uri->segment(3));
-
+    		//print_r($data['links_info']);exit();
 			$this->load->view('templates/header', $data);
 	        $this->load->view('pages/post_info.php', $data);
         	$this->load->view('templates/footer', $data);

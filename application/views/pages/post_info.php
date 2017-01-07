@@ -65,8 +65,8 @@
 									echo '<li><a class="" href="'.base_url().''.strtolower($post_info[0]['category_name']).'/'.$post_info[0]['journal_url_slug'].'/'.$value.'/">'.$key.'</a></li>';
 								}
 							*/
-								foreach ($links_info as $key => $value) {									
-									echo '<li><a class="" href="'.base_url().''.strtolower($value['category_name']).'/'.$value['journal_slug'].'/'.$value['post_slug'].'/">'.$value['post_name'].'</a></li>';	
+								foreach ($links_info as $key => $value) {																		
+									echo '<li><a class="" href="'.base_url().''.strtolower($value['category_name']).'/'.$value['journal_url_slug'].'/'.$value['post_slug'].'/">'.$value['post_name'].'</a></li>';	
 								}
 							 ?>
 							</ul>

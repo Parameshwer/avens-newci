@@ -89,7 +89,7 @@ class Users_model extends CI_Model {
 		//$query = $this->db->query('SELECT * FROM wp_journal_posts WHERE deleted="1" ORDER BY updated_date DESC');	
 		//$query = $this->db->query('SELECT * FROM wp_journal_posts WHERE deleted="1"');	
 
-		$query = $this->db->query('SELECT * FROM wp_journal_posts jp INNER JOIN wp_journals j on jp.journal_id = j.id INNER JOIN wp_journal_main_categories mc on mc.category_id = j.main_category_id WHERE jp.deleted="1"');
+		$query = $this->db->query('SELECT jp.id, jp.post_name, j.journal_name, mc.category_name,jp.created_date, jp.updated_date FROM wp_journal_posts jp INNER JOIN wp_journals j on jp.journal_id = j.id INNER JOIN wp_journal_main_categories mc on mc.category_id = j.main_category_id WHERE jp.deleted="1"');
 		//print_r($query);				
 		return $query->result_array();
 	}
