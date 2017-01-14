@@ -48,7 +48,7 @@ class App_model extends CI_Model {
 			$archive_type = '2';						
 		} else if((strpos($post_name, 'archive') !== false)) {			
 			$archive_type = '3';						
-		}else if((strpos($post_name, 'special-issues') !== false)) {			
+		}else if((strpos($post_name, 'special-issues') !== false) ||  (strpos($post_name, 'special-issue') !== false)) {			
 			$archive_type = '4';						
 		}
 
@@ -63,7 +63,7 @@ class App_model extends CI_Model {
 			$archive_type = '2';						
 		} else if((strpos($post_name, 'archive') !== false)) {			
 			$archive_type = '3';						
-		}else if((strpos($post_name, 'special-issues') !== false)) {			
+		}else if((strpos($post_name, 'special-issues') !== false) || (strpos($post_name, 'special-issue') !== false)) {			
 			$archive_type = '4';						
 		}
 		if($archive_type == '3') {
