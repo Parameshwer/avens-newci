@@ -47,12 +47,35 @@
 <body class="blog single-author sidebar">
 <div id="page" class="hfeed site">
 	<div class="container">
-		<div class="row">
+		<div class="row" style="margin:10px 0">
 			<div class="col-sm-4" id="logo-box">
 				<a href=""><img src="<?php echo base_url() ?>public//images/logo.png" alt="Avens Publishing Group" class="img-responsive"></a>
 			</div>
 			<div class="col-sm-8 text-right hidden-xs">
-				</div>
+			<?php 
+				if($this->uri->segment(2) =='') {
+					$img_name = '1and2.gif';
+				} else if($this->uri->segment(2) =='about_us') {
+					$img_name = '3and4.gif';
+				} else if($this->uri->segment(2) =='journals' || $this->uri->segment(1) =='medical' || $this->uri->segment(1) =='biotechnology' || $this->uri->segment(1) =='biology' || $this->uri->segment(1) =='pharmaceutical') {					
+					$img_name = '5and6.gif';
+				} else if($this->uri->segment(2) =='submit_manuscript') {
+					$img_name = '7and8.gif';
+				} else if($this->uri->segment(2) =='processing_fee') {
+					$img_name = '9and10.gif';
+				} else if($this->uri->segment(2) =='collaborations') {
+					$img_name = '1and2.gif';
+				} else if($this->uri->segment(2) =='membership') {
+					$img_name = '3and4.gif';
+				} else if($this->uri->segment(2) =='policies') {
+					$img_name = '5and6.gif';
+				} else if($this->uri->segment(2) =='contact') {
+					$img_name = '7and8.gif';
+				}	
+				echo '<img src="'.base_url().'public/images/animatedbanners/'.$img_name.'" alt="Avens Publishing Group" />';
+
+			 ?>			
+			</div>
 		</div>
 	</div>
 </div>

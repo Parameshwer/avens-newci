@@ -1,0 +1,27 @@
+<div id="main-wrapper">
+	<div ng-include="'admin1/angular_pages/navbar.html'"></div>
+	<div class="main-wrap">
+		<div ng-include="'admin1/angular_pages/sidebar1.html'"></div>
+		<div class="main-content">
+			<h1 class="page-header">Latest Articles</h1>
+			<div class="create-btn"><a href="#/EditLatestArticle/0" class="btn btn-primary">Create Latest Article</a></div>
+			<div ng-controller="SubmitManuscriptController">
+			<div ng-if="SubmitManuscript">
+				<table class="table table-striped">
+				<tbody>				
+				<tr><th>First Name</th><th>Email</th><th>Journal</th><th>Article</th><th>Author Name</th><th>Uploaded File</th><th></th><th></th></tr></tbody>
+				<tr ng-repeat="(key,val) in SubmitManuscript">				
+				{{val}}
+				<td>{{val.firstname}}</td><td>{{val.email}}</td><td>{{val.journal}}</td><td>{{val.cauthor}}</td>
+				<td>{{val.uploadfile}}</td>
+				<td>{{val.created_date}}</td>
+				<td><a href="#/EditLatestArticle/{{val.id}}">Edit</a></td>
+				<td><a href="">Delete</a></td>
+				</tr>
+				</table>
+				</div>
+				<div ng-show="SubmitManuscript.length == '0'">There are no Latest Articles found.</div>
+			</div>
+		</div>
+	</div>
+</div>

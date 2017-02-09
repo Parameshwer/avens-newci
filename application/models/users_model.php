@@ -85,6 +85,10 @@ class Users_model extends CI_Model {
 		$query = $this->db->query('SELECT wp_latest_articles.id,wp_latest_articles.article_image,wp_latest_articles.article_name,wp_latest_articles.created_date,wp_latest_articles.author_name,wp_latest_articles.pdf_link,wp_journals.journal_name FROM wp_latest_articles INNER JOIN wp_journals ON wp_journals.id = wp_latest_articles.article_category WHERE wp_latest_articles.deleted = "1"');				
 		return $query->result_array();	
 	}
+	function get_SubmitManuscript() {
+		$query = $this->db->query('SELECT * FROM wp_manuscript');				
+		return $query->result_array();	
+	}
 	function get_journals_posts() {
 		//$query = $this->db->query('SELECT * FROM wp_journal_posts WHERE deleted="1" ORDER BY updated_date DESC');	
 		//$query = $this->db->query('SELECT * FROM wp_journal_posts WHERE deleted="1"');	
@@ -135,9 +139,9 @@ class Users_model extends CI_Model {
 	function insert_journal($data) {
 				
 		if($data->id) {
-		$query = $this->db->query("UPDATE wp_journals SET journal_url_slug='".$data->journal_url_slug."',journal_name='".$data->journal_name."', updated_date ='".date('Y-m-d')."',issn_number ='".$data->issn_number."',journal_meta_keywords ='".$data->journal_meta_keywords."',journal_ic_value ='".$data->journal_ic_value."',main_category_id ='".$data->main_category_id."',journal_description ='".$data->journal_description."' WHERE id=$data->id");
+		$query = $this->db->query("UPDATE wp_journals SET journal_url_slug='".$data->journal_url_slug."',journal_name='".$data->journal_name."', updated_date ='".date('Y-m-d')."',issn_number ='".$data->issn_number."',journal_meta_keywords ='".$data->journal_meta_keywords."',journal_ic_value ='".$data->journal_ic_value."',main_category_id ='".$data->main_category_id."',journal_description ='".$data->journal_description."', banner_image ='".$data->banner_image."',sidebar_image ='".$data->sidebar_image."' WHERE id=$data->id");
 		} else {
-		   $query = $this->db->query("INSERT INTO wp_journals (journal_url_slug,journal_name, created_date, updated_date, issn_number,journal_meta_keywords,journal_ic_value,main_category_id,journal_description,deleted) VALUES ('".$data->journal_url_slug."','".$data->journal_name."','".date('Y-m-d')."','".date('Y-m-d')."','".$data->issn_number."','".$data->journal_meta_keywords."','".$data->journal_ic_value."','".$data->main_category_id."','".$data->journal_description."','1')");
+		   $query = $this->db->query("INSERT INTO wp_journals (journal_url_slug,journal_name, created_date, updated_date, issn_number,journal_meta_keywords,journal_ic_value,main_category_id,journal_description,deleted, banner_image, sidebar_image) VALUES ('".$data->journal_url_slug."','".$data->journal_name."','".date('Y-m-d')."','".date('Y-m-d')."','".$data->issn_number."','".$data->journal_meta_keywords."','".$data->journal_ic_value."','".$data->main_category_id."','".$data->journal_description."','1',banner_image ='".$data->banner_image."',sidebar_image ='".$data->sidebar_image."')");
 		}
 		return $query;
 		//return $query->result_array();
@@ -146,13 +150,12 @@ class Users_model extends CI_Model {
 		$query = $this->db->query("SELECT wp_journals.journal_name,wp_journals.id, wp_journal_main_categories.category_id, wp_journal_main_categories.category_name FROM wp_journals INNER JOIN wp_journal_main_categories ON wp_journals.main_category_id=wp_journal_main_categories.category_id GROUP BY wp_journals.journal_name");
 		return $query->result_array();
 	}
-	function update_journal_page($data) {
-		
+	function update_journal_page($data) {			
 		if(isset($data->id) && !empty($data->id)) {
 			
 		$query = $this->db->query("UPDATE wp_journal_posts SET post_name='".$data->post_name."', updated_date ='".date('Y-m-d')."',category_id ='".$data->category_id."',post_slug ='".$data->post_slug."',journal_slug ='".$data->journal_slug."',post_content ='".$data->post_content."',journal_id ='".$data->journal_id."' WHERE id=$data->id");
 		} else {
-		   $query = $this->db->query("INSERT INTO wp_journal_posts (post_name, created_date, updated_date, category_id,post_slug,journal_slug,post_content,journal_id,deleted) VALUES ('".$data->post_name."','".date('Y-m-d')."','".date('Y-m-d')."','".$data->category_id."','".$data->journal_post_slug."','".$data->journal_slug."','".$data->post_content."','$data->journal_id','1')");
+		   $query = $this->db->query("INSERT INTO wp_journal_posts (post_name, created_date, updated_date, category_id,post_slug,post_content,journal_id,deleted) VALUES ('".$data->post_name."','".date('Y-m-d')."','".date('Y-m-d')."','".$data->category_id."','".$data->post_slug."','".$data->post_content."','$data->journal_id','1')");
 		}
 		return $query;
 		//return $query->result_array();

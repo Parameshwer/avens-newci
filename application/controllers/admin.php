@@ -170,6 +170,15 @@ class Admin extends CI_Controller {
 		//echo $data;
 
 	}
+	function get_SubmitManuscript() {
+		$this->load->model('Users_model');	
+		$data = $this->Users_model->get_SubmitManuscript();
+		if(is_array($data)){
+			echo json_encode($data);
+		}
+		//echo $data;
+
+	}
 
 	function get_journal() {
 		$this->load->model('Users_model');
@@ -261,5 +270,46 @@ class Admin extends CI_Controller {
 	{
 		$this->session->sess_destroy();
 		redirect('admin');
+	}
+	function save_uploaded_file () {				
+		$config['upload_path']          = './public/images/journal-banners';
+        $config['allowed_types']        = 'jpg|png|doc|docx';
+        $config['max_size']             = 1000;
+        $config['max_width']            = 1024;
+        $config['max_height']           = 768;
+ 	
+        $this->load->library('upload', $config); 
+		foreach ($image_array as $key => $value) {        
+	    	if(isset($_FILES['journal_banner_img'])) {
+		       $image_array = $_FILES;
+		       $image_type = 'banner_image';
+	        } else if(isset($_FILES['journal_sidebar_img'])) {
+	        	$image_array = $_FILES;
+	        	$image_type = 'sidebar_image';
+	        }
+    	}
+
+        foreach ($image_array as $key => $value) {        	
+        	if($value['name']) {        		
+	        	if ( ! $this->upload->do_upload($key))
+		        {
+	                $error = array('error' => $this->upload->display_errors());
+	                print_r($error['error']);
+
+		        }
+		        else
+		        {		        	
+		            $data[] = array('upload_data' => $this->upload->data());		            
+
+		        }
+	        }	
+        }
+        if($image_type == 'banner_image') {
+        	$data['file_type'] = 'journal_banner_img';	        
+    	} else {
+    		$data['file_type'] = 'journal_sidebar_img';	        
+    	}
+        $data['uploaded_path'] = base_url()."/public/images/journal-banners/".$data[0]['upload_data']['file_name'];
+		echo json_encode($data, true);
 	}
 }

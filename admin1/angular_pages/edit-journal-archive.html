@@ -43,7 +43,7 @@ tinymce.init({
 							</div>
 						</div>
 						<div class="form-group">
-							<label for="journal_name" class="col-sm-3 control-label">Journal Namedsdsd</label>
+							<label for="journal_name" class="col-sm-3 control-label">Journal Name</label>
 							<div class="col-sm-9">
 							<!-- <select class="form-control" ng-model="myColor" ng-options="journal_info.journal_name group by journal_info.category_name for journal_info in journal_info"></select>	 -->						
 								<!-- <select class="form-control" name="category_id">
@@ -54,7 +54,7 @@ tinymce.init({
 									<option value="40">Pharmaceutical</option>
 								</select> -->
 
-								<select class="form-control" ng-model="archive_info.journal_id" ng-change="convertToJournalSlug(archive_info.journal_id)" name="journal_id">								
+								<select class="form-control" ng-model="archive_info.journal_id" name="journal_id">								
 								  <optgroup label="Medical">
 								    <option ng-repeat="j in journal_info" ng-selected="archive_info.journal_id==j.id?'selected':''" ng-if="j.category_name == 'Medical'" value="{{j.id}}">{{j.journal_name}}</option>    
 								  </optgroup>
@@ -71,13 +71,13 @@ tinymce.init({
 								<span style="color:red" ng-show="journal_post_form.journal_id.$dirty"><span ng-show="journal_post_form.journal_id.$error.required">This is required.</span></span>
 							</div>
 						</div>
-						<div class="form-group">
+						<!-- <div class="form-group">
 							<label for="issn_number" class="col-sm-3 control-label">Jounral Slug</label>
 							<div class="col-sm-9">
 								<input type="text" class="form-control" id="journal_slug" name="journal_slug"  ng-model="archive_info.journal_slug">
 
 							</div>
-						</div>
+						</div> -->
 						<div class="form-group" required="">
 							<label for="banner_image" class="col-sm-3 control-label">Archive Content</label>
 							<div class="col-sm-9">								

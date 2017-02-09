@@ -38,7 +38,7 @@ class App_model extends CI_Model {
 	}
 	function get_journal_post ($cat_name,$journal_name,$post_name) {
 		
-		$query = $this->db->query('SELECT jp.post_name,jp.post_slug,jp.post_content,mc.category_name,j.journal_url_slug, j.journal_name FROM wp_journal_posts jp INNER JOIN wp_journals j on jp.journal_id = j.id INNER JOIN wp_journal_main_categories mc on mc.category_id = j.main_category_id WHERE jp.post_slug = "'.$post_name.'" AND mc.category_name = "'.$cat_name.'" AND j.journal_url_slug = "'.$journal_name.'"');
+		$query = $this->db->query('SELECT jp.post_name,jp.post_slug,jp.post_content,mc.category_name,j.journal_url_slug, j.journal_name,j.banner_image,j.sidebar_image,j.issn_number FROM wp_journal_posts jp INNER JOIN wp_journals j on jp.journal_id = j.id INNER JOIN wp_journal_main_categories mc on mc.category_id = j.main_category_id WHERE jp.post_slug = "'.$post_name.'" AND mc.category_name = "'.$cat_name.'" AND j.journal_url_slug = "'.$journal_name.'"');
 		return $query->result_array();
 	}
 	function get_archive_info($cat_name,$journal_name,$post_name) {		

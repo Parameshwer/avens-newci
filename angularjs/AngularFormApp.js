@@ -1,4 +1,4 @@
-var app = angular.module('myApp', ['ngRoute','ui.tinymce','textAngular']);
+var app = angular.module('myApp', ['ngRoute','ui.tinymce','textAngular','ngFileUpload']);
 var base_url = "http://localhost/avens-angular/";
 //console.log(app);
 app.factory("services", ['$http', function($http) {
@@ -37,16 +37,14 @@ app.factory("services", ['$http', function($http) {
             headers: {'Content-Type': 'application/json'},
             data : JSON.stringify({"category_id":id,"category_name":main_category.category_name})          
         })
-        .then(function(response) {
-            console.log(response);
+        .then(function(response) {            
             if(response.status) {
                 window.location = base_url+'admin#/MainCategories'                
             }
         });
     };
     obj.updateJournal = function (id,main_journal) {        
-        //return $http.get(base_url+"admin/insert_main_category?name="+main_category.category_name+"&id="+main_category.category_id+"");
-        console.log(main_journal);
+        //return $http.get(base_url+"admin/insert_main_category?name="+main_category.category_name+"&id="+main_category.category_id+"");        
         /*if(!id) {
             main_journal.main_category_id = 0;
         }*/
@@ -57,8 +55,7 @@ app.factory("services", ['$http', function($http) {
             headers: {'Content-Type': 'application/json'},
             data : JSON.stringify(main_journal)          
         })
-        .then(function(response) {
-            console.log(response);
+        .then(function(response) {            
             if(response.status) {
                 window.location = base_url+'admin#/Journals/medical'                
             }
@@ -68,8 +65,7 @@ app.factory("services", ['$http', function($http) {
         //return $http.get(base_url+"admin/insert_main_category?name="+main_category.category_name+"&id="+main_category.category_id+"");
         /*if(!id) {
             journal_page.main_category_id = 0;
-        }*/
-        console.log(journal_page);
+        }*/        
        /* journal_page.journal_post_slug = journal_page.post_name.toLowerCase().replace(/[^\w ]+/g,'').replace(/ +/g,'-');        
         $.each(scope.journal_info,function(i,v){
             if(v.id == journal_page.journal_id) {                
@@ -77,15 +73,14 @@ app.factory("services", ['$http', function($http) {
                 journal_page.journal_slug = v.journal_name.toLowerCase().replace(/[^\w ]+/g,'').replace(/ +/g,'-');                            
             }
         });*/
-        journal_page.journal_post_slug = journal_page.journal_post_slug;        
+        //journal_page.journal_post_slug = journal_page.journal_post_slug;        
         $http({
             url: base_url+"admin/update_journal_page",
             method: "POST",
             headers: {'Content-Type': 'application/json'},
             data : JSON.stringify(journal_page)          
         })
-        .then(function(response) {
-            console.log(response);
+        .then(function(response) {            
             if(response.status) {
                 window.location = base_url+'admin#/JournalPosts'                
             }
@@ -95,11 +90,9 @@ app.factory("services", ['$http', function($http) {
         //return $http.get(base_url+"admin/insert_main_category?name="+main_category.category_name+"&id="+main_category.category_id+"");
         /*if(!id) {
             archive_info.main_category_id = 0;
-        }*/
-        console.log(archive_info);        
+        }*/        
         $.each(scope.journal_info,function(i,v){
-            if(v.id == archive_info.journal_id) {                
-                console.log(v);
+            if(v.id == archive_info.journal_id) {                           
                 archive_info.journal_slug = v.journal_name.toLowerCase().replace(/[^\w ]+/g,'').replace(/ +/g,'-');                            
             }
         });
@@ -109,28 +102,48 @@ app.factory("services", ['$http', function($http) {
             headers: {'Content-Type': 'application/json'},
             data : JSON.stringify(archive_info)          
         })
-        .then(function(response) {
-            console.log(response);
+        .then(function(response) {            
             if(response.status) {
                 window.location = base_url+'admin#/archives'                
             }
         });
     };
-    obj.updateLatestArticle = function (id,article_info,scope) {        
-        console.log(article_info);
+    obj.updateLatestArticle = function (id,article_info,scope) {                
         $http({
             url: base_url+"admin/update_latest_article",
             method: "POST",
             headers: {'Content-Type': 'application/json'},
             data : JSON.stringify(article_info)          
         })
-        .then(function(response) {
-            console.log(response);
+        .then(function(response) {            
             if(response.status) {
                 window.location = base_url+'admin#/LatestArticles'                
             }
         });
-    };    
+    };
+    obj.saveUploadedImage = function(id, file) {
+        var data = new FormData(jQuery('#journal_form')[0]);             
+        jQuery.ajax({
+            type:"POST",
+            url: base_url+'admin/save_uploaded_file',
+            data: data,
+            mimeType: "multipart/form-data",
+            contentType: false,
+            cache: false,
+            processData: false,
+            dataType:"json",
+            success:function(temp) {
+            console.log(temp);  
+            if(temp.file_type == 'journal_banner_img') {
+               $('.uploaded-banner-img').remove();
+               $('#journal_banner_img').closest('.banner-img-box').append('<div class="uploaded-banner-img"><input type="hidden" name="uploaded_file" value="'+temp[0].upload_data.file_name+'"><p><img width="200px" height="200px" src="'+temp.uploaded_path+'" alt="'+temp[0].upload_data.file_name+'" /><span class="remove-file">Remove File</span></p></div>');
+            } else {
+               $('.uploaded-sidebar-img').remove();
+               $('#journal_sidebar_img').closest('.sidebar-img-box').append('<div class="uploaded-banner-img"><input type="hidden" name="uploaded_file" value="'+temp[0].upload_data.file_name+'"><p><img width="200px" height="200px" src="'+temp.uploaded_path+'" alt="'+temp[1].upload_data.file_name+'" /><span class="remove-file">Remove File</span></p></div>');
+            }
+            }
+        });  
+    }
 
     return obj;   
 }]);
@@ -153,7 +166,7 @@ app.controller('EditMaincategoryController', function($scope,$rootScope,$routePa
         }
     }
 });
-app.controller('EditJournalController', function($scope,$rootScope,$routeParams,$location,services,main_journal) { 
+app.controller('EditJournalController', function($scope,Upload,$timeout,$rootScope,$routeParams,$location,services,main_journal) { 
     var journal_id = ($routeParams.journal_id) ? parseInt($routeParams.journal_id) : 0;
     $rootScope.title = (journal_id > 0) ? 'Edit Journal' : 'Add Journal';
     $scope.buttonText = (journal_id > 0) ? 'Update Journal' : 'Add New Journal';    
@@ -175,6 +188,29 @@ app.controller('EditJournalController', function($scope,$rootScope,$routeParams,
             services.updateJournal(journal_id, main_journal);
         }
     }
+    $scope.uploadImage = function(file) {
+        if(file) {
+            services.saveUploadedImage(journal_id, file);
+        }
+    }
+    $scope.uploadPic = function(file) {
+        file.upload = Upload.upload({
+          url: base_url+'admin/save_uploaded_file',
+          data: {file: file},
+        });
+
+        file.upload.then(function (response) {
+          $timeout(function () {
+            file.result = response.data;
+          });
+        }, function (response) {
+          if (response.status > 0)
+            $scope.errorMsg = response.status + ': ' + response.data;
+        }, function (evt) {
+          // Math.min is to fix IE which reports 200% sometimes
+          file.progress = Math.min(100, parseInt(100.0 * evt.loaded / evt.total));
+        });
+    }
 });
 app.controller('EditJournalPageController', function($scope,$rootScope,$routeParams,$location,services,main_page) { 
 
@@ -193,8 +229,8 @@ app.controller('EditJournalPageController', function($scope,$rootScope,$routePar
     $scope.isClean = function() {
        return angular.equals(original, $scope.main_page);
     }
-    $scope.saveJournalPage = function(main_page) {        
-        console.log(main_page);        
+    $scope.saveJournalPage = function(main_page) {
+        console.log(main_page);                
         if (page_id <= 0) {            
             services.updateJournalPage(0,main_page,$scope);
         }
@@ -242,8 +278,7 @@ app.controller('EditLatestArticleController', function($scope,$rootScope,$routeP
     $scope.latest_article = latest_articles.data.article_info[0];
     $scope.journal_info = latest_articles.data.journal_info;
 
-    $scope.saveLatestArticle = function(latest_article) {        
-        console.log(latest_article);        
+    $scope.saveLatestArticle = function(latest_article) {                
         if (article_id <= 0) {            
             services.updateLatestArticle(0,latest_article,$scope);
         }
@@ -295,8 +330,7 @@ app.controller('EditJournalArchiveController', function($scope,$rootScope,$route
         });        
 
     };
-    $scope.saveJournalArchive = function(archive_info) {        
-        console.log(archive_info);        
+    $scope.saveJournalArchive = function(archive_info) {                
         if (archive_id <= 0) {            
             services.updateJournalArchive(0,archive_info,$scope);
         }
@@ -307,8 +341,7 @@ app.controller('EditJournalArchiveController', function($scope,$rootScope,$route
 });
 
 app.controller('JournalsController', function($scope,services) {    
-    services.get_journals().then(function(data){
-    console.log(data);      
+    services.get_journals().then(function(data){    
         $scope.main_journals = data.data;
     });
 });
@@ -348,6 +381,14 @@ app.config(['$routeProvider',function ($routeProvider) {
         title: 'Latest Articles',
         templateUrl:base_url+'admin1/angular_pages/LatestArticles.html',
         controller: "LatestArticlesController",
+    }).when("/Testimonials", {        
+        title: 'Testimonials',
+        templateUrl:base_url+'admin1/angular_pages/Testimonials.html',
+        controller: "TestimonialsController",
+    }).when("/SubmitManuscript", {        
+        title: 'Submit Manuscript',
+        templateUrl:base_url+'admin1/angular_pages/SubmitManuscript.html',
+        controller: "SubmitManuscriptController",
     }).when("/AllPosts", {        
         title: 'AllPosts',
         templateUrl:base_url+'admin1/angular_pages/Allposts.html',
@@ -388,8 +429,7 @@ app.config(['$routeProvider',function ($routeProvider) {
         controller: "EditJournalArchiveController",
         resolve: {
           archive: function(services, $route){            
-            var archive_id = $route.current.params.ArchiveId;
-            console.log(archive_id);
+            var archive_id = $route.current.params.ArchiveId;            
             return services.get_journalArchive(archive_id);
           }
         }    
@@ -456,8 +496,7 @@ app.controller('JournalPostsController', function($scope,$rootScope,$http){
         url: base_url+'admin/get_journals_posts',
         method: "POST"        
     })
-    .then(function(response) {
-        console.log(response);
+    .then(function(response) {        
         $scope.journal_posts = response.data;
         return $scope;
     });
@@ -467,8 +506,7 @@ app.controller('JournalArchiveController', function($scope,$rootScope,$http){
         url: base_url+'admin/get_journals_archives',
         method: "POST"        
     })
-    .then(function(response) {
-        console.log(response);
+    .then(function(response) {        
         $scope.journal_posts_archives = response.data;
         return $scope;
     });
@@ -490,9 +528,30 @@ app.controller('LatestArticlesController', function($scope,$rootScope,$http){
         url: base_url+'admin/get_LatestArticles',
         method: "POST"        
     })
-    .then(function(response) {
-        console.log(response);
+    .then(function(response) {        
         $scope.latest_articles = response.data;
         return $scope;
     });
 });
+app.controller('TestimonialsController', function($scope,$rootScope,$http){        
+    $http({
+        url: base_url+'admin/get_Testimonials',
+        method: "POST"        
+    })
+    .then(function(response) {        
+        $scope.testimonials = response.data;
+        return $scope;
+    });
+});
+
+app.controller('SubmitManuscriptController', function($scope,$rootScope,$http){        
+    $http({
+        url: base_url+'admin/get_SubmitManuscript',
+        method: "POST"        
+    })
+    .then(function(response) {        
+        $scope.SubmitManuscript = response.data;
+        return $scope;
+    });
+});
+

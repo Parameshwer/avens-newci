@@ -115,3 +115,12 @@ body {
 	top: 7px;
 }
 .create-btn.text {top: 16px;}
+
+.uploaded-banner-img {
+	margin:10px 0;	
+}
+.uploaded-banner-img .remove-file {
+	display: block;
+	margin-top: 15px;
+	font-size: 15px;
+}

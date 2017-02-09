@@ -63,3 +63,5 @@ $route['biology/(:any)/(:any)'] = 'medical/index/$1/$2';
 $route['pharmaceutical/(:any)/(:any)'] = 'medical/index/$1/$2';
 //$route['admin'] = 'admin';
 $route['default_controller'] = 'page';
+
+$route['upload'] = 'Upload';

@@ -18,10 +18,13 @@
 			.journal-info-box h1.entry-title{  position: absolute;top: 0;font-size: 2em;padding: 20px;text-shadow: 0 0 6px #222;}
 			.journal-info-box .issn-number{font-size: 0.5em;overflow: hidden;top: 10px;position: relative;}
 			.affix{position: fixed;top: 0;}
+			#journal-sidebar-wrapper {
+			    margin: -40px 0 0;
+			}
 		</style>
 
 		<style type="text/css">
-			.journal-name{background: url("http://www.avensonline.org/wp-content/uploads/2015/05/glycemic_banner.jpg") no-repeat scroll center top / 1600px auto;text-align: center;padding: 90px;position:relative;
+			.journal-name{background: url("<?php echo base_url(); ?>public/images/journal-banners/<?php echo $post_info[0]['banner_image'] ?>") no-repeat scroll center top / 1600px auto;text-align: center;padding: 90px;position:relative;
 			background-repeat:no-repeat;
 			-webkit-background-size:cover;
 			-moz-background-size:cover;
@@ -54,8 +57,11 @@
 			<div>
 			
 				<div id="journal-sidebar-wrapper">
-
-
+				<?php 
+					if($post_info[0]['issn_number']) {
+						echo "<div class='issn-num'><p>".$post_info[0]['issn_number']."</p></div>";
+					}
+				?>
 					<div id="journal-sidebar">
 						<div id="nav-post">
 							<ul class="post-nav">
@@ -76,8 +82,8 @@
 				<div class="journal-info-box">
 
 
-					<img src="http://www.avensonline.org/wp-content/uploads/2015/05/glycemic_sidenav.jpg" class="img-responsive">
-					<h1 class="entry-title"><?php echo $post_info[0]['journal_name']; ?></h1>
+					<img src="<?php echo base_url(); ?>public/images/journal-sidebar-images/<?php echo $post_info[0]['sidebar_image'] ?>" class="img-responsive">
+					<!-- <h1 class="entry-title"><?php //echo $post_info[0]['journal_name']; ?></h1> -->
 				</div>
 			</div>
 		</div>		

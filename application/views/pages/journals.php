@@ -81,6 +81,7 @@
             if($value['issn_number']) {
               echo '<span class="pull-right"><p></p></span>';
             }
+            echo '<span class="pull-right"><p>'.$value['issn_number'].'</p></span>';
             echo '</li>';
             echo '</ul>';
           }
@@ -95,6 +96,7 @@
             if($value['issn_number']) {
               echo '<span class="pull-right"><p></p></span>';
             }
+            echo '<span class="pull-right"><p>'.$value['issn_number'].'</p></span>';
             echo '</li>';
             echo '</ul>';
           }
@@ -109,6 +111,7 @@
             if($value['issn_number']) {
               echo '<span class="pull-right"><p></p></span>';
             }
+            echo '<span class="pull-right"><p>'.$value['issn_number'].'</p></span>';
             echo '</li>';
             echo '</ul>';
           } 
@@ -123,6 +126,7 @@
             if($value['issn_number']) {
               echo '<span class="pull-right"><p></p></span>';
             }
+            echo '<span class="pull-right"><p>'.$value['issn_number'].'</p></span>';
             echo '</li>';
             echo '</ul>';
           }

@@ -571,3 +571,42 @@ color: #fff;
   margin-left: 2px;
   padding-bottom: 10px;
 }
+
+.testmonial-section-box {border: 1px solid #a7a7a7;padding: 10px;margin: 20px auto;padding: 25px;width: 1000px;background-color: #f8f8f8}
+.testmonial-section-box .testi-user {float: left;}
+.testmonial-section-box .testimonial-info {margin-left: 100px;text-align: left;font-size: 15px;}
+/*.testmonial-section-box .carousel-caption {
+  color: #000;
+  text-shadow: none;
+  right: 0;
+  left: 0;
+  top: 0;
+}
+.testmonial-section-box .carousel-control {
+  background: none;
+}
+ .testmonial-section-box .carousel-inner {overflow-y: auto;overflow-x:hidden;height: 200px;}
+*/
+
+.testmonial-section-box .carousel-control {
+  background: none;
+  width: 10px;
+  display: inline-block;
+  height: 23px;
+  vertical-align: top;
+  float: left;
+  position: absolute;
+  top: 80px;
+}
+.testmonial-section-box .carousel-control.left {left: 0;}
+.testmonial-section-box .carousel-control.right {left: 70px}
+.testmonial-section-box .carousel-inner .item img {margin: 0;padding: 0;}
+.testmonial-section-box .testi-user-name {font-weight: bold;font-size: 18px;}
+.testmonial-section-box .testi-user-info span {border-right: 1px solid #cccccc;margin-right: 15px;padding-right: 15px;}
+.testmonial-section-box .testi-user-info span:last-child {border-right: 0 none;}
+.testmonial-section-box .view-all-text {
+  position: absolute;
+  top: 87px;
+  font-style: italic;
+  left: 15px;
+}

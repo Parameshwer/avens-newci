@@ -142,7 +142,7 @@
 			}
 		});
 
-		jQuery("#manuscript_form").validate({
+		/*jQuery("#manuscript_form").validate({
 			rules: {
 				firstname: "required",
 				email: {
@@ -162,10 +162,33 @@
 			},
 			success: function(){
 				jQuery(this).click(false);
-				jQuery(this).attr("readonly", true);
-			}
-		});		
+				jQuery(this).attr("readonly", true);				
+			},
+			onsubmit: function() {
 
+			}
+		});		*/
+		/*jQuery("#manuscript_form").find('.btn-success').click(function(e){
+			e.preventDefault();
+					
+		    //var data = new FormData($('#manuscript_form')[0]);
+			jQuery.ajax({
+			   type:"POST",
+			   url:"http://localhost/avens-angular/page/save_submit_manuscript/",
+			   data:jQuery('#manuscript_form').serialize(),
+			   mimeType: "multipart/form-data",
+			   contentType: false,
+			   cache: false,
+			   processData: false,
+			   success:function(data)
+				{
+					console.log(data);
+				}
+			});
+
+		});*/
+		
+ 
 		jQuery('.sort_journals').on('click',function(){
 			jQuery('.sort_journals').attr('checked',false);
 			jQuery(this).attr('checked',true);
@@ -198,7 +221,7 @@
 			jQuery(this).next(".post-archive-box-inner").slideToggle();
 		});
 
-		jQuery("#latest-article-results").load("<?php echo base_url(); ?>page/get_latest_journals/");  //initial page number to load
+		jQuery("#latest-article-results").load("<?php echo base_url(); ?>page/get_latest_journals/"); 
 		jQuery(".pagination").bootpag({
 			total: 16,
 			page: 1,
@@ -253,8 +276,54 @@
 			e.stopPropagation();
 			jQuery('.mobile-post-nav').hide(500);
 		});
+		jQuery('span.add-file').on('click',function(){
+			jQuery('.upload-box').append('<div class="upload-inner"><input type="file" name="uploadfile[]" value="Choose Files" size="25" class="input-file"><span class="remove-file">Remove File</span></div>');
+			checking_add_filebtn();
+		});
+		jQuery('.upload-box').on('click','span.remove-file',function(){
 
-});
+			checking_add_filebtn();
+			jQuery(this).closest('.upload-inner').remove();
+		});
+
+		function checking_add_filebtn(){
+			if (jQuery('.upload-inner .input-file').length >= 2){
+				jQuery('.add-file').hide();
+			}
+			else{
+				jQuery('.add-file').show();
+			}
+
+		}		
+		
+		jQuery("input[type=file]").on('change',function(){
+	      var file_id =jQuery(this).attr('id');
+	      var rel_id = jQuery(this).attr('rel');                       ;
+	      var data = new FormData(jQuery('#manuscript_form')[0]);     
+	      jQuery.ajax({
+	         type:"POST",
+	         url:"<?php echo base_url('page/upload_files');?>",
+	         data:data,
+	         mimeType: "multipart/form-data",
+	          contentType: false,
+	          cache: false,
+	          processData: false,
+	          dataType:"json",
+	         success:function(temp)
+	        {         
+	          jQuery('.temp_file_upload').remove();
+	          jQuery.each(temp, function(i,v){
+	            console.log(v.upload_data.file_name);
+	            //console.log(v[i].file_name);
+	            jQuery('#manuscript_form').find('.upload-box').append('<input class="temp_file_upload" id="'+file_id+'_uploaded" type="hidden" name="uploaded_img[]" value="'+v.upload_data.file_name+'">');
+	          })
+	         }
+	      });     
+	    });
+	   	jQuery('.carousel').bind('slid', function (e) {
+		    console.log("slid event!");
+		});
+	});
 
 </script>
 

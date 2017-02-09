@@ -2,7 +2,10 @@
 defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Page extends CI_Controller {
-
+	public function __construct() { 
+		parent::__construct(); 
+		$this->load->helper(array('form', 'url')); 
+  	}
 	/**
 	 * Index Page for this controller.
 	 *
@@ -197,5 +200,71 @@ class Page extends CI_Controller {
 		$data['latest_articles'] = $this->App_model->get_latest_journals($position);
 
 		echo $this->load->view('pages/ajax_latest_articles', $data,TRUE);	
-	}	
+	}
+	public function save_submit_manuscript() {
+				
+		/*$attachment_file=$_FILES["uploadfile"];
+		$output_dir = "./public/images";
+		$fileName = $_FILES["uploadfile"]["name"];
+		move_uploaded_file($_FILES["uploadfile"]["tmp_name"],$output_dir.$fileName);
+		echo "File uploaded successfully"*/;
+
+		$config['upload_path']          = './public/images';
+        $config['allowed_types']        = 'jpg|png|doc|docx';
+        $config['max_size']             = 1000;
+        $config['max_width']            = 1024;
+        $config['max_height']           = 768;
+ 	print_r($_POST);
+        $this->load->library('upload', $config); 
+
+        $all_files_uploads = true;
+        foreach ($_FILES as $key => $value) {
+
+        	if ( ! $this->upload->do_upload($key))
+	        {
+                $all_files_uploads = false;
+
+	        }
+	        else
+	        {
+	            $data = array('upload_data' => $this->upload->data());
+	        }	
+        }
+        print_r($all_files_uploads);
+        if($all_files_uploads) {
+        	echo 'success';
+        }
+
+		
+	}
+	public function upload_files() {
+		$config['upload_path']          = './public/images';
+        $config['allowed_types']        = 'jpg|png|doc|docx';
+        $config['max_size']             = 1000;
+        $config['max_width']            = 1024;
+        $config['max_height']           = 768;
+ 	
+        $this->load->library('upload', $config); 
+    	
+        foreach ($_FILES as $key => $value) {        	
+        	if($value['name']) {        		
+	        	if ( ! $this->upload->do_upload($key))
+		        {
+	                $error = array('error' => $this->upload->display_errors());
+	                print_r($error['error']);
+
+		        }
+		        else
+		        {		        	
+		            $data[] = array('upload_data' => $this->upload->data());		            
+
+		        }
+	        }	
+        }               
+		echo json_encode($data, true);
+	}
+	public function save_upload_files() {
+		print_r($_POST);
+	}
+
 } 

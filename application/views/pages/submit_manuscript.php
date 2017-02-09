@@ -45,7 +45,8 @@ We will Get Back To You Soon
       <div class="row">
       <div class="col-sm-8">      
         <div class="journal-text-box">  
-          <form name="form" id="manuscript_form" enctype="multipart/form-data" method="post" novalidate="novalidate">       
+        
+        <form name="form" id="manuscript_form" action="<?php echo base_url()?>page/save_submit_manuscript" enctype="multipart/form-data"  method="post" novalidate="novalidate">          
         <div class="form-group">
           <div class="col-sm-6">
             <input name="firstname" type="text" value="" id="firstname" size="30" class="form-control" placeholder="First Name">
@@ -90,7 +91,7 @@ We will Get Back To You Soon
           <option value="Belarus">Belarus</option>
           <option value="Belgium">Belgium</option>
           <option value="Belize">Belize</option>
-          <option value="Benin">Benin</option>
+          <option value="Benin">Benin</option>p
           <option value="Bermuda">Bermuda</option>
           <option value="Bhutan">Bhutan</option>
           <option value="Bolivia">Bolivia</option>
@@ -428,17 +429,27 @@ We will Get Back To You Soon
             </div>
             <div class="form-group">
           <div class="col-sm-12">
-          <div class="upload-box">  
-            <input type="file" name="uploadfile[]" value="Choose Files" size="25" id="upload" class="input-file"> <span class="add-file">Add Another File</span>
+          <div class="upload-box">
+          <p>Allowed file types are JPG, PNG, DOC, DOCX, XLS. Max file size 25MB.</p>
+          <p><input type="file" name="userfile" value="Choose Files" size="25" class="input-file" rel="0" id="userfile"></p>            
+          <p><input type="file" name="userfile1" value="Choose Files" size="25" id="userfile1" rel="1" class="input-file"></p>
+          <p><input type="file" name="userfile2" value="Choose Files" size="25" id="userfile2" rel="2" class="input-file"></p>
+            <span class="add-file">Add Another File</span>            
+            
                       </div>
           </div>
         </div>   
         <div class="form-group">
-          <div class="col-sm-12">
-            <input type="submit" value="Submit" name="submit" id="button" class="btn btn-success">
+          <div class="col-sm-12"> 
+            <!-- <input type = "submit" value = "upload"  class="btn btn-success"/>  -->
+            <input type="button" class="post postbtn" style="border: none;outline:none;" value="Post" onclick = "return sendData()"/>
+            <!-- <input type="button" class="post postbtn" style="border: none;outline:none;" value="Post" /> -->
+
           </div>
         </div>                
       </form>
+      
+      
         </div>
         </div>
         <div class="col-sm-4">	<div id="tertiary" class="sidebar-container" role="complementary">
@@ -454,56 +465,26 @@ We will Get Back To You Soon
   </div>
 </div>
 
-
-<script type="text/javascript">
-jQuery('span.add-file').on('click',function(){
-jQuery('.upload-box').append('<div class="upload-inner"><input type="file" name="uploadfile[]" value="Choose Files" size="25" class="input-file"><span class="remove-file">Remove File</span></div>');
-checking_add_filebtn();
-});
-jQuery('.upload-box').on('click','span.remove-file',function(){
-
-   checking_add_filebtn();
-   jQuery(this).closest('.upload-inner').remove();
-});
-
-function checking_add_filebtn(){
-if (jQuery('.upload-inner .input-file').length >= 2){
-jQuery('.add-file').hide();
-}
-else{
-jQuery('.add-file').show();
-}
-
-}
-</script>
-<script type="text/javascript" src="http://www.avensonline.org/wp-content/themes/twentythirteen/jquery.validator.js"></script>
-<script type="text/javascript">
-	jQuery(document).ready(function(){
-		jQuery("#manuscript_form").validate({
-		rules: {
-			firstname: "required",
-			email: {
-				required: true,
-				email: true
-			},
-                         phoneno:{
-                                number: true,
-                                required: true,
-                        },
-		},
-		messages: {
-			first_name: "Please enter your Firstname",
-			email_id: "Please enter a valid Email Address",
-                        phoneno: "Please enter a valid Phone Number"
-
-		},
-		success: function(){
-			jQuery(this).click(false);
-		    jQuery(this).attr("readonly", true);
-		}
-	});
-	});
-</script>
-
-
 </div>
+<script type="text/javascript">
+  function sendData()
+    {
+     
+        var data = new FormData(jQuery('#manuscript_form')[0]);
+     
+     
+         jQuery.ajax({
+                   type:"POST",
+                   url:"<?php echo base_url('page/save_upload_files');?>",
+                   data:data,
+                   mimeType: "multipart/form-data",
+                    contentType: false,
+                    cache: false,
+                    processData: false,
+                   success:function(data)
+                  {
+                    console.log(data);                            
+                  }
+           });     
+    }
+</script>

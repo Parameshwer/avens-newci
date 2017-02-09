@@ -27,7 +27,7 @@
 </header>
 </div>
 <div id="primary" class="content-area">
-	<div id="featured-content" class="site-content" role="main">
+	<!-- <div id="featured-content" class="site-content" role="main">
 		<div class="container">
 			<div class="row">
 				<div class="col-sm-12 text-center"><div class="featured-heading">Featured Journals</div></div>
@@ -53,6 +53,48 @@
 					<p class="jour-info">[ISSN: 2332-3469]&nbsp;&nbsp;|&nbsp;&nbsp;Medical</p>
 				</div>		
 			</div>
+		</div>
+	</div> -->
+	<div class="testmonial-section-wrap">
+	<div class="col-sm-12">
+		<div class="testmonial-section-box container">
+			<div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
+  
+
+  <!-- Wrapper for slides -->
+  <div class="carousel-inner" role="listbox">
+      <p class="view-all-text">View All</p>
+    <div class="item active">
+     <div class="testi-user">
+      <img width="80" height="80" src="http://www.avensonline.org/wp-content/uploads/jnp-04-0032-150x150.jpg" class="attachment-thumbnail wp-post-image" alt="jcb-19">
+      </div>
+      <div class="testimonial-info">
+	      <p>Avens is the perfect platform for all Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris sagittis nibh cursus sem laoreet volutpat. Vestibulum sollicitudin gravida justo, nec ullamcorper orci accumsan vel. Morbi luctus vulputate rhoncus. Curabitur volutpat accumsan auctor. Aenean eu justo pharetra velit dapibus viverra eget eu est. Nam aliquam vulputate eros, ac congue libero bibendum sit amet.Fusce molestie facilisis nibh, porttitor faucibus 
+	nisi rutrum non. Mauris feugiat ante in leo tempor, sed fringilla eros sodales. Ut posuere sem dolor, eget faucibus lorem efficitur id. Pellentesque tempus sollicitudin venenatis. Proin libero nisl, vestibulum in ipsum sit amet, sollicitudin vestibulum odio. Vivamus aliquet ac nulla quis congue. Morbi porttitor, tortor a tincidunt consequat, lectus leo cursus magna, vitae pulvinar ante arcu vel magna</p>
+	<p class="testi-user-info"><span class="testi-user-name">Naveen Khureshi</span><span class="testi-user-desig">Research Schoolar</span><span class="testi-user-university">Asbury University</span></p>
+      </div>
+    </div>
+    <div class="item">
+    	<div class="testi-user">
+      <img width="80" height="80" src="http://www.avensonline.org/wp-content/uploads/jnp-04-0032-150x150.jpg" class="attachment-thumbnail wp-post-image" alt="jcb-19">      
+      </div>
+      <div class="testimonial-info">
+        <p>Avens is the perfect platform for all Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris sagittis nibh cursus sem laoreet volutpat. Vestibulum sollicitudin gravida justo, nec ullamcorper orci accumsan vel. Morbi luctus vulputate rhoncus. Curabitur volutpat accumsan auctor. Aenean eu justo pharetra velit dapibus viverra eget eu est. Nam aliquam vulputate eros, ac congue libero bibendum sit amet.Fusce molestie facilisis nibh, porttitor faucibus 
+	nisi rutrum non. Mauris feugiat ante in leo tempor, sed fringilla eros sodales. Ut posuere sem dolor, eget faucibus lorem efficitur id. Pellentesque tempus sollicitudin venenatis. Proin libero nisl, vestibulum in ipsum sit amet, sollicitudin vestibulum odio. Vivamus aliquet ac nulla quis congue. Morbi porttitor, tortor a tincidunt consequat, lectus leo cursus magna, vitae pulvinar ante arcu vel magna</p>
+	<p class="testi-user-info"><span class="testi-user-name">Naveen Khureshi</span><span class="testi-user-desig">Research Schoolar</span><span class="testi-user-university">Asbury University</span></p>
+      </div>
+    </div>    
+  </div>
+
+  <!-- Controls -->
+  <a class="left carousel-control" href="#carousel-example-generic" role="button" data-slide="prev">
+  	<img src="<?php echo base_url(); ?>/public/images/left-arrow.png" alt="Next">
+  </a>
+  <a class="right carousel-control" href="#carousel-example-generic" role="button" data-slide="next">
+  	<img src="<?php echo base_url(); ?>/public/images/right-arrow.png" alt="Next">
+  </a>
+</div>
+		</div>
 		</div>
 	</div>
 	<div id="content" class="site-content" role="main">
