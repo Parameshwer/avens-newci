@@ -170,6 +170,15 @@ class Admin extends CI_Controller {
 		//echo $data;
 
 	}
+	function get_Testimonials() {
+		$this->load->model('Users_model');	
+		$data = $this->Users_model->get_Testimonials();
+		if(is_array($data)){
+			echo json_encode($data);
+		}
+		//echo $data;
+
+	}
 	function get_SubmitManuscript() {
 		$this->load->model('Users_model');	
 		$data = $this->Users_model->get_SubmitManuscript();
@@ -232,6 +241,14 @@ class Admin extends CI_Controller {
 			echo json_encode($data);
 		}
 	}
+	function get_Testimonial() {
+		$this->load->model('Users_model');
+		$article_id = $this->input->get('id');
+		$data = $this->Users_model->get_Testimonial($article_id);	
+		if(is_array($data)) {
+			echo json_encode($data);
+		}
+	}
 	function update_archive() {
 		$this->load->model('Users_model');
 		$obj=json_decode(file_get_contents('php://input'));				
@@ -266,6 +283,26 @@ class Admin extends CI_Controller {
 		}		
 		echo json_encode($data);
 	}
+
+	function updateTestimonial() {
+		$this->load->model('Users_model');
+		$obj=json_decode(file_get_contents('php://input'));				
+		
+		if(isset($obj->id) && !empty($obj->id)) {
+			$data = $this->Users_model->updateTestimonial($obj);			
+			if($data){
+				$status = array('status' => true,"message" => 'Testimonial Edited Successfully');
+			}
+		} else {
+			$data = $this->Users_model->updateTestimonial($obj);			
+			if($data) {
+				$status = array('status' => true,"message" => 'Testimonial Added Successfully');			
+			}
+			
+		}		
+		echo json_encode($data);
+	}
+
 	function logout()
 	{
 		$this->session->sess_destroy();

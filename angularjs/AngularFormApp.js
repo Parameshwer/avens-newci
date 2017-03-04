@@ -26,6 +26,9 @@ app.factory("services", ['$http', function($http) {
     obj.get_LatestArticle = function(article_id) {        
         return $http.get(base_url+"admin/get_latest_Article?id="+article_id+"");
     }
+    obj.get_Testimonials = function(article_id) {        
+        return $http.get(base_url+"admin/get_Testimonial?id="+article_id+"");
+    }
     obj.updateCategory = function (id,main_category) {        
         //return $http.get(base_url+"admin/insert_main_category?name="+main_category.category_name+"&id="+main_category.category_id+"");
         var params = [];
@@ -118,6 +121,19 @@ app.factory("services", ['$http', function($http) {
         .then(function(response) {            
             if(response.status) {
                 window.location = base_url+'admin#/LatestArticles'                
+            }
+        });
+    };
+    obj.updateTestimonial = function (id,testimonials,scope) {                    
+        $http({
+            url: base_url+"admin/updateTestimonial",
+            method: "POST",
+            headers: {'Content-Type': 'application/json'},
+            data : JSON.stringify(testimonials)          
+        })
+        .then(function(response) {            
+            if(response.status) {
+                window.location = base_url+'admin#/Testimonials'                
             }
         });
     };
@@ -287,6 +303,22 @@ app.controller('EditLatestArticleController', function($scope,$rootScope,$routeP
         }
     }
 });
+app.controller('EditTestimonialController', function($scope,$rootScope,$routeParams,$location,services,testimonials){        
+   var article_id = ($routeParams.ArchiveId) ? parseInt($routeParams.ArchiveId) : 0;
+    $rootScope.title = (article_id > 0) ? 'Edit Testimonials' : 'Add Testimonials';
+    $scope.buttonText = (article_id > 0) ? 'Update Testimonials' : 'Add New Testimonials';
+
+    $scope.testimonial = testimonials.data[0];
+
+    $scope.saveTestimonial = function(testimonials) {                        
+        if (article_id <= 0) {            
+            services.updateTestimonial(0,testimonials,$scope);
+        }
+        else {
+            services.updateTestimonial(archive_id, testimonials,$scope);
+        }
+    }
+});
 app.controller('EditJournalArchiveController', function($scope,$rootScope,$routeParams,$location,services,archive) {     
     var archive_id = ($routeParams.ArchiveId) ? parseInt($routeParams.ArchiveId) : 0;
     $rootScope.title = (archive_id > 0) ? 'Edit Journal Archive' : 'Add Journal Archive';
@@ -442,6 +474,16 @@ app.config(['$routeProvider',function ($routeProvider) {
             var article_id = $route.current.params.ArticleId;            
             return services.get_LatestArticle(article_id);
           }
+        }    
+    }).when("/EditTestimonial/:ArticleId", {        
+        title: 'Edit Testimonial',
+        templateUrl:base_url+'admin1/angular_pages/edit-testimonial.html',
+        controller: "EditTestimonialController",
+        resolve: {
+          testimonials: function(services, $route){            
+            var article_id = $route.current.params.ArticleId;            
+            return services.get_Testimonials(article_id);
+          }        
         }    
     })
     .otherwise({

@@ -12,7 +12,7 @@
 	</div>
 	<div class="row">					
 		<div class="col-sm-5">
-			<form id="home-form" action="<?php echo base_url(); ?>">
+			<form id="home-form" action="<?php echo base_url(); ?>/page/search">
 				<div class="input-group">
 					<input placeholder="Search for journals by entering keyword.." type="text" name="s" title="Search for:">
 					<span class="input-group-btn">						
@@ -63,27 +63,24 @@
 
   <!-- Wrapper for slides -->
   <div class="carousel-inner" role="listbox">
-      <p class="view-all-text">View All</p>
-    <div class="item active">
-     <div class="testi-user">
-      <img width="80" height="80" src="http://www.avensonline.org/wp-content/uploads/jnp-04-0032-150x150.jpg" class="attachment-thumbnail wp-post-image" alt="jcb-19">
-      </div>
-      <div class="testimonial-info">
-	      <p>Avens is the perfect platform for all Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris sagittis nibh cursus sem laoreet volutpat. Vestibulum sollicitudin gravida justo, nec ullamcorper orci accumsan vel. Morbi luctus vulputate rhoncus. Curabitur volutpat accumsan auctor. Aenean eu justo pharetra velit dapibus viverra eget eu est. Nam aliquam vulputate eros, ac congue libero bibendum sit amet.Fusce molestie facilisis nibh, porttitor faucibus 
-	nisi rutrum non. Mauris feugiat ante in leo tempor, sed fringilla eros sodales. Ut posuere sem dolor, eget faucibus lorem efficitur id. Pellentesque tempus sollicitudin venenatis. Proin libero nisl, vestibulum in ipsum sit amet, sollicitudin vestibulum odio. Vivamus aliquet ac nulla quis congue. Morbi porttitor, tortor a tincidunt consequat, lectus leo cursus magna, vitae pulvinar ante arcu vel magna</p>
-	<p class="testi-user-info"><span class="testi-user-name">Naveen Khureshi</span><span class="testi-user-desig">Research Schoolar</span><span class="testi-user-university">Asbury University</span></p>
-      </div>
-    </div>
-    <div class="item">
-    	<div class="testi-user">
-      <img width="80" height="80" src="http://www.avensonline.org/wp-content/uploads/jnp-04-0032-150x150.jpg" class="attachment-thumbnail wp-post-image" alt="jcb-19">      
-      </div>
-      <div class="testimonial-info">
-        <p>Avens is the perfect platform for all Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris sagittis nibh cursus sem laoreet volutpat. Vestibulum sollicitudin gravida justo, nec ullamcorper orci accumsan vel. Morbi luctus vulputate rhoncus. Curabitur volutpat accumsan auctor. Aenean eu justo pharetra velit dapibus viverra eget eu est. Nam aliquam vulputate eros, ac congue libero bibendum sit amet.Fusce molestie facilisis nibh, porttitor faucibus 
-	nisi rutrum non. Mauris feugiat ante in leo tempor, sed fringilla eros sodales. Ut posuere sem dolor, eget faucibus lorem efficitur id. Pellentesque tempus sollicitudin venenatis. Proin libero nisl, vestibulum in ipsum sit amet, sollicitudin vestibulum odio. Vivamus aliquet ac nulla quis congue. Morbi porttitor, tortor a tincidunt consequat, lectus leo cursus magna, vitae pulvinar ante arcu vel magna</p>
-	<p class="testi-user-info"><span class="testi-user-name">Naveen Khureshi</span><span class="testi-user-desig">Research Schoolar</span><span class="testi-user-university">Asbury University</span></p>
-      </div>
-    </div>    
+      <p class="view-all-text"><a href="<?php echo base_url() ?>page/testimonials">View All</a></p>
+<?php
+	$flag = 'active'; 
+	foreach ($testi_info as $key => $value) {
+		echo '<div class="item '.$flag.'">
+	     <div class="testi-user">
+	      <img width="80" height="80" src="'.$value["user_img"].'" class="attachment-thumbnail wp-post-image" alt="jcb-19">
+	      </div>
+	      <div class="testimonial-info">
+		      <p>'.$value["testimonial_desc"].'</p>
+		<p class="testi-user-info"><span class="testi-user-name">'.$value["user_name"].'</span><span class="testi-user-desig">'.$value["user_desig"].'</span><span class="testi-user-university">'.$value["user_university"].'</span></p>
+	      </div>
+	    </div>';
+	    $flag = '';
+	}
+ ?>
+    
+   
   </div>
 
   <!-- Controls -->
@@ -258,7 +255,8 @@
 </div>
 
 <div id="facebook-box">
-
+<aside id="text-4" class="widget widget_text">			<div class="textwidget"><div class="fb-like-box fb_iframe_widget" data-href="https://www.facebook.com/www.avensonline.org" data-colorscheme="light" data-show-faces="true" data-header="true" data-stream="false" data-show-border="true" data-width="260" fb-xfbml-state="rendered" fb-iframe-plugin-query="app_id=562268420549512&amp;color_scheme=light&amp;container_width=257&amp;header=true&amp;href=https%3A%2F%2Fwww.facebook.com%2Fwww.avensonline.org&amp;locale=en_US&amp;sdk=joey&amp;show_border=true&amp;show_faces=true&amp;stream=false&amp;width=260"><span style="vertical-align: bottom; width: 260px; height: 213px;"><iframe name="f1ca319c07b9c2" width="260px" height="1000px" frameborder="0" allowtransparency="true" allowfullscreen="true" scrolling="no" title="fb:like_box Facebook Social Plugin" src="https://www.facebook.com/v2.0/plugins/like_box.php?app_id=562268420549512&amp;channel=http%3A%2F%2Fstaticxx.facebook.com%2Fconnect%2Fxd_arbiter.php%3Fversion%3D42%23cb%3Df14a1087f1284bc%26domain%3Dwww.avensonline.org%26origin%3Dhttp%253A%252F%252Fwww.avensonline.org%252Ff6c33a7850a9bc%26relation%3Dparent.parent&amp;color_scheme=light&amp;container_width=257&amp;header=true&amp;href=https%3A%2F%2Fwww.facebook.com%2Fwww.avensonline.org&amp;locale=en_US&amp;sdk=joey&amp;show_border=true&amp;show_faces=true&amp;stream=false&amp;width=260" style="border: none; visibility: visible; width: 260px; height: 213px;" class=""></iframe></span></div></div>
+		</aside>
 </div>
 </div>
 </div>				

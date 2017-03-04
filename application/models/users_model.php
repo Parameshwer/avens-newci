@@ -85,6 +85,10 @@ class Users_model extends CI_Model {
 		$query = $this->db->query('SELECT wp_latest_articles.id,wp_latest_articles.article_image,wp_latest_articles.article_name,wp_latest_articles.created_date,wp_latest_articles.author_name,wp_latest_articles.pdf_link,wp_journals.journal_name FROM wp_latest_articles INNER JOIN wp_journals ON wp_journals.id = wp_latest_articles.article_category WHERE wp_latest_articles.deleted = "1"');				
 		return $query->result_array();	
 	}
+	function get_Testimonials() {
+		$query = $this->db->query('SELECT * FROM wp_testimonials');				
+		return $query->result_array();	
+	}
 	function get_SubmitManuscript() {
 		$query = $this->db->query('SELECT * FROM wp_manuscript');				
 		return $query->result_array();	
@@ -110,6 +114,12 @@ class Users_model extends CI_Model {
 	function get_latest_Article($article_id) {
 		
 		$query = $this->db->query('SELECT * FROM  wp_latest_articles WHERE id = "'.$article_id.'" AND deleted = 1');	
+		//print_r($query);				
+		return $query->result_array();
+	}
+	function get_Testimonial($article_id) {
+		
+		$query = $this->db->query('SELECT * FROM  wp_testimonials WHERE id = "'.$article_id.'"');	
 		//print_r($query);				
 		return $query->result_array();
 	}
@@ -180,6 +190,14 @@ class Users_model extends CI_Model {
 		}
 		return $query;
 		//return $query->result_array();
+	}
+	function updateTestimonial($data) {				
+		if(isset($data->id) && !empty($data->id)) {
+		$query = $this->db->query("UPDATE wp_testimonials SET user_name='".$data->user_name."', user_img='".$data->user_img."',testimonial_desc='".$data->testimonial_desc."', user_desig='".$data->user_desig."',user_university='".$data->user_university	."',updated_date='".date('Y-m-d')."' WHERE id=$data->id");
+		} else {
+		   $query = $this->db->query("INSERT INTO wp_testimonials (user_name, user_img, testimonial_desc,user_desig, updated_date, created_date) VALUES ('".$data->user_name."','".$data->user_img."','".$data->testimonial_desc."','".$data->user_desig."','".date('Y-m-d')."','".date('Y-m-d')."')");
+		}
+		return $query;	
 	}	
 }
 

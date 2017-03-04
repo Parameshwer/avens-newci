@@ -49,7 +49,7 @@
 	<div class="container">
 		<div class="row" style="margin:10px 0">
 			<div class="col-sm-4" id="logo-box">
-				<a href=""><img src="<?php echo base_url() ?>public//images/logo.png" alt="Avens Publishing Group" class="img-responsive"></a>
+				<a href="<?php echo base_url(); ?>"><img src="<?php echo base_url() ?>public//images/logo.png" alt="Avens Publishing Group" class="img-responsive"></a>
 			</div>
 			<div class="col-sm-8 text-right hidden-xs">
 			<?php 
@@ -70,6 +70,10 @@
 				} else if($this->uri->segment(2) =='policies') {
 					$img_name = '5and6.gif';
 				} else if($this->uri->segment(2) =='contact') {
+					$img_name = '7and8.gif';
+				} else if($this->uri->segment(2) =='search'){
+					$img_name = '7and8.gif';
+				} else if($this->uri->segment(2) =='testimonials'){
 					$img_name = '7and8.gif';
 				}	
 				echo '<img src="'.base_url().'public/images/animatedbanners/'.$img_name.'" alt="Avens Publishing Group" />';
@@ -95,7 +99,10 @@
 				<li class="menu-item <?php echo (($this->uri->segment(2) == 'membership')?'current_page_item':''); ?>"><a href="<?php echo base_url(); ?>page/membership/">Membership</a></li>
 				<li class="menu-item <?php echo (($this->uri->segment(2) == 'policies')?'current_page_item':''); ?>"><a href="<?php echo base_url(); ?>page/policies/">Policies</a></li>
 				<li class="menu-item <?php echo (($this->uri->segment(2) == 'contact')?'current_page_item':''); ?>"><a href="<?php echo base_url(); ?>page/contact/">Contact</a></li>
-			</ul></div>				<form role="search" method="get" class="search-form" action="<?php echo base_url(); ?>">
+
+			</ul>
+			</div>
+			<form role="search" method="get" class="search-form" action="<?php echo base_url(); ?>/page/search">
 			<label>
 				<span class="screen-reader-text">Search for:</span>
 				<input type="search" class="search-field" placeholder="Search …" value="" name="s" title="Search for:">

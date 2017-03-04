@@ -52,7 +52,7 @@ class App_model extends CI_Model {
 			$archive_type = '4';						
 		}
 
-		$query  = $this->db->query('SELECT * FROM wp_journal_archives jp JOIN wp_journals j on jp.journal_id = j.id INNER JOIN wp_journal_main_categories mc on mc.category_id = j.main_category_id WHERE jp.archive_in = "'.$archive_type.'" AND mc.category_name = "'.$cat_name.'" AND j.journal_url_slug = "'.$journal_name.'"');
+		$query  = $this->db->query('SELECT * FROM wp_journal_archives jp JOIN wp_journals j on jp.journal_id = j.id INNER JOIN wp_journal_main_categories mc on mc.category_id = j.main_category_id WHERE jp.archive_in = "'.$archive_type.'" AND mc.category_name = "'.$cat_name.'" AND j.journal_url_slug = "'.$journal_name.'" ORDER BY jp.archive_year ASC');
 
 		return $query->result_array();
 	}
@@ -84,7 +84,18 @@ class App_model extends CI_Model {
 		/*$query = $this->db->query('SELECT * FROM wp_journal_posts INNER JOIN wp_journal_main_categories 
 			ON wp_journal_posts.category_id = wp_journal_main_categories.category_id 
 			WHERE journal_slug = "'.$journal_name.'" AND category_name="'.$cat_name.'"');*/			
-		$query = $this->db->query('SELECT jp.post_name,mc.category_name,j.journal_url_slug,jp.post_slug FROM wp_journal_posts jp INNER JOIN wp_journals j on jp.journal_id = j.id INNER JOIN wp_journal_main_categories mc on mc.category_id = j.main_category_id WHERE mc.category_name = "'.$cat_name.'" AND j.journal_url_slug = "'.$journal_name.'"');			
+		$query = $this->db->query('SELECT jp.post_name,mc.category_name,j.journal_url_slug,jp.post_slug FROM wp_journal_posts jp INNER JOIN wp_journals j on jp.journal_id = j.id INNER JOIN wp_journal_main_categories mc on mc.category_id = j.main_category_id WHERE mc.category_name = "'.$cat_name.'" AND j.journal_url_slug = "'.$journal_name.'" ORDER BY jp.created_date ASC');			
 		return $query->result_array();
+	}
+	function get_testimonials() {
+		$query = $this->db->query("SELECT * FROM wp_testimonials WHERE deleted = '1'");			
+		return $query->result_array();	
+	}
+	function get_search_results($string) {
+		if(isset($string) && !empty($string)) {
+			$query  = $this->db->query('SELECT * FROM wp_journal_archives jp JOIN wp_journals j on jp.journal_id = j.id INNER JOIN wp_journal_main_categories mc on mc.category_id = j.main_category_id WHERE jp.archive_desc LIKE "%'.$string.'%"');
+
+			return $query->result_array();					
+		}
 	}
 }

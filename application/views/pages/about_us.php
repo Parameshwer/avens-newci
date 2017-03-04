@@ -49,7 +49,9 @@
 							<div id="tertiary" class="sidebar-container" role="complementary">
 								<div class="sidebar-inner">
 									<div class="widget-area">
-									/div><!-- .widget-area -->
+									<aside id="text-4" class="widget widget_text">			<div class="textwidget"><div class="fb-like-box fb_iframe_widget" data-href="https://www.facebook.com/www.avensonline.org" data-colorscheme="light" data-show-faces="true" data-header="true" data-stream="false" data-show-border="true" data-width="260" fb-xfbml-state="rendered" fb-iframe-plugin-query="app_id=562268420549512&amp;color_scheme=light&amp;container_width=257&amp;header=true&amp;href=https%3A%2F%2Fwww.facebook.com%2Fwww.avensonline.org&amp;locale=en_US&amp;sdk=joey&amp;show_border=true&amp;show_faces=true&amp;stream=false&amp;width=260"><span style="vertical-align: bottom; width: 260px; height: 213px;"><iframe name="f1ca319c07b9c2" width="260px" height="1000px" frameborder="0" allowtransparency="true" allowfullscreen="true" scrolling="no" title="fb:like_box Facebook Social Plugin" src="https://www.facebook.com/v2.0/plugins/like_box.php?app_id=562268420549512&amp;channel=http%3A%2F%2Fstaticxx.facebook.com%2Fconnect%2Fxd_arbiter.php%3Fversion%3D42%23cb%3Df14a1087f1284bc%26domain%3Dwww.avensonline.org%26origin%3Dhttp%253A%252F%252Fwww.avensonline.org%252Ff6c33a7850a9bc%26relation%3Dparent.parent&amp;color_scheme=light&amp;container_width=257&amp;header=true&amp;href=https%3A%2F%2Fwww.facebook.com%2Fwww.avensonline.org&amp;locale=en_US&amp;sdk=joey&amp;show_border=true&amp;show_faces=true&amp;stream=false&amp;width=260" style="border: none; visibility: visible; width: 260px; height: 213px;" class=""></iframe></span></div></div>
+		</aside>
+									</div><!-- .widget-area -->
 									</div><!-- .sidebar-inner -->
 								</div><!-- #tertiary -->
 								<style type="text/css">.site-header .home-link{min-height: 375px;}</style>

@@ -175,7 +175,7 @@ div.banner-text{background: #fe6d01;padding: 15px 20px;display: inline-block;col
 .home-inner input[type="submit"]{
 	background: none;
 	border-left: 1px solid #eee;
-	background-image: url(images/newsearch-icon.png);
+	background-image: url(../images/newsearch-icon.png);
 	border-bottom: 0 none;
 	background-repeat: no-repeat;
 	background-color: #ffffff;
@@ -320,7 +320,7 @@ p.month.active {
   font-size: 1.2em;
 }
 
-.search-header{background: #ccc;padding: 20px;margin-bottom: 50px;}
+.search-header{background: #ccc;padding: 40px;margin-bottom: 0px;}
 #search-page article{margin-bottom: 20px;}
 #pagination-next-prev ul.pagination {margin: 0;}
 #pagination-next-prev ul.pagination li a:hover,#pagination-next-prev ul.pagination li a:focus{background: none}
@@ -609,4 +609,47 @@ color: #fff;
   top: 87px;
   font-style: italic;
   left: 15px;
+  z-index: 99;
 }
+.search-header {
+    background: url(../images/submit-man-banner-1.jpg) no-repeat scroll top;
+    background-size: 1600px auto;
+    background-repeat: no-repeat;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+    background-position: center;
+    text-align: center;
+    color: #ffffff;
+}
+.search-wrap {margin: 30px 0;}
+.search-wrap .search-item {
+  background: #f5f5f5;
+  margin: 10px 0;
+  padding: 10px;
+  border: 1px solid #ccc;
+}
+.search-wrap .search-item ul {margin: 0;padding: 0;}
+.search-wrap .search-item ul li {list-style-type: none;}
+.search-wrap .search-border-bottom {
+  font-size: 20px;
+  text-align: center;
+  border-bottom: 1px solid #ccc;
+  margin: -25px 0 0;
+}
+.search-wrap p.search-text {
+  display: inline-block;
+  background: #fff;
+  padding: 0 10px;
+}
+.search-wrap .no-results-found {
+  text-align: center;
+  font-size: 20px;
+  margin-bottom: 35px;
+}
+.custom-search-form {margin-top: 20px;}
+.custom-search-form input{padding: 20px;font-size: 14px;}
+.custom-search-form button {padding: 10px;}
+.testimonials-page .item {border-bottom: 1px solid #dddddd;margin-bottom: 20px;padding-bottom: 10px;}
+.testimonials-page .item:last-child{border-bottom: 0 none;padding-bottom: 0;margin-bottom: 0}

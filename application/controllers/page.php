@@ -37,6 +37,7 @@ class Page extends CI_Controller {
 	}*/
 	public function index()
 	{			
+
 	        if ( ! file_exists(APPPATH.'views/pages/home.php'))
 	        {
 	                // Whoops, we don't have a page for that!
@@ -44,7 +45,8 @@ class Page extends CI_Controller {
 	        }
 
 	        $data['title'] = "Home Page"; // Capitalize the first letter
-
+	        $this->load->model('App_model');
+	        $data['testi_info'] = $this->App_model->get_testimonials();	        
 	        $this->load->view('templates/header', $data);
 	        $this->load->view('pages/home.php', $data);
 	        $this->load->view('templates/footer', $data);
@@ -149,7 +151,7 @@ class Page extends CI_Controller {
 	}
 	public function contact()
 	{						
-	        if ( ! file_exists(APPPATH.'views/pages/contact.php'))
+	    if ( ! file_exists(APPPATH.'views/pages/contact.php'))
 	        {
 	                // Whoops, we don't have a page for that!
 	                show_404();
@@ -160,6 +162,35 @@ class Page extends CI_Controller {
 	        $this->load->view('templates/header', $data);
 	        $this->load->view('pages/contact.php', $data);
 	        $this->load->view('templates/footer', $data);
+	}
+	public function search() {
+		if ( ! file_exists(APPPATH.'views/pages/search.php'))
+        {
+           show_404();
+        }
+
+		$this->load->model('App_model');
+		$data['search_results'] = $this->App_model->get_search_results($_GET['s']);
+        $data['title'] = "Search Page";
+
+        $this->load->view('templates/header', $data);
+        $this->load->view('pages/search.php', $data);
+        $this->load->view('templates/footer', $data);
+		
+	}
+	public function testimonials() {
+		if ( ! file_exists(APPPATH.'views/pages/testimonials.php'))
+        {
+           show_404();
+        }
+
+		$this->load->model('App_model');		
+        $data['title'] = "Testimonials Page";
+        $data['testimonials'] = $this->App_model->get_testimonials();
+        $this->load->view('templates/header', $data);
+        $this->load->view('pages/testimonials.php', $data);
+        $this->load->view('templates/footer', $data);
+		
 	}
 	public function get_journals() {			
 		$this->load->model('App_model');	
@@ -266,5 +297,6 @@ class Page extends CI_Controller {
 	public function save_upload_files() {
 		print_r($_POST);
 	}
+
 
 } 

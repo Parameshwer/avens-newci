@@ -1,0 +1,58 @@
+
+<div id="main-wrapper">
+	<div ng-include="'admin1/angular_pages/navbar.html'"></div>
+	<div class="main-wrap">
+		<div ng-include="'admin1/angular_pages/sidebar1.html'"></div>
+		<div class="main-content">
+			<h1 class="page-header">Testimonials</h1>
+			<div class="create-btn text">
+				<a href="#/Testimonials">Back to Testimonials</a>				
+			</div>
+			<div>
+				<div class="form-box">					
+					<form class="form-horizontal" enctype="multipart/form-data" name="testimonial_form" method="post" novalidate
+					>					
+						<div class="form-group">
+							<label for="issn_number" class="col-sm-3 control-label">User Name*</label>
+							<div class="col-sm-9">
+								<input type="text" class="form-control" ng-model="testimonial.user_name" id="user_name" name="user_name" required>
+								
+							</div>
+						</div>
+						<div class="form-group">
+							<label for="issn_number" class="col-sm-3 control-label">Testimonial Description</label>							
+							<div class="col-sm-9">
+								<textarea type="text" class="form-control" id="testimonial_desc" name="testimonial_desc" ng-model="testimonial.testimonial_desc"></textarea>
+							</div>
+						</div>
+
+						<div class="form-group">
+							<label for="journal_name" class="col-sm-3 control-label">User Image</label>
+							<div class="col-sm-9">
+								<input type="text" class="form-control" ng-model="testimonial.user_img" id="user_img" name="user_img" required>
+							</div>
+						</div>
+						<div class="form-group">
+							<label for="journal_name" class="col-sm-3 control-label">User Designation</label>
+							<div class="col-sm-9">
+								<input type="text" class="form-control" ng-model="testimonial.user_desig" id="user_desig" name="user_desig" required>
+							</div>
+						</div>
+						<div class="form-group">
+							<label for="journal_name" class="col-sm-3 control-label">User University</label>
+							<div class="col-sm-9">
+								<input type="text" class="form-control" ng-model="testimonial.user_university" id="user_university" name="user_university" required>
+							</div>
+						</div>
+						<div class="form-group">
+							<div class="col-sm-offset-3 col-sm-10">
+								<input type="submit" ng-click="saveTestimonial(testimonial)" name="insert" value="Save" class="btn btn-primary">
+							</div>
+						</div>
+					</form>						
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+</div>
