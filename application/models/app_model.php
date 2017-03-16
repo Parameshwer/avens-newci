@@ -53,8 +53,11 @@ class App_model extends CI_Model {
 		}
 
 		$query  = $this->db->query('SELECT * FROM wp_journal_archives jp JOIN wp_journals j on jp.journal_id = j.id INNER JOIN wp_journal_main_categories mc on mc.category_id = j.main_category_id WHERE jp.archive_in = "'.$archive_type.'" AND mc.category_name = "'.$cat_name.'" AND j.journal_url_slug = "'.$journal_name.'" ORDER BY jp.archive_year ASC');
-
 		return $query->result_array();
+	}
+	function archive_page_info($journal_name) {
+		$query  = $this->db->query('SELECT * FROM wp_journals WHERE journal_url_slug = "'.$journal_name.'" AND deleted = "1"');
+		return $query->result_array();		
 	}
 	function get_sidebar_links($cat_name,$journal_name,$post_name) {
 		if((strpos($post_name, 'articles-in-press') !== false)) {

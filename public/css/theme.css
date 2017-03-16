@@ -159,7 +159,7 @@ p.jour-info{font-size: 1em;margin: 0;color: #5e5e5e;}
 #footer-bottom img{float: right;padding: 20px 0 0 20px;}
 #footer-top{padding: 0 0 30px 0;}
 ul.footer-social li{padding: 0;}
-ul.footer-social li img{width: 25px;padding: 0 2px 0;}
+ul.footer-social li img{width: 30px;padding: 0 2px 0;}
 div.banner-text{background: #fe6d01;padding: 15px 20px;display: inline-block;color: #ffffff;font-family: 'Kreon';font-size:1.5em;}
 .home-inner{position: relative;top: 225px;}
 .home-inner input[type="text"]{
@@ -572,9 +572,18 @@ color: #fff;
   padding-bottom: 10px;
 }
 
-.testmonial-section-box {border: 1px solid #a7a7a7;padding: 10px;margin: 20px auto;padding: 25px;width: 1000px;background-color: #f8f8f8}
+.testmonial-section-box {border: 1px solid #a7a7a7;padding: 10px;margin: 20px auto;padding: 25px;width: 1000px;background-color: #f8f8f8;min-height: 150px;}
 .testmonial-section-box .testi-user {float: left;}
 .testmonial-section-box .testimonial-info {margin-left: 100px;text-align: left;font-size: 15px;}
+.testmonial-section-box .carousel-inner {min-height: 150px;}
+.testmonial-section-box .carousel-indicators {bottom: 0;}
+.testmonial-section-box .carousel-indicators li {
+  text-indent: 1px;
+  height: 20px;
+  width: 20px;
+  margin: 0 2px;
+}
+.testmonial-section-box .carousel-indicators li.active {background-color: #000000;color: #29c694}
 /*.testmonial-section-box .carousel-caption {
   color: #000;
   text-shadow: none;

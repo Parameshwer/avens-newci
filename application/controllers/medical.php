@@ -7,6 +7,7 @@ class Medical extends CI_Controller {
         $data['title'] = "Post Info";        
 		if((strpos($this->uri->segment(3), 'current-issue') !== false) || (strpos($this->uri->segment(3), 'articles-in-press') !== false) || (strpos($this->uri->segment(3), 'archive') !== false) || (strpos($this->uri->segment(3), 'special-issues') !== false) || (strpos($this->uri->segment(3), 'special-issue') !== false)) {    	    		
 			$data['archive_info'] = $this->App_model->get_archive_info($this->uri->segment(1),$this->uri->segment(2),$this->uri->segment(3));
+			$data['archive_page_info'] = $this->App_model->archive_page_info($this->uri->segment(2));
 			$data['get_sidebar_links'] = $this->App_model->get_sidebar_links($this->uri->segment(1),$this->uri->segment(2),$this->uri->segment(3));
 			$data['links_info'] = $this->App_model->get_sidebar_slugs($this->uri->segment(1),$this->uri->segment(2),$this->uri->segment(3));
 			$this->load->view('templates/header', $data);

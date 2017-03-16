@@ -22,7 +22,7 @@
 		</style>
 
 		<style type="text/css">
-			.journal-name{background: url("<?php echo base_url(); ?>public/images/journal-banners/<?php echo $archive_info[0]['banner_image'] ?>") no-repeat scroll center top / 1600px auto;text-align: center;padding: 90px;position:relative;
+			.journal-name{background: url("<?php echo base_url(); ?>public/images/journal-banners/<?php echo $archive_page_info[0]['banner_image'] ?>") no-repeat scroll center top / 1600px auto;text-align: center;padding: 90px;position:relative;
 			background-repeat:no-repeat;
 			-webkit-background-size:cover;
 			-moz-background-size:cover;
@@ -57,8 +57,9 @@
 				<div id="journal-sidebar-wrapper">
 
 					<?php 
-					if($archive_info[0]['issn_number']) {
-							echo "<div class='issn-num'><p>".$archive_info[0]['issn_number']."</p></div>";
+
+					if($archive_page_info[0]['issn_number']) {
+							echo "<div class='issn-num'><p>".$archive_page_info[0]['issn_number']."</p></div>";
 						}
 					?>
 					<div id="journal-sidebar">
@@ -79,8 +80,8 @@
 				</div>
 				<div class="journal-info-box">
 
-					<?php if(isset($archive_info) && !empty($archive_info)){ ?>
-					<img src="<?php echo base_url(); ?>public/images/journal-sidebar-images/<?php echo $archive_info[0]['sidebar_image'] ?>" class="img-responsive">					
+					<?php if(isset($archive_page_info) && !empty($archive_page_info)){ ?>
+					<img src="<?php echo base_url(); ?>public/images/journal-sidebar-images/<?php echo $archive_page_info[0]['sidebar_image'] ?>" class="img-responsive">					
 					<?php } ?>
 				</div>
 			</div>

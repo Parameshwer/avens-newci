@@ -80,26 +80,21 @@
 		</div>
 	</div>
 </footer>
-<script type='text/javascript' src='<?php echo base_url(); ?>public/js/swfobject.js'></script>
+<!-- <script type='text/javascript' src='<?php echo base_url(); ?>public/js/swfobject.js'></script>
 <script type='text/javascript' src='<?php echo base_url(); ?>public/js/jquery.js'></script>
 <script type='text/javascript' src='<?php echo base_url(); ?>public/js/jquery-migrate.min.js'></script>
-<script type="text/javascript" src="<?php echo base_url(); ?>public/js/bootstrap.min.js"></script>
-<script src="<?php echo base_url(); ?>public/js/jquery.bootpag.min.js"></script>
-<script type="text/javascript">
-	var _gaq = _gaq || [];
-	_gaq.push(['_setAccount', 'UA-35984191-1']);
-	_gaq.push(['_trackPageview']);
-	(function() {
-		var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-		ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-		var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-	})();
-</script>
+<script type="text/javascript" src="<?php echo base_url(); ?>public/js/bootstrap.min1.js"></script>
+ -->
 
+<!-- <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"> -->
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+<script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>	
 <script type="text/javascript" src="<?php echo base_url(); ?>public/js/jquery.validator.js"></script>
+<script src="<?php echo base_url(); ?>public/js/jquery.bootpag.min.js"></script>
+
 <script type="text/javascript">
-	jQuery(document).ready(function(){
-		jQuery("#form_collab").validate({
+	$(document).ready(function(){
+		$("#form_collab").validate({
 			rules: {
 				institute_name: "required",
 				email: {
@@ -119,11 +114,11 @@
 
 			},
 			success: function(){
-				jQuery(this).click(false);
-				jQuery(this).attr("readonly", true);
+				$(this).click(false);
+				$(this).attr("readonly", true);
 			}
 		});
-		jQuery(".contact-form").validate({
+		$(".contact-form").validate({
 			rules: {
 				first_name: "required",
 				email_id: {
@@ -137,12 +132,12 @@
 
 			},
 			success: function(){
-				jQuery(this).click(false);
-				jQuery(this).attr("readonly", true);
+				$(this).click(false);
+				$(this).attr("readonly", true);
 			}
 		});
 
-		/*jQuery("#manuscript_form").validate({
+		$("#manuscript_form").validate({
 			rules: {
 				firstname: "required",
 				email: {
@@ -161,21 +156,21 @@
 
 			},
 			success: function(){
-				jQuery(this).click(false);
-				jQuery(this).attr("readonly", true);				
+				$(this).click(false);
+				$(this).attr("readonly", true);				
 			},
 			onsubmit: function() {
 
 			}
-		});		*/
-		/*jQuery("#manuscript_form").find('.btn-success').click(function(e){
+		});
+		$("#manuscript_form").find('.btn-success').click(function(e){
 			e.preventDefault();
 					
 		    //var data = new FormData($('#manuscript_form')[0]);
 			jQuery.ajax({
 			   type:"POST",
 			   url:"http://localhost/avens-angular/page/save_submit_manuscript/",
-			   data:jQuery('#manuscript_form').serialize(),
+			   data:$('#manuscript_form').serialize(),
 			   mimeType: "multipart/form-data",
 			   contentType: false,
 			   cache: false,
@@ -186,43 +181,43 @@
 				}
 			});
 
-		});*/
+		});
 		
  
-		jQuery('.sort_journals').on('click',function(){
-			jQuery('.sort_journals').attr('checked',false);
-			jQuery(this).attr('checked',true);
-			var sort_type = jQuery(this).val();
-			jQuery('#journal-ajax').html('<div class="text-center" style="padding:10px;margin-top:20px;"><strong>Loading..</strong></div>');
+		$('.sort_journals').on('click',function(){
+			$('.sort_journals').attr('checked',false);
+			$(this).attr('checked',true);
+			var sort_type = $(this).val();
+			$('#journal-ajax').html('<div class="text-center" style="padding:10px;margin-top:20px;"><strong>Loading..</strong></div>');
 			jQuery.get("<?php echo base_url(); ?>page/get_journals",
 			{
 				sort_type: sort_type			        
 			},
 			function(data, status){				
-				jQuery('#journal-ajax').html(data);					    			      
+				$('#journal-ajax').html(data);					    			      
 			});
 		});
 
-		jQuery('#myTabs a').click(function (e) {
+		$('#myTabs a').click(function (e) {
 			e.preventDefault()
-			jQuery(this).tab('show')
+			$(this).tab('show')
 		});
 
 
-		jQuery("p.month").on('click', function () {
-			if(jQuery(this).hasClass("active")){
-				jQuery(this).removeClass("active");
+		$("p.month").on('click', function () {
+			if($(this).hasClass("active")){
+				$(this).removeClass("active");
 			}else{
-				jQuery('.month').removeClass("active");
-				jQuery(this).toggleClass("active");
+				$('.month').removeClass("active");
+				$(this).toggleClass("active");
 			}
 
-			jQuery(".post-archive-box-inner").not(jQuery(this).next(".post-archive-box-inner")).slideUp();
-			jQuery(this).next(".post-archive-box-inner").slideToggle();
+			$(".post-archive-box-inner").not($(this).next(".post-archive-box-inner")).slideUp();
+			$(this).next(".post-archive-box-inner").slideToggle();
 		});
 
-		jQuery("#latest-article-results").load("<?php echo base_url(); ?>page/get_latest_journals/"); 
-		jQuery(".pagination").bootpag({
+		$("#latest-article-results").load("<?php echo base_url(); ?>page/get_latest_journals/"); 
+		$(".pagination").bootpag({
 			total: 16,
 			page: 1,
 			maxVisible: 5,
@@ -230,76 +225,76 @@
 			next: 'Next'       
 		}).on("page", function(e, num){
 			e.preventDefault();
-			jQuery("#latest-article-results").prepend('<div class="loading-indication">Loading...</div>');		
-			jQuery("#latest-article-results").load("<?php echo base_url(); ?>page/get_latest_journals/", {'page':num});
+			$("#latest-article-results").prepend('<div class="loading-indication">Loading...</div>');		
+			$("#latest-article-results").load("<?php echo base_url(); ?>page/get_latest_journals/", {'page':num});
 		});
 
-		jQuery('.nav-controls .custom-prev').on('click',function(e){
+		$('.nav-controls .custom-prev').on('click',function(e){
 			e.preventDefault();
-			jQuery('ul.pagination .prev a').trigger('click');
+			$('ul.pagination .prev a').trigger('click');
 		});
-		jQuery('.nav-controls .custom-next').on('click',function(e){
+		$('.nav-controls .custom-next').on('click',function(e){
 			e.preventDefault();
-			jQuery('ul.pagination .next a').trigger('click');
+			$('ul.pagination .next a').trigger('click');
 		});
 
-		var logo_box_height = jQuery('#logo-box').height();
+		var logo_box_height = $('#logo-box').height();
 
-		var admin_bar_height = (jQuery('#wpadminbar').height())?jQuery('#wpadminbar').height():'0';
+		var admin_bar_height = ($('#wpadminbar').height())?$('#wpadminbar').height():'0';
 		var temp_height = admin_bar_height+logo_box_height;
 
-		jQuery(window).scroll(function(){
-			if (jQuery(this).scrollTop() > temp_height)
-				jQuery('#navbar').addClass('fixed_top').css('top',admin_bar_height);		
+		$(window).scroll(function(){
+			if ($(this).scrollTop() > temp_height)
+				$('#navbar').addClass('fixed_top').css('top',admin_bar_height);		
 			else 
-				jQuery('#navbar').removeClass('fixed_top').css('top','0');			
+				$('#navbar').removeClass('fixed_top').css('top','0');			
 		});	
-		jQuery('.goto-top').hide();
+		$('.goto-top').hide();
 
-		jQuery(window).scroll(function(){
-			if (jQuery(this).scrollTop() > 200)
-				jQuery('.goto-top').show(300);		
+		$(window).scroll(function(){
+			if ($(this).scrollTop() > 200)
+				$('.goto-top').show(300);		
 			else 
-				jQuery('.goto-top').hide(300);	
+				$('.goto-top').hide(300);	
 
 		});	
 
-		jQuery('.scroll-top').on('click',function(e){
+		$('.scroll-top').on('click',function(e){
 			e.preventDefault();
-			jQuery("html,body").animate({scrollTop:0}, 600);
+			$("html,body").animate({scrollTop:0}, 600);
 		});
-		jQuery('#mobile-post-navbtn').on('click',function(e){
+		$('#mobile-post-navbtn').on('click',function(e){
 			e.stopPropagation();
-			jQuery('.mobile-post-nav').toggle(500);
+			$('.mobile-post-nav').toggle(500);
 		});
-		jQuery('body').on('click',function(e){
+		/*$('body').on('click',function(e){
 			e.stopPropagation();
-			jQuery('.mobile-post-nav').hide(500);
-		});
-		jQuery('span.add-file').on('click',function(){
-			jQuery('.upload-box').append('<div class="upload-inner"><input type="file" name="uploadfile[]" value="Choose Files" size="25" class="input-file"><span class="remove-file">Remove File</span></div>');
+			$('.mobile-post-nav').hide(500);
+		});*/
+		$('span.add-file').on('click',function(){
+			$('.upload-box').append('<div class="upload-inner"><input type="file" name="uploadfile[]" value="Choose Files" size="25" class="input-file"><span class="remove-file">Remove File</span></div>');
 			checking_add_filebtn();
 		});
-		jQuery('.upload-box').on('click','span.remove-file',function(){
+		$('.upload-box').on('click','span.remove-file',function(){
 
 			checking_add_filebtn();
-			jQuery(this).closest('.upload-inner').remove();
+			$(this).closest('.upload-inner').remove();
 		});
 
 		function checking_add_filebtn(){
-			if (jQuery('.upload-inner .input-file').length >= 2){
-				jQuery('.add-file').hide();
+			if ($('.upload-inner .input-file').length >= 2){
+				$('.add-file').hide();
 			}
 			else{
-				jQuery('.add-file').show();
+				$('.add-file').show();
 			}
 
 		}		
 		
-		jQuery("input[type=file]").on('change',function(){
-	      var file_id =jQuery(this).attr('id');
-	      var rel_id = jQuery(this).attr('rel');                       ;
-	      var data = new FormData(jQuery('#manuscript_form')[0]);     
+		$("input[type=file]").on('change',function(){
+	      var file_id =$(this).attr('id');
+	      var rel_id = $(this).attr('rel');                       ;
+	      var data = new FormData($('#manuscript_form')[0]);     
 	      jQuery.ajax({
 	         type:"POST",
 	         url:"<?php echo base_url('page/upload_files');?>",
@@ -311,18 +306,16 @@
 	          dataType:"json",
 	         success:function(temp)
 	        {         
-	          jQuery('.temp_file_upload').remove();
+	          $('.temp_file_upload').remove();
 	          jQuery.each(temp, function(i,v){
 	            console.log(v.upload_data.file_name);
 	            //console.log(v[i].file_name);
-	            jQuery('#manuscript_form').find('.upload-box').append('<input class="temp_file_upload" id="'+file_id+'_uploaded" type="hidden" name="uploaded_img[]" value="'+v.upload_data.file_name+'">');
+	            $('#manuscript_form').find('.upload-box').append('<input class="temp_file_upload" id="'+file_id+'_uploaded" type="hidden" name="uploaded_img[]" value="'+v.upload_data.file_name+'">');
 	          })
 	         }
 	      });     
 	    });
-	   	jQuery('.carousel').bind('slid', function (e) {
-		    console.log("slid event!");
-		});
+	   	
 	});
 
 </script>

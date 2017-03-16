@@ -57,6 +57,7 @@
 	</div> -->
 	<div class="testmonial-section-wrap">
 	<div class="col-sm-12">
+
 		<div class="testmonial-section-box container">
 			<div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
   
@@ -66,6 +67,14 @@
       <p class="view-all-text"><a href="<?php echo base_url() ?>page/testimonials">View All</a></p>
 <?php
 	$flag = 'active'; 
+	$temp = 'active';
+	echo '<ol class="carousel-indicators">';
+	foreach ($testi_info as $key => $value) {
+		echo '<li data-target="#carousel-example-generic" data-slide-to="'.$key.'" class="'.$temp.'">'.($key+1).'</li>';
+		$temp='';
+	}
+	echo '</ol>';
+
 	foreach ($testi_info as $key => $value) {
 		echo '<div class="item '.$flag.'">
 	     <div class="testi-user">
@@ -84,14 +93,14 @@
   </div>
 
   <!-- Controls -->
-  <a class="left carousel-control" href="#carousel-example-generic" role="button" data-slide="prev">
+  <!-- <a class="left carousel-control" href="#carousel-example-generic" role="button" data-slide="prev">
   	<img src="<?php echo base_url(); ?>/public/images/left-arrow.png" alt="Next">
   </a>
   <a class="right carousel-control" href="#carousel-example-generic" role="button" data-slide="next">
   	<img src="<?php echo base_url(); ?>/public/images/right-arrow.png" alt="Next">
-  </a>
+  </a> -->
 </div>
-		</div>
+		</div> 
 		</div>
 	</div>
 	<div id="content" class="site-content" role="main">
@@ -248,9 +257,42 @@
 					<div id="follow-linkedin">
 						<h3>Follow us on LinkedIn</h3>
 						<div class="follow-linkedin-inner">
-							<img src="<?php echo base_url(); ?>wp-content/themes/twentythirteen/images/linkedin.png" alt="">
-<!--<script src="//platform.linkedin.com/in.js" type="text/javascript"> lang: en_US</script>
-	<script type="IN/FollowCompany" data-id="645919" data-counter="right"></script> -->
+						<div class="social-links">
+	<ul class="list-inline footer-social">
+		<li>
+			<a target="_blank" href="https://www.facebook.com/www.avensonline.org?fref=ts">
+				<img src="<?php echo base_url(); ?>public/images/fb-icon.png" alt="Facebook">
+			</a>
+		</li>
+		<li>
+			<a target="_blank" href="https://twitter.com/avensonline">
+				<img src="<?php echo base_url(); ?>public/images/tweet.png" alt="Twitter">
+			</a>
+		</li>
+		<li>
+			<a target="_blank" href="https://www.linkedin.com/pub/avens-publishers/58/a2b/479">
+				<img src="<?php echo base_url(); ?>public/images/linked.png" alt="Linked In">
+			</a>
+		</li>
+		<li>
+			<a target="_blank" href="http://feeds.feedburner.com/Avens">
+				<img src="<?php echo base_url(); ?>public/images/rssfeed.png" alt="Rss Feed">
+			</a>
+		</li>
+		<li>
+			<a target="_blank" href="http://avensonline.org/blog">
+				<img src="<?php echo base_url(); ?>public/images/blog-icon.png" alt="Avens Blog">
+			</a>
+		</li>
+		<li>
+			<a target="_blank" href="http://avensonline.org/mendeley">
+				<img src="<?php echo base_url(); ?>public/images/mendeley.png" alt="Mendeley">
+			</a>
+		</li>
+
+
+	</ul>
+</div>	
 </div>				
 </div>
 
